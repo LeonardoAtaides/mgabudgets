@@ -244,30 +244,6 @@ export default function Page() {
               setData({ ...data, descricaoHotel: e.target.value })
             }
           />
-          
-          <div className="flex gap-2">
-            <select
-              className="border border-gray-300 p-2 rounded-lg text-gray-500"
-              value={data.moeda}
-              onChange={(e) =>
-                setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
-              }
-            >
-              <option value="BRL">R$</option>
-              <option value="USD">$</option>
-            </select>
-
-            <input
-              type="number"
-              className="w-full border border-gray-300 p-2 rounded-lg text-gray-400"
-              value={data.valorTotal}
-              onChange={(e) =>
-                setData({ ...data, valorTotal:(e.target.value) })
-              }
-            />
-          </div>
-        </div>
-
 
         {/* BENEFÍCIOS */}
         <div className="space-y-2">
@@ -295,7 +271,34 @@ export default function Page() {
               </button>
             </div>
           ))}
+        </div>     
+            
+          <h3 className="font-semibold text-gray-700">Valor</h3>
+          <div className="flex gap-2">
+            <select
+              className="border border-gray-300 p-2 rounded-lg text-gray-500"
+              value={data.moeda}
+              onChange={(e) =>
+                setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
+              }
+            >
+              <option value="BRL">R$</option>
+              <option value="USD">$</option>
+            </select>
+
+            <input
+              type="number"
+              className="w-full border border-gray-300 p-2 rounded-lg text-gray-400"
+              value={data.valorTotal}
+              onChange={(e) =>
+                setData({ ...data, valorTotal:(e.target.value) })
+              }
+            />
+          </div>
         </div>
+
+
+
 
         {/* VOOS */}
         <div className="border-t pt-4 space-y-2">
