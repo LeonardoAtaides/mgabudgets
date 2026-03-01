@@ -99,10 +99,10 @@ function adicionarImagem() {
   }
 
   return (
-    <div className="flex gap-6 p-6 bg-gray-100 min-h-screen">
+    <div className="flex gap-6 p-6 bg-[#F2F3F4] min-h-screen">
 
       {/* FORMULÁRIO */}
-      <div className="w-1/3 bg-black p-6 rounded-xl shadow-md overflow-y-auto max-h-screen space-y-4">
+      <div className="w-1/3 bg-[#07132b] p-6 rounded-xl shadow-md overflow-y-auto max-h-screen space-y-4">
 
         <h2 className="text-xl font-bold">Editar Orçamento</h2>
 
