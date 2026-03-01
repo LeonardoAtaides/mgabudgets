@@ -145,11 +145,15 @@ export default function Page() {
     })
   }
 
+  function gerarPDF() {
+    window.print()
+  }
+
   return (
     <div className="h-screen flex overflow-hidden">
 
       {/* EDITOR */}
-      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6">
+      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden">
 
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold text-gray-800">
@@ -158,6 +162,7 @@ export default function Page() {
 
 
         <button
+          onClick={gerarPDF}
           className="bg-blue-600 text-white p-2 rounded-full"
         >
           <FileText className="w-5 h-5"/>
