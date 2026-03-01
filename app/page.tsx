@@ -143,10 +143,10 @@ export default function Page() {
   }
 
   return (
-    <div className="h-screen flex bg-gray-100 overflow-hidden">
+    <div className="h-screen flex overflow-hidden">
 
       {/* EDITOR */}
-      <div className="w-[380px] bg-white border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6">
+      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6">
 
         <h2 className="text-xl font-semibold text-gray-800">
           Editor de Orçamento
@@ -155,21 +155,21 @@ export default function Page() {
         {/* DADOS BÁSICOS */}
         <div className="space-y-3">
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 placeholder:text-gray-400"
             placeholder="Destino"
             value={data.destino}
             onChange={(e) => setData({ ...data, destino: e.target.value })}
           />
 
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
             placeholder="Hotel"
             value={data.hotel}
             onChange={(e) => setData({ ...data, hotel: e.target.value })}
           />
 
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
             placeholder="Período"
             value={data.periodo}
             onChange={(e) => setData({ ...data, periodo: e.target.value })}
@@ -177,7 +177,7 @@ export default function Page() {
 
           <div className="flex gap-2">
             <select
-              className="border border-gray-300 p-2 rounded-lg"
+              className="border border-gray-300 p-2 rounded-lg text-gray-500"
               value={data.moeda}
               onChange={(e) =>
                 setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
@@ -189,8 +189,7 @@ export default function Page() {
 
             <input
               type="number"
-              className="w-full border border-gray-300 p-2 rounded-lg"
-              placeholder="Valor total"
+              className="w-full border border-gray-300 p-2 rounded-lg text-gray-400"
               value={data.valorTotal}
               onChange={(e) =>
                 setData({ ...data, valorTotal: Number(e.target.value) })
@@ -199,7 +198,7 @@ export default function Page() {
           </div>
 
           <textarea
-            className="w-full border border-gray-300 p-2 rounded-lg"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
             placeholder="Descrição do hotel"
             value={data.descricaoHotel}
             onChange={(e) =>
@@ -214,7 +213,7 @@ export default function Page() {
 
           <div className="flex gap-2">
             <input
-              className="flex-1 border border-gray-300 p-2 rounded-lg"
+              className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
               placeholder="https://..."
               value={imagemInput}
               onChange={(e) => setImagemInput(e.target.value)}
@@ -243,7 +242,7 @@ export default function Page() {
 
           <div className="flex gap-2">
             <input
-              className="flex-1 border border-gray-300 p-2 rounded-lg"
+              className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400"
               value={beneficioInput}
               onChange={(e) => setBeneficioInput(e.target.value)}
             />
@@ -272,7 +271,7 @@ export default function Page() {
           {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
             <input
               key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
               placeholder={campo}
               value={novoVoo[campo]}
               onChange={(e) =>
@@ -305,7 +304,7 @@ export default function Page() {
           {(Object.keys(novoQuarto) as Array<keyof typeof novoQuarto>).map((campo) => (
             <input
               key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
               placeholder={campo}
               value={novoQuarto[campo]}
               onChange={(e) =>
