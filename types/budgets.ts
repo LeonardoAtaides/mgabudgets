@@ -7,7 +7,10 @@ export interface BudgetsData {
   descricaoHotel: string
   beneficios: string[]
   mostrarResumo: boolean
+  mostrarInfo: boolean
   imagens: string[]  
+  viajantes: string
+  regime: string
 
   voos: {
     cia: string

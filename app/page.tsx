@@ -20,7 +20,10 @@ export default function Page() {
     imagens: [],
     voos: [],
     quartos: [],
-    mostrarResumo: true
+    mostrarResumo: true,
+    mostrarInfo: true,
+    viajantes:"",
+    regime:""
   })
 
   useEffect(() => {
@@ -168,7 +171,10 @@ export default function Page() {
       imagens: [],
       voos: [],
       quartos: [],
-       mostrarResumo: true
+      mostrarResumo: true,
+      mostrarInfo: true,
+      viajantes:"",
+      regime:"",
     })
   }
 
@@ -199,10 +205,6 @@ export default function Page() {
         >
           <Trash className="w-5 h-5"/>
         </button>  
-
-
-
-
       </div>
  
 
@@ -357,6 +359,54 @@ export default function Page() {
           ))}
         </div>
 
+{/* Informações Adicionais */}
+<label className="flex items-center gap-3 cursor-pointer">
+  <input
+    type="checkbox"
+    checked={data.mostrarInfo}
+    onChange={(e) =>
+      setData(prev => ({
+        ...prev,
+        mostrarInfo: e.target.checked
+      }))
+    }
+    className="w-4 h-4 accent-blue-600"
+  />
+  <span className="text-sm font-medium text-gray-700">
+    Exibir Informações Adicionais
+  </span>
+</label>
+
+{data.mostrarInfo && (
+  <div className="mt-3 space-y-3 border border-gray-200 p-3 rounded-lg bg-gray-50">
+    
+    <input
+      className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+      placeholder="Viajantes"
+      value={data.viajantes}
+      onChange={(e) =>
+        setData(prev => ({
+          ...prev,
+          viajantes: e.target.value
+        }))
+      }
+    />
+
+    <input
+      className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+      placeholder="Regime (Ex: Café da manhã incluso)"
+      value={data.regime}
+      onChange={(e) =>
+        setData(prev => ({
+          ...prev,
+          regime: e.target.value
+        }))
+      }
+    />
+
+  </div>
+)}
+        
         {/* QUARTOS */}
         <div className="border-t pt-4 space-y-2">
           <h3 className="font-semibold text-gray-700">Quartos</h3>
@@ -390,19 +440,19 @@ export default function Page() {
           ))}
         </div>
 
-<label className="flex items-center gap-3 cursor-pointer">
-  <input
-    type="checkbox"
-    checked={data.mostrarResumo}
-    onChange={(e) =>
-      setData({ ...data, mostrarResumo: e.target.checked })
-    }
-    className="w-4 h-4 accent-blue-600"
-  />
-  <span className="text-sm font-medium text-gray-700">
-    Exibir Resumo
-  </span>
-</label>
+        <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={data.mostrarResumo}
+            onChange={(e) =>
+              setData({ ...data, mostrarResumo: e.target.checked })
+            }
+            className="w-4 h-4 accent-blue-600"
+          />
+          <span className="text-sm font-medium text-gray-700">
+            Exibir Resumo
+          </span>
+        </label>
 
 
       </div>

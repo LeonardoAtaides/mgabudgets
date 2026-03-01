@@ -147,6 +147,24 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
               )}
 
+              {/* Informações Adicionais */}
+              {data.mostrarInfo && (
+              <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+                <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
+                  <strong>Informações Adicionais</strong>
+                </div>
+
+                <div className="border rounded-b-lg p-3">
+                  <div className="text-sm text-gray-700 leading-relaxed gap-2 flex">
+                    <strong>Período:</strong> {data.periodo}
+                    <strong>Viajantes:</strong> {data.viajantes}
+                    <strong>Quartos:</strong> {data.quartos.length}
+                    <strong>Regime:</strong> {data.regime}
+                  </div>
+                </div>
+              </div>
+              )}
+
               {/* QUARTOS */}
               {data.quartos.length > 0 && (
                 <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
@@ -190,7 +208,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                     <strong>Destino:</strong> {data.destino} <br />
                     <strong>Hotel:</strong> {data.hotel} <br />
                     <strong>Período:</strong> {data.periodo} <br />
-                    <strong>Ocupação:</strong> {data.quartos.length} quarto
+                    <strong>Ocupação:</strong> {data.quartos.length}
                   </div>
                 </div>
               </div>
