@@ -5,6 +5,8 @@ import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText, Pencil} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
+import { Credits } from "./components/credits"
+
 
 export default function Page() {
   const [mounted, setMounted] = useState(false)
@@ -219,6 +221,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
   return (
     <div className="h-screen flex overflow-hidden">
+      <Credits  />
 
       {/* EDITOR */}
       <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden">
