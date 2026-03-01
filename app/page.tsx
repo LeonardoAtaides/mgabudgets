@@ -47,6 +47,7 @@ export default function Page() {
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
+  const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
@@ -189,6 +190,18 @@ export default function Page() {
     ...prev,
     voos: prev.voos.map((voo, i) =>
       i === index ? { ...voo, [campo]: valor } : voo
+    )
+  }))
+}
+function editarQuarto(
+  index: number,
+  campo: keyof typeof novoQuarto,
+  valor: string
+) {
+  setData(prev => ({
+    ...prev,
+    quartos: prev.quartos.map((quarto, i) =>
+      i === index ? { ...quarto, [campo]: valor } : quarto
     )
   }))
 }
@@ -537,13 +550,65 @@ export default function Page() {
           </button>
 
           {data.quartos.map((quarto, index) => (
-            <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm">
-              <span>{quarto.nome}</span>
-              <button onClick={() => removerQuarto(index)}>
-                <X className="w-5 h-5 text-red-500" />
-              </button>
+            <div key={index} className="bg-gray-100 p-3 rounded-lg space-y-2">
+
+              {editandoQuarto === index ? (
+                <>
+                  {(Object.keys(quarto) as Array<keyof typeof quarto>).map((campo) => (
+                    <input
+                      key={campo}
+                      autoFocus={campo === "nome"}
+                      className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
+                      value={quarto[campo]}
+                      placeholder={campo}
+                      onChange={(e) =>
+                        editarQuarto(index, campo, e.target.value)
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          setEditandoQuarto(null)
+                        }
+                      }}
+                    />
+                  ))}
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setEditandoQuarto(null)}
+                      className="flex-1 bg-blue-600 text-white py-1 rounded"
+                    >
+                      Salvar
+                    </button>
+
+                    <button
+                      onClick={() => removerQuarto(index)}
+                      className="flex-1 bg-red-500 text-white py-1 rounded"
+                    >
+                      Remover
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">
+                    {quarto.nome}
+                  </span>
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoQuarto(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+
+                    <button onClick={() => removerQuarto(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
+
         </div>
 
         <label className="flex items-center gap-3 cursor-pointer">
