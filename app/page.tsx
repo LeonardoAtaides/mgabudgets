@@ -23,6 +23,7 @@ export default function Page() {
 
   const [novoVoo, setNovoVoo] = useState({
     cia: "",
+    classe:"",
     voo: "",
     saida: "",
     chegada: "",
@@ -85,6 +86,7 @@ export default function Page() {
 
     setNovoVoo({
       cia: "",
+      classe:"",
       voo: "",
       saida: "",
       chegada: "",

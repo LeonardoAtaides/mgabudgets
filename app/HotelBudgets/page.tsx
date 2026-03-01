@@ -111,7 +111,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {data.voos.length > 0 && (
                 <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
                   <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
-                    <strong>Voos</strong>
+                    <strong>Voos
+                    {data.voos.length > 0 && (<> {" — "} {data.voos[0].cia} {" — Em classe "}{data.voos[0].classe} </>)}</strong>
                   </div>
 
                   <div className="p-4 overflow-x-auto">
