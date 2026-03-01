@@ -6,8 +6,8 @@ export interface BudgetsData {
   moeda: "BRL" | "USD"
   descricaoHotel: string
   beneficios: string[]
-
-  imagens: string[]   // 👈 ADICIONE ISSO
+  mostrarResumo: boolean
+  imagens: string[]  
 
   voos: {
     cia: string

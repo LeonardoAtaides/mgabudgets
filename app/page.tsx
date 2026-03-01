@@ -1,12 +1,14 @@
 "use client"
 
-import { useState, useRef  } from "react"
+import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 
 export default function Page() {
+  const [mounted, setMounted] = useState(false)
+
   const [data, setData] = useState<BudgetsData>({
     destino: "",
     periodo: "",
@@ -17,8 +19,27 @@ export default function Page() {
     beneficios: [],
     imagens: [],
     voos: [],
-    quartos: []
+    quartos: [],
+    mostrarResumo: true
   })
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+    const saved = localStorage.getItem("orcamentoHotel")
+    if (saved) {
+      setData(JSON.parse(saved))
+    }
+  }, [mounted])
+
+  useEffect(() => {
+    if (!mounted) return
+    localStorage.setItem("orcamentoHotel", JSON.stringify(data))
+  }, [data, mounted])
+
 
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
@@ -146,9 +167,12 @@ export default function Page() {
       beneficios: [],
       imagens: [],
       voos: [],
-      quartos: []
+      quartos: [],
+       mostrarResumo: true
     })
   }
+
+  if (!mounted) return null
 
   return (
     <div className="h-screen flex overflow-hidden">
@@ -365,6 +389,20 @@ export default function Page() {
             </div>
           ))}
         </div>
+
+<label className="flex items-center gap-3 cursor-pointer">
+  <input
+    type="checkbox"
+    checked={data.mostrarResumo}
+    onChange={(e) =>
+      setData({ ...data, mostrarResumo: e.target.checked })
+    }
+    className="w-4 h-4 accent-blue-600"
+  />
+  <span className="text-sm font-medium text-gray-700">
+    Exibir Resumo
+  </span>
+</label>
 
 
       </div>
