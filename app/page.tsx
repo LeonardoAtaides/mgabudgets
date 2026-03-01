@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect  } from "react"
-import HotelOrcamento from "./components/page"
+import HotelOrcamento from "./components/preview"
 import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText, Pencil, ChevronDown, ChevronUp} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
@@ -237,7 +237,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
         <button
           onClick={handlePrint}
-          className="bg-blue-600 text-white p-2 rounded-full"
+          className="bg-green-500 text-white p-2 rounded-full"
         >
           <FileText className="w-5 h-5"/>
         </button>  
@@ -274,19 +274,19 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
         >
           <div className="mt-2 space-y-3">
             <input
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Destino"
               value={data.destino}
               onChange={(e) => setData({ ...data, destino: e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Hotel"
               value={data.hotel}
               onChange={(e) => setData({ ...data, hotel: e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Período"
               value={data.periodo}
               onChange={(e) => setData({ ...data, periodo: e.target.value })}
@@ -297,7 +297,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
               <h3 className="font-semibold text-gray-700">Imagens</h3>
               <div className="flex gap-2">
                 <input
-                  className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   placeholder="https://..."
                   value={imagemInput}
                   onChange={(e) => setImagemInput(e.target.value)}
@@ -321,7 +321,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
             {/* DESCRIÇÃO */}
             <textarea
-              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Descrição do hotel"
               value={data.descricaoHotel}
               onChange={(e) =>
@@ -334,7 +334,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
               <h3 className="font-semibold text-gray-700">Benefícios</h3>
               <div className="flex gap-2">
                 <input
-                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   value={beneficioInput}
                   onChange={(e) => setBeneficioInput(e.target.value)}
                 />
@@ -354,7 +354,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                   {editandoBeneficio === index ? (
                     <input
                       autoFocus
-                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                       value={beneficio}
                       onChange={(e) =>
                         setData(prev => ({
@@ -393,7 +393,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
               <h3 className="font-semibold text-gray-700">Valor</h3>
               <div className="flex gap-2">
                 <select
-                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
                   value={data.moeda}
                   onChange={(e) =>
                     setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
@@ -405,7 +405,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
                 <input
                   type="number"
-                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
                   value={data.valorTotal}
                   onChange={(e) =>
                     setData({ ...data, valorTotal:(e.target.value) })
@@ -436,14 +436,14 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
         <div
           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-            vooModalAberto ? "max-h-130 opacity-100" : "max-h-0 opacity-0"
+            vooModalAberto ? "max-h-500 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="mt-2 space-y-2">
             {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
               <input
                 key={campo}
-                className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                 placeholder={campo}
                 value={novoVoo[campo]}
                 onChange={(e) => setNovoVoo({ ...novoVoo, [campo]: e.target.value })}
@@ -468,7 +468,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                       <input
                         key={campo}
                         autoFocus={campo === "cia"}
-                        className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                         value={voo[campo]}
                         placeholder={campo}
                         onChange={(e) => editarVoo(index, campo, e.target.value)}
@@ -484,7 +484,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                     <div className="flex gap-2">
                       <button
                         onClick={() => setEditandoVoo(null)}
-                        className="flex-1 bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition-colors duration-200"
+                        className="flex-1 bg-green-500 text-white py-1 rounded hover:bg-green-700 transition-colors duration-200"
                       >
                         Salvar
                       </button>
@@ -563,7 +563,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setEditandoInfo(false)}
-                    className="flex-1 bg-blue-600 text-white py-1 rounded"
+                    className="flex-1 bg-green-500 text-white py-1 rounded"
                   >
                     Salvar
                   </button>
@@ -639,7 +639,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
           {/* Conteúdo expansível */}
           <div
             className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-              quartoModalAberto ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+              quartoModalAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
             }`}
           >
             <div className="mt-2 space-y-2">
@@ -647,7 +647,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
               {(Object.keys(novoQuarto) as Array<keyof typeof novoQuarto>).map((campo) => (
                 <input
                   key={campo}
-                  className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   placeholder={campo}
                   value={novoQuarto[campo]}
                   onChange={(e) =>
@@ -675,7 +675,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                         <input
                           key={campo}
                           autoFocus={campo === "nome"}
-                          className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                           value={quarto[campo]}
                           placeholder={campo}
                           onChange={(e) =>
@@ -693,7 +693,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                       <div className="flex gap-2">
                         <button
                           onClick={() => setEditandoQuarto(null)}
-                          className="flex-1 bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition-colors duration-200"
+                          className="flex-1 bg-green-500 text-white py-1 rounded hover:bg-green-700 transition-colors duration-200"
                         >
                           Salvar
                         </button>
