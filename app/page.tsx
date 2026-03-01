@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/preview"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText, Pencil, ChevronDown, ChevronUp} from "lucide-react"
+import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
@@ -52,7 +52,6 @@ export default function Page() {
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [quartoModalAberto, setQuartoModalAberto] = useState(false)
-  const conteudoQuartoRef = useRef<HTMLDivElement>(null)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const [editandoInfo, setEditandoInfo] = useState(false);
@@ -238,11 +237,15 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
       <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden">
 
       <div className="flex justify-between items-center">
+        <div className="flex gap-2 text-gray-800">
+         <TicketsPlane/>
         <h2 className="text-xl font-semibold text-gray-800">
-          Editor de Orçamento
-        </h2>
+          Budgetly Tour
+        </h2>       
+        </div>
 
 
+      <div className="flex gap-2">
         <button
           onClick={handlePrint}
           className="bg-green-500 text-white p-2 rounded-full"
@@ -261,7 +264,9 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
           className="bg-red-600 text-white p-2 rounded-full"
         >
           <Trash className="w-5 h-5"/>
-        </button>  
+        </button>          
+      </div>
+
       </div>
  
 
@@ -271,7 +276,10 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
           className="flex justify-between items-center cursor-pointer"
           onClick={() => setDadosBasicosAberto(prev => !prev)}
         >
-          <h3 className="font-semibold text-gray-700">Dados Básicos</h3>
+          <span className="flex gap-2 justify-center items-center text-gray-700">
+            <Info className="w-5 h-5" />
+            <h3 className="font-semibold text-gray-700">Dados Básicos</h3></span>
+          
           <span
             className={`text-gray-500 transition-transform duration-300 ${
               dadosBasicosAberto ? "rotate-180" : "rotate-0"
@@ -335,7 +343,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
             {/* DESCRIÇÃO */}
             <textarea
-              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Descrição do hotel"
               value={data.descricaoHotel}
               onChange={(e) =>
@@ -407,7 +415,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
               <h3 className="font-semibold text-gray-700">Valor</h3>
               <div className="flex gap-2">
                 <select
-                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
                   value={data.moeda}
                   onChange={(e) =>
                     setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
@@ -437,8 +445,12 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
         <div 
           className="flex justify-between items-center cursor-pointer"
           onClick={() => setVooModalAberto(prev => !prev)}
-        >
-          <h3 className="font-semibold text-gray-700">Voos</h3>
+        > 
+          <span className="flex gap-2 justify-center items-center text-gray-700">
+            <Plane className="w-5 h-5" />
+            <h3 className="font-semibold text-gray-700">Voos</h3> 
+          </span>
+          
           <span
             className={`text-gray-500 transition-transform duration-300 ${
               vooModalAberto ? "rotate-180" : "rotate-0"
@@ -640,7 +652,10 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
             className="flex justify-between items-center cursor-pointer"
             onClick={() => setQuartoModalAberto(prev => !prev)}
           >
-            <h3 className="font-semibold text-gray-700">Quartos</h3>
+            <span className="flex gap-2 justify-center items-center text-gray-700">
+              <BedDouble className="w-5 h-5"/>
+              <h3 className="font-semibold text-gray-700">Quartos</h3>
+            </span>
             <span
               className={`text-gray-500 transition-transform duration-300 ${
                 quartoModalAberto ? "rotate-180" : "rotate-0"
