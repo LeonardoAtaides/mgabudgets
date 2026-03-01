@@ -7,6 +7,7 @@ import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plan
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
+import { InfoModal } from "./components/infomodal"
 
 export default function Page() {
   const [mounted, setMounted] = useState(false)
@@ -51,6 +52,7 @@ export default function Page() {
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
+  const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [quartoModalAberto, setQuartoModalAberto] = useState(false)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
@@ -95,18 +97,20 @@ export default function Page() {
     }))
   }
 
-  function adicionarImagem() {
-    if (!imagemInput.trim()) return
-    if (data.imagens.length >= 5) {
-      alert("Máximo de 5 imagens permitidas.")
-      return
-    }
-    setData(prev => ({
-      ...prev,
-      imagens: [...prev.imagens, imagemInput]
-    }))
-    setImagemInput("")
+function adicionarImagem() {
+  if (!imagemInput.trim()) return;
+
+  if (data.imagens.length >= 5) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 5 imagens permitidas." });
+    return;
   }
+
+  setData((prev) => ({
+    ...prev,
+    imagens: [...prev.imagens, imagemInput],
+  }));
+  setImagemInput("");
+}
 
   function removerImagem(index: number) {
     setData(prev => ({
@@ -233,6 +237,12 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
     <div className="h-screen flex overflow-hidden">
       <Credits  />
 
+      <InfoModal
+  mensagem={infoModal.mensagem}
+  mostrar={infoModal.mostrar}
+  onClose={() => setInfoModal({ ...infoModal, mostrar: false })}
+/>
+
       {/* EDITOR */}
       <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden">
 
@@ -248,7 +258,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
       <div className="flex gap-2">
         <button
           onClick={handlePrint}
-          className="bg-green-500 text-white p-2 rounded-full"
+          className="bg-orange-500 text-white p-2 rounded-full"
         >
           <FileText className="w-5 h-5"/>
         </button> 
