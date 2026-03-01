@@ -155,26 +155,66 @@ export default function Page() {
         {/* DADOS BÁSICOS */}
         <div className="space-y-3">
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 placeholder:text-gray-400"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
             placeholder="Destino"
             value={data.destino}
             onChange={(e) => setData({ ...data, destino: e.target.value })}
           />
 
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
             placeholder="Hotel"
             value={data.hotel}
             onChange={(e) => setData({ ...data, hotel: e.target.value })}
           />
 
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
             placeholder="Período"
             value={data.periodo}
             onChange={(e) => setData({ ...data, periodo: e.target.value })}
           />
 
+        {/* IMAGENS */}
+        <div className="space-y-2">
+          <h3 className="font-semibold text-gray-700">Imagens</h3>
+
+          <div className="flex gap-2">
+            <input
+              className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+              placeholder="https://..."
+              value={imagemInput}
+              onChange={(e) => setImagemInput(e.target.value)}
+            />
+            <button
+              onClick={adicionarImagem}
+              className="bg-indigo-600 text-white px-3 rounded-lg"
+            >
+              +
+            </button>
+          </div>
+
+          {data.imagens.map((img, index) => (
+            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
+              <span className="truncate w-[80%]">{img}</span>
+              <button onClick={() => removerImagem(index)} className="text-red-500">
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+
+          <h3 className="font-semibold text-gray-700">Informações e Valores</h3>
+
+          <textarea
+            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+            placeholder="Descrição do hotel"
+            value={data.descricaoHotel}
+            onChange={(e) =>
+              setData({ ...data, descricaoHotel: e.target.value })
+            }
+          />
+          
           <div className="flex gap-2">
             <select
               className="border border-gray-300 p-2 rounded-lg text-gray-500"
@@ -196,45 +236,8 @@ export default function Page() {
               }
             />
           </div>
-
-          <textarea
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
-            placeholder="Descrição do hotel"
-            value={data.descricaoHotel}
-            onChange={(e) =>
-              setData({ ...data, descricaoHotel: e.target.value })
-            }
-          />
         </div>
 
-        {/* IMAGENS */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-gray-700">Imagens</h3>
-
-          <div className="flex gap-2">
-            <input
-              className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
-              placeholder="https://..."
-              value={imagemInput}
-              onChange={(e) => setImagemInput(e.target.value)}
-            />
-            <button
-              onClick={adicionarImagem}
-              className="bg-indigo-600 text-white px-3 rounded-lg"
-            >
-              +
-            </button>
-          </div>
-
-          {data.imagens.map((img, index) => (
-            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 p-2 rounded-lg">
-              <span className="truncate w-[80%]">{img}</span>
-              <button onClick={() => removerImagem(index)} className="text-red-500">
-                ✕
-              </button>
-            </div>
-          ))}
-        </div>
 
         {/* BENEFÍCIOS */}
         <div className="space-y-2">
@@ -255,7 +258,7 @@ export default function Page() {
           </div>
 
           {data.beneficios.map((beneficio, index) => (
-            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 p-2 rounded-lg">
+            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 p-2 rounded-lg text-gray-400">
               <span>{beneficio}</span>
               <button onClick={() => removerBeneficio(index)} className="text-red-500">
                 ✕
@@ -271,7 +274,7 @@ export default function Page() {
           {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
             <input
               key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
               placeholder={campo}
               value={novoVoo[campo]}
               onChange={(e) =>
@@ -288,7 +291,7 @@ export default function Page() {
           </button>
 
           {data.voos.map((voo, index) => (
-            <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm">
+            <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm text-gray-400">
               <span>{voo.cia} - {voo.voo}</span>
               <button onClick={() => removerVoo(index)} className="text-red-500">
                 ✕
@@ -304,7 +307,7 @@ export default function Page() {
           {(Object.keys(novoQuarto) as Array<keyof typeof novoQuarto>).map((campo) => (
             <input
               key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400"
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
               placeholder={campo}
               value={novoQuarto[campo]}
               onChange={(e) =>
