@@ -4,6 +4,7 @@ import { useState } from "react"
 import HotelOrcamento from "./HotelBudgets/page"
 import { BudgetsData } from "@/types/budgets"
 
+
 export default function Page() {
   const [data, setData] = useState<BudgetsData>({
     destino: "",
@@ -17,6 +18,28 @@ export default function Page() {
     voos: [],
     quartos: []
   })
+
+
+async function gerarPDF() {
+  const html2pdf = (await import("html2pdf.js")).default
+
+  const element = document.getElementById("orcamento-preview")
+  if (!element) {
+    alert("Preview não encontrado!")
+    return
+  }
+
+  const opt = {
+    margin: 0.5,
+    filename: `orcamento-${data.destino || "viagem"}.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  }
+
+  html2pdf().set(opt).from(element).save()
+}
+
 
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
@@ -323,12 +346,24 @@ export default function Page() {
           Limpar Orçamento
         </button>
 
+        <button
+          onClick={gerarPDF}
+          className="bg-[#0b1b3b] text-white px-4 py-2 rounded mb-4"
+        >
+          Gerar PDF
+        </button>        
+
       </div>
 
       {/* PREVIEW */}
       <div className="w-2/3">
+
+
+
         <HotelOrcamento data={data} />
+
       </div>
+      
     </div>
   )
 }
