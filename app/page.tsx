@@ -6,7 +6,7 @@ import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText, Pencil, ChevronDown, ChevronUp} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
-
+import { ConfirmModal } from "./components/modal"
 
 export default function Page() {
   const [mounted, setMounted] = useState(false)
@@ -45,6 +45,7 @@ export default function Page() {
     localStorage.setItem("orcamentoHotel", JSON.stringify(data))
   }, [data, mounted])
 
+  const [modalAberto, setModalAberto] = useState(false);
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
@@ -166,9 +167,11 @@ export default function Page() {
     }))
   }
 
-  function limparTudo() {
-    if (!confirm("Tem certeza que deseja limpar o orçamento?")) return
+ function abrirModal() {
+    setModalAberto(true);
+  }
 
+  function confirmarLimpeza() {
     setData({
       destino: "",
       periodo: "",
@@ -182,9 +185,14 @@ export default function Page() {
       quartos: [],
       mostrarResumo: true,
       mostrarInfo: true,
-      viajantes:"",
-      regime:"",
-    })
+      viajantes: "",
+      regime: "",
+    });
+    setModalAberto(false);
+  }
+
+  function cancelarLimpeza() {
+    setModalAberto(false);
   }
 
   function editarVoo(
@@ -240,10 +248,16 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
           className="bg-green-500 text-white p-2 rounded-full"
         >
           <FileText className="w-5 h-5"/>
-        </button>  
+        </button> 
+        <ConfirmModal
+        mensagem="Tem certeza que deseja limpar o orçamento?"
+        mostrar={modalAberto}
+        onConfirm={confirmarLimpeza}
+        onCancel={cancelarLimpeza}
+      /> 
 
         <button
-          onClick={limparTudo}
+          onClick={abrirModal}
           className="bg-red-600 text-white p-2 rounded-full"
         >
           <Trash className="w-5 h-5"/>
