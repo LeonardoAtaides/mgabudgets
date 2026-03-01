@@ -11,7 +11,7 @@ export default function Page() {
     destino: "",
     periodo: "",
     hotel: "",
-    valorTotal: 0,
+    valorTotal: "",
     moeda: "BRL",
     descricaoHotel: "",
     beneficios: [],
@@ -140,7 +140,7 @@ export default function Page() {
       destino: "",
       periodo: "",
       hotel: "",
-      valorTotal: 0,
+      valorTotal: "",
       moeda: "BRL",
       descricaoHotel: "",
       beneficios: [],
@@ -262,7 +262,7 @@ export default function Page() {
               className="w-full border border-gray-300 p-2 rounded-lg text-gray-400"
               value={data.valorTotal}
               onChange={(e) =>
-                setData({ ...data, valorTotal: Number(e.target.value) })
+                setData({ ...data, valorTotal:(e.target.value) })
               }
             />
           </div>

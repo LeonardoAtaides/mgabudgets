@@ -98,7 +98,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
                 <div className="text-2xl font-extrabold text-[#0b1b3b]">
-                    {formatarMoeda(data.valorTotal, data.moeda)}
+                      {formatarMoeda(Number(data.valorTotal || 0),data.moeda)}
                 </div>
 
                 <div className="text-sm text-gray-500 mt-1">
