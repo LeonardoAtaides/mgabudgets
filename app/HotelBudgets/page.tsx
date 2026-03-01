@@ -28,7 +28,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
           <img
             className="h-16"
-            src="https://mgatourcorp.com/wp-content/uploads/2024/04/MIV_MGA_2-24-e1729800489767.png"
+            src="/assets/logoMga.png"
             alt="Logo"
           />
         </div>
