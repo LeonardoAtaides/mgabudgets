@@ -11,9 +11,13 @@ function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
   ).format(valor)
 }
 
+function pluralize(count: number, singular: string, plural?: string) {
+  return count === 1 ? singular : plural || singular + "s";
+}
+
 const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
   return (
-    <div className="py-12">
+    <div className="py-2">
       <div
         className="max-w-[1100px] mx-auto bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200"
         style={{ zoom: 0.7 }}
@@ -155,11 +159,15 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
                 <div className="border rounded-b-lg p-3">
-                  <div className="text-sm text-gray-700 leading-relaxed gap-2 flex">
-                    <strong>Período:</strong> {data.periodo}
-                    <strong>Viajantes:</strong> {data.viajantes}
-                    <strong>Quartos:</strong> {data.quartos.length}
-                    <strong>Regime:</strong> {data.regime}
+                  <div className="text-sm text-gray-700 leading-relaxed gap-4 flex">
+                    <div><strong>Período:</strong> {data.periodo}</div>
+                    <div>
+                      <strong>Viajantes:</strong> {Number(data.viajantes)} {pluralize(Number(data.viajantes), "viajante")}
+                    </div>
+                    <div>
+                      <strong>Quartos:</strong> {data.quartos.length} {pluralize(data.quartos.length, "quarto")}
+                    </div>
+                    <div><strong>Regime:</strong> {data.regime}</div>
                   </div>
                 </div>
               </div>
@@ -203,12 +211,16 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   <strong>Resumo</strong>
                 </div>
 
-                <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3 flex gap-2">
-                  <div className="text-sm text-gray-700 leading-relaxed">
-                    <strong>Destino:</strong> {data.destino}
-                    <strong>Hotel:</strong> {data.hotel}
-                    <strong>Período:</strong> {data.periodo}
-                    <strong>Ocupação:</strong> {data.quartos.length}
+                <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3">
+                  <div className="text-sm text-gray-700 leading-relaxed flex gap-4">
+                    <div><strong>Destino:</strong>{data.destino}</div>
+                    <div><strong>Hotel:</strong>{data.hotel}</div>
+                    <div><strong>Período:</strong>{data.periodo}</div>
+                    <div>
+                      <strong>Ocupação:</strong>{" "}
+                      {Number(data.viajantes)} {pluralize(Number(data.viajantes), "viajante")} -{" "}
+                      {data.quartos.length} {pluralize(data.quartos.length, "quarto")}
+                    </div>
                   </div>
                 </div>
               </div>
