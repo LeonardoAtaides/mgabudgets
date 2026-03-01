@@ -128,6 +128,16 @@ function adicionarImagem() {
         />
 
         <div className="flex gap-2">
+          <select
+            className="border p-2 rounded"
+            value={data.moeda}
+            onChange={(e) =>
+              setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
+            }
+          >
+            <option value="BRL">R$</option>
+            <option value="USD">$</option>
+          </select>          
           <input
             type="number"
             className="w-full border p-2 rounded"
@@ -138,16 +148,7 @@ function adicionarImagem() {
             }
           />
 
-          <select
-            className="border p-2 rounded"
-            value={data.moeda}
-            onChange={(e) =>
-              setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
-            }
-          >
-            <option value="BRL">R$</option>
-            <option value="USD">$</option>
-          </select>
+
         </div>
 
         <textarea
