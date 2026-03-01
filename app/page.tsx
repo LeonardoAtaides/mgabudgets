@@ -269,7 +269,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
         <div
           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-            dadosBasicosAberto ? "max-h-130 opacity-100" : "max-h-0 opacity-0"
+            dadosBasicosAberto ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="mt-2 space-y-3">
@@ -537,6 +537,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
             Exibir Informações Adicionais
           </span>
         </label>
+
         {data.mostrarInfo && (
           <div className="bg-gray-100 p-3 rounded-lg space-y-2">
 
@@ -740,6 +741,7 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
             Exibir Resumo
           </span>
         </label>
+
 
       </div>
 

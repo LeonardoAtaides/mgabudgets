@@ -15,6 +15,24 @@ function pluralize(count: number, singular: string, plural?: string) {
 }
 
 const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
+
+    const safeData: BudgetsData = data || {
+    destino: "",
+    hotel: "",
+    periodo: "",
+    moeda: "BRL",
+    valorTotal: 0,
+    beneficios: [],
+    voos: [],
+    imagens: [],
+    mostrarInfo: false,
+    mostrarResumo: false,
+    viajantes: 0,
+    quartos: [],
+    descricaoHotel: "",
+    regime: ""
+  };
+
   return (
     <div className="py-2">
       <div
@@ -25,7 +43,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         <div className="bg-[#0b1b3b] p-6 text-white flex items-center justify-between gap-4">
           <div className="flex flex-col gap-1.5 min-w-0">
             <div className="text-2xl font-semibold leading-tight">
-               Hospedagem | {data.destino || <span className="placeholder">Destino</span>}
+               Hospedagem | {safeData.destino || <span className="placeholder">Destino</span>}
             </div>
           </div>
 
@@ -44,8 +62,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
           <div className="rounded-lg border border-gray-300 overflow-hidden">
             <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
               <strong>
-                {data.hotel || <span className="placeholder">Nome do hotel</span>} —{" "}
-                  {data.periodo || <span className="placeholder">Período da estadia</span>}
+                {safeData.hotel || <span className="placeholder">Nome do hotel</span>} —{" "}
+                  {safeData.periodo || <span className="placeholder">Período da estadia</span>}
               </strong>
             </div>
 
@@ -54,8 +72,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             {/* GALERIA */}
             <div className="mb-6">
               <div className="grid grid-cols-4 grid-rows-2 gap-2.5 h-[280px]">
-                {(data.imagens && data.imagens.length > 0
-                  ? data.imagens
+                {(safeData.imagens && safeData.imagens.length > 0
+                  ? safeData.imagens
                   : Array(5).fill(null)
                 ).map((img, index) => (
                   <div
@@ -86,11 +104,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   </div>
 
                   <div className="text-base text-gray-700 leading-relaxed">
-                    {data.descricaoHotel}
+                    {safeData.descricaoHotel}
 
-                    {data.beneficios.length > 0 && (
+                    {safeData.beneficios.length > 0 && (
                       <ul className="mt-3 pl-4 list-disc space-y-1">
-                        {data.beneficios.map((beneficio, index) => (
+                        {safeData.beneficios.map((beneficio, index) => (
                           <li key={index}>{beneficio}</li>
                         ))}
                       </ul>
@@ -106,12 +124,12 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
                 <div className="text-sm font-semibold text-white bg-[#0b1b3b] px-2 py-1 rounded">
-                    {data.moeda}
+                    {safeData.moeda}
                 </div>
                 </div>
 
                 <div className="text-2xl font-extrabold text-[#0b1b3b]">
-                      {formatarMoeda(Number(data.valorTotal || 0),data.moeda)}
+                      {formatarMoeda(Number(safeData.valorTotal || 0),safeData.moeda)}
                 </div>
 
                 <div className="text-sm text-gray-500 mt-1">
@@ -125,8 +143,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                 <strong>
                   Voos
-                  {data.voos.length > 0 ? (
-                    <> {" — "} {data.voos[0].cia || <span className="placeholder">Teste</span>} {" — Em classe "} {data.voos[0].classe || <span className="placeholder">Econômica</span>}</>
+                  {safeData.voos.length > 0 ? (
+                    <> {" — "} {safeData.voos[0].cia || <span className="placeholder">Teste</span>} {" — Em classe "} {safeData.voos[0].classe || <span className="placeholder">Econômica</span>}</>
                   ) : (
                     <> {" — "} <span className="placeholder">Cia Aérea</span> {" — Em classe "} <span className="placeholder">Econômica</span></>
                   )}
@@ -148,8 +166,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   </thead>
 
                   <tbody>
-                    {data.voos.length > 0
-                      ? data.voos.map((voo, index) => (
+                    {safeData.voos.length > 0
+                      ? safeData.voos.map((voo, index) => (
                           <tr key={index}>
                             <td className="p-2.5 border-t text-gray-500">{voo.cia || <span className="placeholder">Teste</span>}</td>
                             <td className="p-2.5 border-t text-gray-500">{voo.voo || <span className="placeholder">Teste</span>}</td>
@@ -177,7 +195,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
 
               {/* Informações Adicionais */}
-              {data.mostrarInfo && (
+              {safeData.mostrarInfo && (
               <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
                 <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                   <strong>Informações Adicionais</strong>
@@ -185,22 +203,22 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
                 <div className="border rounded-b-lg p-3">
                   <div className="text-sm text-gray-700 leading-relaxed gap-4 flex">
-                    <div><strong>Período:</strong> {data.periodo}</div>
+                    <div><strong>Período:</strong> {safeData.periodo}</div>
                     <div>
                       <strong>
-                        {data.viajantes? `Viajante${Number(data.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
+                        {safeData.viajantes? `Viajante${Number(safeData.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
                       </strong>{" "}
-                      {data.viajantes? `${Number(data.viajantes)}`: <span className="placeholder">0</span>}
+                      {safeData.viajantes? `${Number(safeData.viajantes)}`: <span className="placeholder">0</span>}
                     </div>
                     <div>
                       <strong>
-                        {data.quartos && data.quartos.length > 0 ? `Quarto${data.quartos.length > 1 ? "s" : ""}:`: "Quartos:"} 
+                        {safeData.quartos && safeData.quartos.length > 0 ? `Quarto${safeData.quartos.length > 1 ? "s" : ""}:`: "Quartos:"} 
                       </strong>{" "}
-                      {data.quartos && data.quartos.length > 0
-                        ? `${data.quartos.length}`
+                      {safeData.quartos && safeData.quartos.length > 0
+                        ? `${safeData.quartos.length}`
                         : <span className="placeholder">0</span>}
                     </div>
-                    <div><strong>Regime:</strong> {data.regime}</div>
+                    <div><strong>Regime:</strong> {safeData.regime}</div>
                   </div>
                 </div>
               </div>
@@ -214,8 +232,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               <div className="p-4">
                 <div className="grid grid-cols-2 gap-3">
-                  {data.quartos.length > 0
-                    ? data.quartos.map((quarto, index) => (
+                  {safeData.quartos.length > 0
+                    ? safeData.quartos.map((quarto, index) => (
                         <div key={index} className="border border-gray-200 rounded-lg p-3">
                           <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
                             {quarto.nome || <span className="placeholder">Quarto A</span>}
@@ -247,7 +265,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
 
               {/* RESUMO */}
-              {data.mostrarResumo && (
+              {safeData.mostrarResumo && (
               <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
                 <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                   <strong>Resumo</strong>
@@ -255,13 +273,13 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
                 <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3">
                   <div className="text-sm text-gray-700 leading-relaxed flex gap-4">
-                    <div><strong>Destino:</strong>{data.destino}</div>
-                    <div><strong>Hotel:</strong>{data.hotel}</div>
-                    <div><strong>Período:</strong>{data.periodo}</div>
+                    <div><strong>Destino:</strong>{safeData.destino}</div>
+                    <div><strong>Hotel:</strong>{safeData.hotel}</div>
+                    <div><strong>Período:</strong>{safeData.periodo}</div>
                     <div>
                       <strong>Ocupação:</strong>{" "}
-                      {Number(data.viajantes)} {pluralize(Number(data.viajantes), "viajante")} -{" "}
-                      {data.quartos.length} {pluralize(data.quartos.length, "quarto")}
+                      {Number(safeData.viajantes)} {pluralize(Number(safeData.viajantes), "viajante")} -{" "}
+                      {safeData.quartos.length} {pluralize(safeData.quartos.length, "quarto")}
                     </div>
                   </div>
                 </div>
