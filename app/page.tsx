@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import HotelOrcamento from "./HotelBudgets/page"
+import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText} from "lucide-react"
 
