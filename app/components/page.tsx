@@ -105,7 +105,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                     VALOR
                 </div>
 
-                <div className="text-sm font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                <div className="text-sm font-semibold text-white bg-[#0b1b3b] px-2 py-1 rounded">
                     {data.moeda}
                 </div>
                 </div>
@@ -187,10 +187,18 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   <div className="text-sm text-gray-700 leading-relaxed gap-4 flex">
                     <div><strong>Período:</strong> {data.periodo}</div>
                     <div>
-                      <strong>Viajantes:</strong> {Number(data.viajantes)} {pluralize(Number(data.viajantes), "viajante")}
+                      <strong>
+                        {data.viajantes? `Viajante${Number(data.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
+                      </strong>{" "}
+                      {data.viajantes? `${Number(data.viajantes)}`: <span className="placeholder">0</span>}
                     </div>
                     <div>
-                      <strong>Quartos:</strong> {data.quartos.length} {pluralize(data.quartos.length, "quarto")}
+                      <strong>
+                        {data.quartos && data.quartos.length > 0 ? `Quarto${data.quartos.length > 1 ? "s" : ""}:`: "Quartos:"} 
+                      </strong>{" "}
+                      {data.quartos && data.quartos.length > 0
+                        ? `${data.quartos.length}`
+                        : <span className="placeholder">0</span>}
                     </div>
                     <div><strong>Regime:</strong> {data.regime}</div>
                   </div>
