@@ -1,0 +1,174 @@
+import React from "react";
+import { BudgetsData } from "@/types/budgets";
+
+const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
+  return (
+    <div>
+      <div
+        className="max-w-[1100px] mx-auto bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200"
+        style={{ zoom: 0.65 }}
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#0b1b3b] to-[#1b1c1f] p-6 text-white flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-1.5 min-w-0">
+            <div className="text-2xl font-semibold leading-tight">
+              Hospedagem | {data.destino}
+            </div>
+          </div>
+
+          <img
+            className="h-16"
+            src="https://mgatourcorp.com/wp-content/uploads/2024/04/MIV_MGA_2-24-e1729800489767.png"
+            alt="Logo"
+          />
+        </div>
+
+        <div className="p-6 bg-white">
+          <h2 className="text-xl font-semibold mb-6 text-[#0b1b3b] border-l-4 border-[#d4af37] pl-2.5 tracking-wider uppercase">
+            Detalhes da hospedagem
+          </h2>
+
+          <div className="rounded-lg border border-gray-300 overflow-hidden">
+            <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
+              <strong>
+                {data.hotel} — {data.periodo}
+              </strong>
+            </div>
+
+            <div className="p-4">
+              {/* INFORMAÇÕES + VALOR */}
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                {/* HOTEL INFO */}
+                <div className="border border-gray-300 rounded-lg p-4">
+                  <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
+                    INFORMAÇÕES DO HOTEL
+                  </div>
+
+                  <div className="text-base text-gray-700 leading-relaxed">
+                    {data.descricaoHotel}
+
+                    {data.beneficios.length > 0 && (
+                      <ul className="mt-3 pl-4 list-disc space-y-1">
+                        {data.beneficios.map((beneficio, index) => (
+                          <li key={index}>{beneficio}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+
+                {/* VALOR */}
+                <div className="border border-gray-300 rounded-lg p-4">
+                  <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
+                    VALOR
+                  </div>
+
+                  <div className="text-2xl font-extrabold text-[#0b1b3b]">
+                    {data.valorTotal}
+                  </div>
+
+                  <div className="text-sm text-gray-500 mt-1">
+                    Valor total do pacote por pessoa.
+                  </div>
+                </div>
+              </div>
+
+              {/* VOOS */}
+              {data.voos.length > 0 && (
+                <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+                  <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                    <strong>Voos</strong>
+                  </div>
+
+                  <div className="p-4 overflow-x-auto">
+                    <table className="w-full border-collapse text-sm min-w-[780px]">
+                      <thead>
+                        <tr>
+                          <th className="text-left p-2.5 border-b">Cia</th>
+                          <th className="text-left p-2.5 border-b">Voo</th>
+                          <th className="text-left p-2.5 border-b">Saída</th>
+                          <th className="text-left p-2.5 border-b">Chegada</th>
+                          <th className="text-left p-2.5 border-b">Origem</th>
+                          <th className="text-left p-2.5 border-b">Destino</th>
+                          <th className="text-left p-2.5 border-b">Duração</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {data.voos.map((voo, index) => (
+                          <tr key={index}>
+                            <td className="p-2.5 border-b">{voo.cia}</td>
+                            <td className="p-2.5 border-b">{voo.voo}</td>
+                            <td className="p-2.5 border-b">{voo.saida}</td>
+                            <td className="p-2.5 border-b">{voo.chegada}</td>
+                            <td className="p-2.5 border-b">{voo.origem}</td>
+                            <td className="p-2.5 border-b">{voo.destino}</td>
+                            <td className="p-2.5 border-b">{voo.duracao}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* QUARTOS */}
+              {data.quartos.length > 0 && (
+                <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+                  <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                    <strong>Quartos selecionados</strong>
+                  </div>
+
+                  <div className="p-4">
+                    <div className="grid grid-cols-2 gap-3">
+                      {data.quartos.map((quarto, index) => (
+                        <div
+                          key={index}
+                          className="border border-gray-200 rounded-lg p-3"
+                        >
+                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
+                            {quarto.nome}
+                          </div>
+
+                          <div className="text-sm text-gray-700 leading-relaxed">
+                            <strong>Vista:</strong> {quarto.vista} <br />
+                            <strong>Cama:</strong> {quarto.cama} <br />
+                            <strong>Tamanho:</strong> {quarto.tamanho} <br />
+                            <strong>Incluso:</strong> {quarto.incluso}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* RESUMO */}
+              <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+                <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                  <strong>Resumo</strong>
+                </div>
+
+                <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3">
+                  <div className="text-sm text-gray-700 leading-relaxed">
+                    <strong>Destino:</strong> {data.destino} <br />
+                    <strong>Hotel:</strong> {data.hotel} <br />
+                    <strong>Período:</strong> {data.periodo} <br />
+                    <strong>Quartos:</strong> {data.quartos.length}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="bg-[#f6f7fb] p-4 border-t border-gray-200 text-sm text-gray-500">
+          Valores e disponibilidade sujeitos à confirmação no momento da reserva.
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HotelOrcamento;
