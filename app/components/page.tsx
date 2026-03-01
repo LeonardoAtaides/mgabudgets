@@ -52,22 +52,31 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             <div className="p-4">
 
             {/* GALERIA */}
-            {data.imagens && data.imagens.length > 0 && (
             <div className="mb-6">
-                <div className="grid grid-cols-4 grid-rows-2 gap-2.5 h-[280px]">
-                {data.imagens.map((img, index) => (
-                    <img
+              <div className="grid grid-cols-4 grid-rows-2 gap-2.5 h-[280px]">
+                {(data.imagens && data.imagens.length > 0
+                  ? data.imagens
+                  : Array(5).fill(null)
+                ).map((img, index) => (
+                  <div
                     key={index}
-                    src={img}
-                    alt={`Imagem ${index + 1}`}
-                    className={`w-full h-full object-cover rounded-lg border border-gray-100 ${
-                        index === 0 ? "col-span-2 row-span-2" : ""
+                    className={`w-full h-full rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center text-gray-400 text-sm ${
+                      index === 0 ? "col-span-2 row-span-2" : ""
                     }`}
-                    />
+                  >
+                    {img ? (
+                      <img
+                        src={img}
+                        alt={`Imagem ${index + 1}`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      "Imagem"
+                    )}
+                  </div>
                 ))}
-                </div>
+              </div>
             </div>
-)}
               {/* INFORMAÇÕES + VALOR */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* HOTEL INFO */}
@@ -189,36 +198,45 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               </div>
               )}
 
-              {/* QUARTOS */}
-              {data.quartos.length > 0 && (
-                <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
-                  <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
-                    <strong>Quartos selecionados</strong>
-                  </div>
+            {/* QUARTOS */}
+            <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+              <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
+                <strong>Quartos selecionados</strong>
+              </div>
 
-                  <div className="p-4">
-                    <div className="grid grid-cols-2 gap-3">
-                      {data.quartos.map((quarto, index) => (
-                        <div
-                          key={index}
-                          className="border border-gray-200 rounded-lg p-3"
-                        >
+              <div className="p-4">
+                <div className="grid grid-cols-2 gap-3">
+                  {data.quartos.length > 0
+                    ? data.quartos.map((quarto, index) => (
+                        <div key={index} className="border border-gray-200 rounded-lg p-3">
                           <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
-                            {quarto.nome}
+                            {quarto.nome || <span className="placeholder">Quarto A</span>}
                           </div>
 
                           <div className="text-sm text-gray-700 leading-relaxed">
-                            <strong>Vista:</strong> {quarto.vista} <br />
-                            <strong>Cama:</strong> {quarto.cama} <br />
-                            <strong>Tamanho:</strong> {quarto.tamanho} <br />
-                            <strong>Incluso:</strong> {quarto.incluso}
+                            <strong>Vista:</strong> {quarto.vista || <span className="placeholder">Cidade</span>} <br />
+                            <strong>Cama:</strong> {quarto.cama || <span className="placeholder">Casal</span>} <br />
+                            <strong>Tamanho:</strong> {quarto.tamanho || <span className="placeholder">30m²</span>} <br />
+                            <strong>Incluso:</strong> {quarto.incluso || <span className="placeholder">Café da manhã</span>}
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      ))
+                    : (
+                        <div className="border border-gray-200 rounded-lg p-3 col-span-2">
+                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
+                            <span className="placeholder">Quarto A</span>
+                          </div>
+                          <div className="text-sm text-gray-700 leading-relaxed">
+                            <strong>Vista:</strong> <span className="placeholder">Cidade</span> <br />
+                            <strong>Cama:</strong> <span className="placeholder">Casal</span> <br />
+                            <strong>Tamanho:</strong> <span className="placeholder">30m²</span> <br />
+                            <strong>Incluso:</strong> <span className="placeholder">Café da manhã</span>
+                          </div>
+                        </div>
+                      )}
                 </div>
-              )}
+              </div>
+            </div>
 
               {/* RESUMO */}
               {data.mostrarResumo && (
