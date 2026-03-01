@@ -248,131 +248,132 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
       </div>
  
 
-        {/* DADOS BÁSICOS */}
-        <div className="space-y-3">
+      {/* DADOS BÁSICOS */}
+      <div className="space-y-3">
+        <input
+          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+          placeholder="Destino"
+          value={data.destino}
+          onChange={(e) => setData({ ...data, destino: e.target.value })}
+        />
+
+        <input
+          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+          placeholder="Hotel"
+          value={data.hotel}
+          onChange={(e) => setData({ ...data, hotel: e.target.value })}
+        />
+
+        <input
+          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+          placeholder="Período"
+          value={data.periodo}
+          onChange={(e) => setData({ ...data, periodo: e.target.value })}
+        />
+
+      {/* IMAGENS */}
+      <div className="space-y-2">
+        <h3 className="font-semibold text-gray-700">Imagens</h3>
+
+        <div className="flex gap-2">
           <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-            placeholder="Destino"
-            value={data.destino}
-            onChange={(e) => setData({ ...data, destino: e.target.value })}
+            className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
+            placeholder="https://..."
+            value={imagemInput}
+            onChange={(e) => setImagemInput(e.target.value)}
           />
-
-          <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-            placeholder="Hotel"
-            value={data.hotel}
-            onChange={(e) => setData({ ...data, hotel: e.target.value })}
-          />
-
-          <input
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-            placeholder="Período"
-            value={data.periodo}
-            onChange={(e) => setData({ ...data, periodo: e.target.value })}
-          />
-
-        {/* IMAGENS */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-gray-700">Imagens</h3>
-
-          <div className="flex gap-2">
-            <input
-              className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-              placeholder="https://..."
-              value={imagemInput}
-              onChange={(e) => setImagemInput(e.target.value)}
-            />
-            <button
-              onClick={adicionarImagem}
-              className="bg-green-600 text-white px-3 rounded-lg"
-            >
-              <Plus className="w-5 h-5 text-white" />
-            </button>
-          </div>
-
-          {data.imagens.map((img, index) => (
-            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
-              <span className="truncate w-[80%]">{img}</span>
-              <button onClick={() => removerImagem(index)}>
-                <X className="w-5 h-5 text-red-500" />
-              </button>
-            </div>
-          ))}
+          <button
+            onClick={adicionarImagem}
+            className="bg-green-600 text-white px-3 rounded-lg"
+          >
+            <Plus className="w-5 h-5 text-white" />
+          </button>
         </div>
 
-          <h3 className="font-semibold text-gray-700">Informações e Valores</h3>
-
-          <textarea
-            className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-            placeholder="Descrição do hotel"
-            value={data.descricaoHotel}
-            onChange={(e) =>
-              setData({ ...data, descricaoHotel: e.target.value })
-            }
-          />
-
-        {/* BENEFÍCIOS */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-gray-700">Benefícios</h3>
-
-          <div className="flex gap-2">
-            <input
-              className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400"
-              value={beneficioInput}
-              onChange={(e) => setBeneficioInput(e.target.value)}
-            />
-            <button
-              onClick={adicionarBeneficio}
-              className="bg-green-600 text-white px-3 rounded-lg"
-            >
-              <Plus className="w-5 h-5 text-white" />
+        {data.imagens.map((img, index) => (
+          <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
+            <span className="truncate w-[80%]">{img}</span>
+            <button onClick={() => removerImagem(index)}>
+              <X className="w-5 h-5 text-red-500" />
             </button>
           </div>
-
-
-        {data.beneficios.map((beneficio, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2"
-          >
-            {editandoBeneficio === index ? (
-              <input
-                autoFocus
-                className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600"
-                value={beneficio}
-                onChange={(e) =>
-                  setData(prev => ({
-                    ...prev,
-                    beneficios: prev.beneficios.map((b, i) =>
-                      i === index ? e.target.value : b
-                    )
-                  }))
-                }
-                onBlur={() => setEditandoBeneficio(null)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault()
-                    e.currentTarget.blur() 
-                  }
-                }}
-              />
-            ) : (
-              <span className="flex-1 text-gray-600">{beneficio}</span>
-            )}
-
-            <div className="flex gap-2">
-              <button onClick={() => setEditandoBeneficio(index)}>
-                <Pencil className="w-4 h-4 text-blue-500" />
-              </button>
-
-              <button onClick={() => removerBeneficio(index)}>
-                <X className="w-4 h-4 text-red-500" />
-              </button>
-            </div>
-          </div>
         ))}
-        </div>     
-            
+      </div>
+
+        <h3 className="font-semibold text-gray-700">Informações do Hotel</h3>
+
+        <textarea
+          className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400"
+          placeholder="Descrição do hotel"
+          value={data.descricaoHotel}
+          onChange={(e) =>
+            setData({ ...data, descricaoHotel: e.target.value })
+          }
+        />
+
+      {/* BENEFÍCIOS */}
+      <div className="space-y-2 mb-4">
+        <h3 className="font-semibold text-gray-700">Benefícios</h3>
+
+        <div className="flex gap-2">
+          <input
+            className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400"
+            value={beneficioInput}
+            onChange={(e) => setBeneficioInput(e.target.value)}
+          />
+          <button
+            onClick={adicionarBeneficio}
+            className="bg-green-600 text-white px-3 rounded-lg"
+          >
+            <Plus className="w-5 h-5 text-white" />
+          </button>
+        </div>
+
+
+      {data.beneficios.map((beneficio, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2"
+        >
+          {editandoBeneficio === index ? (
+            <input
+              autoFocus
+              className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600"
+              value={beneficio}
+              onChange={(e) =>
+                setData(prev => ({
+                  ...prev,
+                  beneficios: prev.beneficios.map((b, i) =>
+                    i === index ? e.target.value : b
+                  )
+                }))
+              }
+              onBlur={() => setEditandoBeneficio(null)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault()
+                  e.currentTarget.blur() 
+                }
+              }}
+            />
+          ) : (
+            <span className="flex-1 text-gray-600">{beneficio}</span>
+          )}
+
+          <div className="flex gap-2">
+            <button onClick={() => setEditandoBeneficio(index)}>
+              <Pencil className="w-4 h-4 text-blue-500" />
+            </button>
+
+            <button onClick={() => removerBeneficio(index)}>
+              <X className="w-4 h-4 text-red-500" />
+            </button>
+          </div>
+        </div>
+      ))}
+      </div>     
+        
+        <div className="border-t pt-4">
           <h3 className="font-semibold text-gray-700">Valor</h3>
           <div className="flex gap-2">
             <select
@@ -394,8 +395,10 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                 setData({ ...data, valorTotal:(e.target.value) })
               }
             />
-          </div>
+          </div>          
         </div>
+
+      </div>
 
 
 
