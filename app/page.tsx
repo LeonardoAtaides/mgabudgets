@@ -5,17 +5,18 @@ import HotelOrcamento from "./HotelBudgets/page"
 import { BudgetsData } from "@/types/budgets"
 
 export default function Page() {
-  const [data, setData] = useState<BudgetsData>({
-    destino: "",
-    periodo: "",
-    hotel: "",
-    valorTotal: "",
-    descricaoHotel: "",
-    beneficios: [],
-    imagens: [], // ✅ ADICIONADO
-    voos: [],
-    quartos: []
-  })
+const [data, setData] = useState<BudgetsData>({
+  destino: "",
+  periodo: "",
+  hotel: "",
+  valorTotal: 0,
+  moeda: "BRL",
+  descricaoHotel: "",
+  beneficios: [],
+  imagens: [],
+  voos: [],
+  quartos: []
+})
 
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("") // ✅ NOVO
@@ -126,12 +127,28 @@ function adicionarImagem() {
           onChange={(e) => setData({ ...data, periodo: e.target.value })}
         />
 
-        <input
-          className="w-full border p-2 rounded"
-          placeholder="Valor total"
-          value={data.valorTotal}
-          onChange={(e) => setData({ ...data, valorTotal: e.target.value })}
-        />
+        <div className="flex gap-2">
+          <input
+            type="number"
+            className="w-full border p-2 rounded"
+            placeholder="Valor total"
+            value={data.valorTotal}
+            onChange={(e) =>
+              setData({ ...data, valorTotal: Number(e.target.value) })
+            }
+          />
+
+          <select
+            className="border p-2 rounded"
+            value={data.moeda}
+            onChange={(e) =>
+              setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
+            }
+          >
+            <option value="BRL">R$</option>
+            <option value="USD">$</option>
+          </select>
+        </div>
 
         <textarea
           className="w-full border p-2 rounded"

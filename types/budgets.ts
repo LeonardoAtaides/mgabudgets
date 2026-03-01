@@ -2,7 +2,8 @@ export interface BudgetsData {
   destino: string
   periodo: string
   hotel: string
-  valorTotal: string
+  valorTotal: number
+  moeda: "BRL" | "USD"
   descricaoHotel: string
   beneficios: string[]
 

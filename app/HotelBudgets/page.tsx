@@ -1,6 +1,16 @@
 import React from "react";
 import { BudgetsData } from "@/types/budgets";
 
+function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
+  return new Intl.NumberFormat(
+    moeda === "BRL" ? "pt-BR" : "en-US",
+    {
+      style: "currency",
+      currency: moeda
+    }
+  ).format(valor)
+}
+
 const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
   return (
     <div>
@@ -77,19 +87,25 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
                 {/* VALOR */}
                 <div className="border border-gray-300 rounded-lg p-4">
-                  <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
+                <div className="flex items-center justify-between mb-3">
+                <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold">
                     VALOR
-                  </div>
-
-                  <div className="text-2xl font-extrabold text-[#0b1b3b]">
-                    {data.valorTotal}
-                  </div>
-
-                  <div className="text-sm text-gray-500 mt-1">
-                    Valor total do pacote por pessoa.
-                  </div>
                 </div>
-              </div>
+
+                <div className="text-sm font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                    {data.moeda}
+                </div>
+                </div>
+
+                <div className="text-2xl font-extrabold text-[#0b1b3b]">
+                    {formatarMoeda(data.valorTotal, data.moeda)}
+                </div>
+
+                <div className="text-sm text-gray-500 mt-1">
+                    Valor total do pacote por pessoa.
+                </div>
+                </div>
+            </div>
 
               {/* VOOS */}
               {data.voos.length > 0 && (
