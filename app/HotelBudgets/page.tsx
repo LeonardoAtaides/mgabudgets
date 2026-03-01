@@ -110,34 +110,34 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {/* VOOS */}
               {data.voos.length > 0 && (
                 <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
-                  <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                  <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                     <strong>Voos</strong>
                   </div>
 
                   <div className="p-4 overflow-x-auto">
                     <table className="w-full border-collapse text-sm min-w-[780px]">
                       <thead>
-                        <tr>
-                          <th className="text-left p-2.5 border-b">Cia</th>
-                          <th className="text-left p-2.5 border-b">Voo</th>
-                          <th className="text-left p-2.5 border-b">Saída</th>
-                          <th className="text-left p-2.5 border-b">Chegada</th>
-                          <th className="text-left p-2.5 border-b">Origem</th>
-                          <th className="text-left p-2.5 border-b">Destino</th>
-                          <th className="text-left p-2.5 border-b">Duração</th>
+                        <tr className="">
+                          <th className="text-left p-2.5 text-[#222]">Cia</th>
+                          <th className="text-left p-2.5 text-[#222]">Voo</th>
+                          <th className="text-left p-2.5 text-[#222]">Saída</th>
+                          <th className="text-left p-2.5 text-[#222]">Chegada</th>
+                          <th className="text-left p-2.5 text-[#222]">Origem</th>
+                          <th className="text-left p-2.5 text-[#222]">Destino</th>
+                          <th className="text-left p-2.5 text-[#222]">Duração</th>
                         </tr>
                       </thead>
 
                       <tbody>
                         {data.voos.map((voo, index) => (
                           <tr key={index}>
-                            <td className="p-2.5 border-b">{voo.cia}</td>
-                            <td className="p-2.5 border-b">{voo.voo}</td>
-                            <td className="p-2.5 border-b">{voo.saida}</td>
-                            <td className="p-2.5 border-b">{voo.chegada}</td>
-                            <td className="p-2.5 border-b">{voo.origem}</td>
-                            <td className="p-2.5 border-b">{voo.destino}</td>
-                            <td className="p-2.5 border-b">{voo.duracao}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.cia}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.voo}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.saida}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.chegada}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.origem}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.destino}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.duracao}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -149,7 +149,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {/* QUARTOS */}
               {data.quartos.length > 0 && (
                 <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
-                  <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                  <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                     <strong>Quartos selecionados</strong>
                   </div>
 
@@ -179,7 +179,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               {/* RESUMO */}
               <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
-                <div className="bg-[#fafbff] p-3 text-lg border-b border-gray-300">
+                <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                   <strong>Resumo</strong>
                 </div>
 
