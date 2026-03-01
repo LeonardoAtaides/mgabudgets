@@ -179,6 +179,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               )}
 
               {/* RESUMO */}
+              {data.mostrarResumo && (
               <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
                 <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
                   <strong>Resumo</strong>
@@ -189,10 +190,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                     <strong>Destino:</strong> {data.destino} <br />
                     <strong>Hotel:</strong> {data.hotel} <br />
                     <strong>Período:</strong> {data.periodo} <br />
-                    <strong>Quartos:</strong> {data.quartos.length}
+                    <strong>Ocupação:</strong> {data.quartos.length} quarto
                   </div>
                 </div>
               </div>
+              )}
             </div>
           </div>
         </div>
