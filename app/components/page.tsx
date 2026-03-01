@@ -19,7 +19,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         style={{ zoom: 0.65 }}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#0b1b3b] to-[#1b1c1f] p-6 text-white flex items-center justify-between gap-4">
+        <div className="bg-[#0b1b3b] p-6 text-white flex items-center justify-between gap-4">
           <div className="flex flex-col gap-1.5 min-w-0">
             <div className="text-2xl font-semibold leading-tight">
               Hospedagem | {data.destino}

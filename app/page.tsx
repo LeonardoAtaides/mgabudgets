@@ -146,7 +146,9 @@ export default function Page() {
   }
 
   function gerarPDF() {
-    window.print()
+    setTimeout(() => {
+      window.print()
+    }, 100)
   }
 
   return (
