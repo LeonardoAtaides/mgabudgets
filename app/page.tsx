@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText} from "lucide-react"
+import { Plus, X, Trash, FileText, Pencil} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 
 export default function Page() {
@@ -46,6 +46,7 @@ export default function Page() {
 
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
+  const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
@@ -289,14 +290,48 @@ export default function Page() {
             </button>
           </div>
 
-          {data.beneficios.map((beneficio, index) => (
-            <div key={index} className="flex justify-between items-center text-sm bg-gray-100 p-2 rounded-lg text-gray-400">
-              <span>{beneficio}</span>
+
+        {data.beneficios.map((beneficio, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2"
+          >
+            {editandoBeneficio === index ? (
+              <input
+                autoFocus
+                className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600"
+                value={beneficio}
+                onChange={(e) =>
+                  setData(prev => ({
+                    ...prev,
+                    beneficios: prev.beneficios.map((b, i) =>
+                      i === index ? e.target.value : b
+                    )
+                  }))
+                }
+                onBlur={() => setEditandoBeneficio(null)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault()
+                    e.currentTarget.blur() // 🔥 força o blur e mantém padrão único
+                  }
+                }}
+              />
+            ) : (
+              <span className="flex-1 text-gray-600">{beneficio}</span>
+            )}
+
+            <div className="flex gap-2">
+              <button onClick={() => setEditandoBeneficio(index)}>
+                <Pencil className="w-4 h-4 text-blue-500" />
+              </button>
+
               <button onClick={() => removerBeneficio(index)}>
-                <X className="w-5 h-5 text-red-500" />
+                <X className="w-4 h-4 text-red-500" />
               </button>
             </div>
-          ))}
+          </div>
+        ))}
         </div>     
             
           <h3 className="font-semibold text-gray-700">Valor</h3>
