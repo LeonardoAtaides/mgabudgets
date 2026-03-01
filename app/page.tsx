@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText, Pencil} from "lucide-react"
+import { Plus, X, Trash, FileText, Pencil, ChevronDown, ChevronUp} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 
@@ -45,10 +45,12 @@ export default function Page() {
     localStorage.setItem("orcamentoHotel", JSON.stringify(data))
   }, [data, mounted])
 
-
+  const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
+  const [quartoModalAberto, setQuartoModalAberto] = useState(false)
+  const conteudoQuartoRef = useRef<HTMLDivElement>(null)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const [editandoInfo, setEditandoInfo] = useState(false);
@@ -402,95 +404,107 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
 
 
-
-        {/* VOOS */}
-        <div className="border-t pt-4 space-y-2">
+      {/* VOOS - SEÇÃO EXPANSÍVEL */}
+      <div className="border-t pt-4 space-y-2">
+        <div 
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setVooModalAberto(prev => !prev)}
+        >
           <h3 className="font-semibold text-gray-700">Voos</h3>
-
-          {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
-            <input
-              key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-              placeholder={campo}
-              value={novoVoo[campo]}
-              onChange={(e) =>
-                setNovoVoo({ ...novoVoo, [campo]: e.target.value })
-              }
-            />
-          ))}
-
-          <button
-            onClick={adicionarVoo}
-            className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center"
+          <span
+            className={`text-gray-500 transition-transform duration-300 ${
+              vooModalAberto ? "rotate-180" : "rotate-0"
+            }`}
           >
-            <Plus className="w-5 h-5 text-white" /> Adicionar Voo
-          </button>
-
-          {data.voos.map((voo, index) => (
-            <div key={index} className="bg-gray-100 p-3 rounded-lg space-y-2">
-
-            {editandoVoo === index ? (
-                <>
-                {(Object.keys(voo) as Array<keyof typeof voo>).map((campo) => (
-                  <input
-                    key={campo}
-                    autoFocus={campo === "cia"}
-                    className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
-                    value={voo[campo]}
-                    placeholder={campo}
-                    onChange={(e) =>
-                      editarVoo(index, campo, e.target.value)
-                    }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault()
-                        setEditandoVoo(null)
-                      }
-                    }}
-                  />
-                ))}
-
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setEditandoVoo(null)}
-                    className="flex-1 bg-blue-600 text-white py-1 rounded"
-                  >
-                    Salvar
-                  </button>
-
-                  <button
-                    onClick={() => removerVoo(index)}
-                    className="flex-1 bg-red-500 text-white py-1 rounded"
-                  >
-                    Remover
-                  </button>
-                </div>
-              </>
-            ) : (
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">
-                    {voo.cia} - {voo.voo}
-                  </span>
-
-                  <div className="flex gap-2">
-                    <button onClick={() => setEditandoVoo(index)}>
-                      <Pencil className="w-4 h-4 text-blue-500" />
-                    </button>
-
-                    <button onClick={() => removerVoo(index)}>
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        
-
-
-
-
+            <ChevronDown />
+          </span>
         </div>
+
+        <div
+          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            vooModalAberto ? "max-h-130 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-2 space-y-2">
+            {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
+              <input
+                key={campo}
+                className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                placeholder={campo}
+                value={novoVoo[campo]}
+                onChange={(e) => setNovoVoo({ ...novoVoo, [campo]: e.target.value })}
+              />
+            ))}
+
+            <button
+              onClick={adicionarVoo}
+              className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-green-700 transition-colors duration-200"
+            >
+              <Plus className="w-5 h-5 text-white" /> Adicionar Voo
+            </button>
+
+            {data.voos.map((voo, index) => (
+              <div
+                key={index}
+                className="bg-gray-100 p-3 rounded-lg space-y-2 transition-all duration-200 hover:bg-gray-200"
+              >
+                {editandoVoo === index ? (
+                  <>
+                    {(Object.keys(voo) as Array<keyof typeof voo>).map((campo) => (
+                      <input
+                        key={campo}
+                        autoFocus={campo === "cia"}
+                        className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        value={voo[campo]}
+                        placeholder={campo}
+                        onChange={(e) => editarVoo(index, campo, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            setEditandoVoo(null);
+                          }
+                        }}
+                      />
+                    ))}
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setEditandoVoo(null)}
+                        className="flex-1 bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition-colors duration-200"
+                      >
+                        Salvar
+                      </button>
+
+                      <button
+                        onClick={() => removerVoo(index)}
+                        className="flex-1 bg-red-500 text-white py-1 rounded hover:bg-red-600 transition-colors duration-200"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">
+                      {voo.cia} - {voo.voo}
+                    </span>
+
+                    <div className="flex gap-2">
+                      <button onClick={() => setEditandoVoo(index)}>
+                        <Pencil className="w-4 h-4 text-blue-500" />
+                      </button>
+
+                      <button onClick={() => removerVoo(index)}>
+                        <X className="w-4 h-4 text-red-500" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
         {/* Informações Adicionais */}
         <label className="flex items-center gap-3 cursor-pointer">
@@ -590,90 +604,115 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
 
           </div>
         )}
-        {/* QUARTOS */}
+
+        {/* QUARTOS - SEÇÃO EXPANSÍVEL */}
         <div className="border-t pt-4 space-y-2">
-          <h3 className="font-semibold text-gray-700">Quartos</h3>
-
-          {(Object.keys(novoQuarto) as Array<keyof typeof novoQuarto>).map((campo) => (
-            <input
-              key={campo}
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-              placeholder={campo}
-              value={novoQuarto[campo]}
-              onChange={(e) =>
-                setNovoQuarto({ ...novoQuarto, [campo]: e.target.value })
-              }
-            />
-          ))}
-
-          <button
-            onClick={adicionarQuarto}
-            className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center"
+          {/* Título clicável */}
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => setQuartoModalAberto(prev => !prev)}
           >
-            <Plus className="w-5 h-5 text-white" /> Adicionar Quarto
-          </button>
+            <h3 className="font-semibold text-gray-700">Quartos</h3>
+            <span
+              className={`text-gray-500 transition-transform duration-300 ${
+                quartoModalAberto ? "rotate-180" : "rotate-0"
+              }`}
+            >
+              <ChevronDown />
+            </span>
+          </div>
 
-          {data.quartos.map((quarto, index) => (
-            <div key={index} className="bg-gray-100 p-3 rounded-lg space-y-2">
+          {/* Conteúdo expansível */}
+          <div
+            className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+              quartoModalAberto ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="mt-2 space-y-2">
+              {/* Inputs para novo quarto */}
+              {(Object.keys(novoQuarto) as Array<keyof typeof novoQuarto>).map((campo) => (
+                <input
+                  key={campo}
+                  className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  placeholder={campo}
+                  value={novoQuarto[campo]}
+                  onChange={(e) =>
+                    setNovoQuarto({ ...novoQuarto, [campo]: e.target.value })
+                  }
+                />
+              ))}
 
-              {editandoQuarto === index ? (
-                <>
-                  {(Object.keys(quarto) as Array<keyof typeof quarto>).map((campo) => (
-                    <input
-                      key={campo}
-                      autoFocus={campo === "nome"}
-                      className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
-                      value={quarto[campo]}
-                      placeholder={campo}
-                      onChange={(e) =>
-                        editarQuarto(index, campo, e.target.value)
-                      }
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault()
-                          setEditandoQuarto(null)
-                        }
-                      }}
-                    />
-                  ))}
+              <button
+                onClick={adicionarQuarto}
+                className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-green-700 transition-colors duration-200"
+              >
+                <Plus className="w-5 h-5 text-white" /> Adicionar Quarto
+              </button>
 
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setEditandoQuarto(null)}
-                      className="flex-1 bg-blue-600 text-white py-1 rounded"
-                    >
-                      Salvar
-                    </button>
+              {/* Lista de quartos existentes */}
+              {data.quartos.map((quarto, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-100 p-3 rounded-lg space-y-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoQuarto === index ? (
+                    <>
+                      {(Object.keys(quarto) as Array<keyof typeof quarto>).map((campo) => (
+                        <input
+                          key={campo}
+                          autoFocus={campo === "nome"}
+                          className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          value={quarto[campo]}
+                          placeholder={campo}
+                          onChange={(e) =>
+                            editarQuarto(index, campo, e.target.value)
+                          }
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              e.preventDefault()
+                              setEditandoQuarto(null)
+                            }
+                          }}
+                        />
+                      ))}
 
-                    <button
-                      onClick={() => removerQuarto(index)}
-                      className="flex-1 bg-red-500 text-white py-1 rounded"
-                    >
-                      Remover
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">
-                    {quarto.nome}
-                  </span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setEditandoQuarto(null)}
+                          className="flex-1 bg-blue-600 text-white py-1 rounded hover:bg-blue-700 transition-colors duration-200"
+                        >
+                          Salvar
+                        </button>
 
-                  <div className="flex gap-2">
-                    <button onClick={() => setEditandoQuarto(index)}>
-                      <Pencil className="w-4 h-4 text-blue-500" />
-                    </button>
+                        <button
+                          onClick={() => removerQuarto(index)}
+                          className="flex-1 bg-red-500 text-white py-1 rounded hover:bg-red-600 transition-colors duration-200"
+                        >
+                          Remover
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">{quarto.nome}</span>
 
-                    <button onClick={() => removerQuarto(index)}>
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                  </div>
+                      <div className="flex gap-2">
+                        <button onClick={() => setEditandoQuarto(index)}>
+                          <Pencil className="w-4 h-4 text-blue-500" />
+                        </button>
+
+                        <button onClick={() => removerQuarto(index)}>
+                          <X className="w-4 h-4 text-red-500" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-
+          </div>
         </div>
+
 
         <label className="flex items-center gap-3 cursor-pointer">
           <input
