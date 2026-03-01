@@ -3,6 +3,7 @@
 import { useState } from "react"
 import HotelOrcamento from "./HotelBudgets/page"
 import { BudgetsData } from "@/types/budgets"
+import { Plus, X, Trash, FileText} from "lucide-react"
 
 export default function Page() {
   const [data, setData] = useState<BudgetsData>({
@@ -22,7 +23,7 @@ export default function Page() {
   const [imagemInput, setImagemInput] = useState("")
 
   const [novoVoo, setNovoVoo] = useState({
-    cia: "teste",
+    cia: "",
     classe:"",
     voo: "",
     saida: "",
@@ -150,9 +151,30 @@ export default function Page() {
       {/* EDITOR */}
       <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6">
 
+      <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold text-gray-800">
           Editor de Orçamento
         </h2>
+
+
+        <button
+          className="bg-blue-600 text-white p-2 rounded-full"
+        >
+          <FileText className="w-5 h-5"/>
+        </button>  
+
+        <button
+          onClick={limparTudo}
+          className="bg-red-600 text-white p-2 rounded-full"
+        >
+          <Trash className="w-5 h-5"/>
+        </button>  
+
+
+
+
+      </div>
+ 
 
         {/* DADOS BÁSICOS */}
         <div className="space-y-3">
@@ -192,15 +214,15 @@ export default function Page() {
               onClick={adicionarImagem}
               className="bg-green-600 text-white px-3 rounded-lg"
             >
-              +
+              <Plus className="w-5 h-5 text-white" />
             </button>
           </div>
 
           {data.imagens.map((img, index) => (
             <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
               <span className="truncate w-[80%]">{img}</span>
-              <button onClick={() => removerImagem(index)} className="text-red-500">
-                ✕
+              <button onClick={() => removerImagem(index)}>
+                <X className="w-5 h-5 text-red-500" />
               </button>
             </div>
           ))}
@@ -255,15 +277,15 @@ export default function Page() {
               onClick={adicionarBeneficio}
               className="bg-green-600 text-white px-3 rounded-lg"
             >
-              +
+              <Plus className="w-5 h-5 text-white" />
             </button>
           </div>
 
           {data.beneficios.map((beneficio, index) => (
             <div key={index} className="flex justify-between items-center text-sm bg-gray-100 p-2 rounded-lg text-gray-400">
               <span>{beneficio}</span>
-              <button onClick={() => removerBeneficio(index)} className="text-red-500">
-                ✕
+              <button onClick={() => removerBeneficio(index)}>
+                <X className="w-5 h-5 text-red-500" />
               </button>
             </div>
           ))}
@@ -287,16 +309,16 @@ export default function Page() {
 
           <button
             onClick={adicionarVoo}
-            className="bg-green-600 text-white w-full py-2 rounded-lg"
+            className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center"
           >
-            Adicionar Voo
+            <Plus className="w-5 h-5 text-white" /> Adicionar Voo
           </button>
 
           {data.voos.map((voo, index) => (
             <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm text-gray-400">
               <span>{voo.cia} - {voo.voo}</span>
-              <button onClick={() => removerVoo(index)} className="text-red-500">
-                ✕
+              <button onClick={() => removerVoo(index)}>
+                <X className="w-5 h-5 text-red-500" />
               </button>
             </div>
           ))}
@@ -320,27 +342,22 @@ export default function Page() {
 
           <button
             onClick={adicionarQuarto}
-            className="bg-green-600 text-white w-full py-2 rounded-lg"
+            className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center"
           >
-            Adicionar Quarto
+            <Plus className="w-5 h-5 text-white" /> Adicionar Quarto
           </button>
 
           {data.quartos.map((quarto, index) => (
             <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm">
               <span>{quarto.nome}</span>
-              <button onClick={() => removerQuarto(index)} className="text-red-500">
-                ✕
+              <button onClick={() => removerQuarto(index)}>
+                <X className="w-5 h-5 text-red-500" />
               </button>
             </div>
           ))}
         </div>
 
-        <button
-          onClick={limparTudo}
-          className="bg-red-600 text-white w-full py-2 rounded-lg mt-4"
-        >
-          Limpar Orçamento
-        </button>
+
       </div>
 
       {/* PREVIEW */}
