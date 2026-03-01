@@ -47,6 +47,7 @@ export default function Page() {
 
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
+  const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [quartoModalAberto, setQuartoModalAberto] = useState(false)
@@ -250,158 +251,171 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
       </div>
  
 
-      {/* DADOS BÁSICOS */}
-      <div className="space-y-3">
-        <input
-          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-          placeholder="Destino"
-          value={data.destino}
-          onChange={(e) => setData({ ...data, destino: e.target.value })}
-        />
-
-        <input
-          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-          placeholder="Hotel"
-          value={data.hotel}
-          onChange={(e) => setData({ ...data, hotel: e.target.value })}
-        />
-
-        <input
-          className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-          placeholder="Período"
-          value={data.periodo}
-          onChange={(e) => setData({ ...data, periodo: e.target.value })}
-        />
-
-      {/* IMAGENS */}
+      {/* DADOS BÁSICOS - SEÇÃO EXPANSÍVEL */}
       <div className="space-y-2">
-        <h3 className="font-semibold text-gray-700">Imagens</h3>
-
-        <div className="flex gap-2">
-          <input
-            className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-            placeholder="https://..."
-            value={imagemInput}
-            onChange={(e) => setImagemInput(e.target.value)}
-          />
-          <button
-            onClick={adicionarImagem}
-            className="bg-green-600 text-white px-3 rounded-lg"
-          >
-            <Plus className="w-5 h-5 text-white" />
-          </button>
-        </div>
-
-        {data.imagens.map((img, index) => (
-          <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
-            <span className="truncate w-[80%]">{img}</span>
-            <button onClick={() => removerImagem(index)}>
-              <X className="w-5 h-5 text-red-500" />
-            </button>
-          </div>
-        ))}
-      </div>
-
-        <h3 className="font-semibold text-gray-700">Informações do Hotel</h3>
-
-        <textarea
-          className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400"
-          placeholder="Descrição do hotel"
-          value={data.descricaoHotel}
-          onChange={(e) =>
-            setData({ ...data, descricaoHotel: e.target.value })
-          }
-        />
-
-      {/* BENEFÍCIOS */}
-      <div className="space-y-2 mb-4">
-        <h3 className="font-semibold text-gray-700">Benefícios</h3>
-
-        <div className="flex gap-2">
-          <input
-            className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400"
-            value={beneficioInput}
-            onChange={(e) => setBeneficioInput(e.target.value)}
-          />
-          <button
-            onClick={adicionarBeneficio}
-            className="bg-green-600 text-white px-3 rounded-lg"
-          >
-            <Plus className="w-5 h-5 text-white" />
-          </button>
-        </div>
-
-
-      {data.beneficios.map((beneficio, index) => (
         <div
-          key={index}
-          className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2"
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setDadosBasicosAberto(prev => !prev)}
         >
-          {editandoBeneficio === index ? (
+          <h3 className="font-semibold text-gray-700">Dados Básicos</h3>
+          <span
+            className={`text-gray-500 transition-transform duration-300 ${
+              dadosBasicosAberto ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <ChevronDown />
+          </span>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            dadosBasicosAberto ? "max-h-130 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-2 space-y-3">
             <input
-              autoFocus
-              className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600"
-              value={beneficio}
-              onChange={(e) =>
-                setData(prev => ({
-                  ...prev,
-                  beneficios: prev.beneficios.map((b, i) =>
-                    i === index ? e.target.value : b
-                  )
-                }))
-              }
-              onBlur={() => setEditandoBeneficio(null)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault()
-                  e.currentTarget.blur() 
-                }
-              }}
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              placeholder="Destino"
+              value={data.destino}
+              onChange={(e) => setData({ ...data, destino: e.target.value })}
             />
-          ) : (
-            <span className="flex-1 text-gray-600">{beneficio}</span>
-          )}
+            <input
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              placeholder="Hotel"
+              value={data.hotel}
+              onChange={(e) => setData({ ...data, hotel: e.target.value })}
+            />
+            <input
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              placeholder="Período"
+              value={data.periodo}
+              onChange={(e) => setData({ ...data, periodo: e.target.value })}
+            />
 
-          <div className="flex gap-2">
-            <button onClick={() => setEditandoBeneficio(index)}>
-              <Pencil className="w-4 h-4 text-blue-500" />
-            </button>
+            {/* IMAGENS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Imagens</h3>
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  placeholder="https://..."
+                  value={imagemInput}
+                  onChange={(e) => setImagemInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarImagem}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+              {data.imagens.map((img, index) => (
+                <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
+                  <span className="truncate w-[80%]">{img}</span>
+                  <button onClick={() => removerImagem(index)}>
+                    <X className="w-5 h-5 text-red-500" />
+                  </button>
+                </div>
+              ))}
+            </div>
 
-            <button onClick={() => removerBeneficio(index)}>
-              <X className="w-4 h-4 text-red-500" />
-            </button>
+            {/* DESCRIÇÃO */}
+            <textarea
+              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              placeholder="Descrição do hotel"
+              value={data.descricaoHotel}
+              onChange={(e) =>
+                setData({ ...data, descricaoHotel: e.target.value })
+              }
+            />
+
+            {/* BENEFÍCIOS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Benefícios</h3>
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  value={beneficioInput}
+                  onChange={(e) => setBeneficioInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarBeneficio}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.beneficios.map((beneficio, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoBeneficio === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                      value={beneficio}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          beneficios: prev.beneficios.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoBeneficio(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{beneficio}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoBeneficio(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerBeneficio(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* VALOR */}
+            <div>
+              <h3 className="font-semibold text-gray-700">Valor</h3>
+              <div className="flex gap-2">
+                <select
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  value={data.moeda}
+                  onChange={(e) =>
+                    setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
+                  }
+                >
+                  <option value="BRL">R$</option>
+                  <option value="USD">$</option>
+                </select>
+
+                <input
+                  type="number"
+                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  value={data.valorTotal}
+                  onChange={(e) =>
+                    setData({ ...data, valorTotal:(e.target.value) })
+                  }
+                />
+              </div>          
+            </div>
           </div>
         </div>
-      ))}
-      </div>     
-        
-        <div className="border-t pt-4">
-          <h3 className="font-semibold text-gray-700">Valor</h3>
-          <div className="flex gap-2">
-            <select
-              className="border border-gray-300 p-2 rounded-lg text-gray-500"
-              value={data.moeda}
-              onChange={(e) =>
-                setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
-              }
-            >
-              <option value="BRL">R$</option>
-              <option value="USD">$</option>
-            </select>
-
-            <input
-              type="number"
-              className="w-full border border-gray-300 p-2 rounded-lg text-gray-400"
-              value={data.valorTotal}
-              onChange={(e) =>
-                setData({ ...data, valorTotal:(e.target.value) })
-              }
-            />
-          </div>          
-        </div>
-
       </div>
-
 
 
       {/* VOOS - SEÇÃO EXPANSÍVEL */}
@@ -523,7 +537,6 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
             Exibir Informações Adicionais
           </span>
         </label>
-
         {data.mostrarInfo && (
           <div className="bg-gray-100 p-3 rounded-lg space-y-2">
 
@@ -727,7 +740,6 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
             Exibir Resumo
           </span>
         </label>
-
 
       </div>
 
