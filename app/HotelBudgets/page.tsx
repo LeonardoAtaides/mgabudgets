@@ -198,7 +198,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
         {/* Footer */}
         <div className="bg-[#f6f7fb] p-4 border-t border-gray-200 text-sm text-gray-500">
-          Valores e disponibilidade sujeitos à confirmação no momento da reserva.
+          <span className="font-bold">Observações importantes:</span> Valores e disponibilidade sujeitos à confirmação no momento da reserva. Taxas locais e serviços extras (quando aplicáveis) podem ser cobrados diretamente pelo hotel. Horários dos voos sujeitos à confirmação e alterações pela companhia aérea.
         </div>
       </div>
     </div>
