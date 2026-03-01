@@ -13,10 +13,10 @@ function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
 
 const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
   return (
-    <div>
+    <div className="py-12">
       <div
         className="max-w-[1100px] mx-auto bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200"
-        style={{ zoom: 0.65 }}
+        style={{ zoom: 0.7 }}
       >
         {/* Header */}
         <div className="bg-[#0b1b3b] p-6 text-white flex items-center justify-between gap-4">
@@ -198,7 +198,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-[#f6f7fb] p-4 border-t border-gray-200 text-sm text-gray-500">
+        <div className="bg-[#f6f7fb] p-4 border-t border-gray-200 text-sm text-gray-500 text-center">
           <span className="font-bold">Observações importantes:</span> Valores e disponibilidade sujeitos à confirmação no momento da reserva. Taxas locais e serviços extras (quando aplicáveis) podem ser cobrados diretamente pelo hotel. Horários dos voos sujeitos à confirmação e alterações pela companhia aérea.
         </div>
       </div>
