@@ -36,6 +36,24 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
 
             <div className="p-4">
+
+            {/* GALERIA */}
+            {data.imagens && data.imagens.length > 0 && (
+            <div className="mb-6">
+                <div className="grid grid-cols-4 grid-rows-2 gap-2.5 h-[280px]">
+                {data.imagens.map((img, index) => (
+                    <img
+                    key={index}
+                    src={img}
+                    alt={`Imagem ${index + 1}`}
+                    className={`w-full h-full object-cover rounded-lg border border-gray-100 ${
+                        index === 0 ? "col-span-2 row-span-2" : ""
+                    }`}
+                    />
+                ))}
+                </div>
+            </div>
+)}
               {/* INFORMAÇÕES + VALOR */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* HOTEL INFO */}

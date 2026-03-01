@@ -49,16 +49,21 @@ export default function Page() {
     setBeneficioInput("")
   }
 
-  function adicionarImagem() {
-    if (!imagemInput.trim()) return
+function adicionarImagem() {
+  if (!imagemInput.trim()) return
 
-    setData(prev => ({
-      ...prev,
-      imagens: [...prev.imagens, imagemInput]
-    }))
-
-    setImagemInput("")
+  if (data.imagens.length >= 5) {
+    alert("Máximo de 5 imagens permitidas.")
+    return
   }
+
+  setData(prev => ({
+    ...prev,
+    imagens: [...prev.imagens, imagemInput]
+  }))
+
+  setImagemInput("")
+}
 
   function adicionarVoo() {
     setData(prev => ({
