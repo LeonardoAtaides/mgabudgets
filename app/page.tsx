@@ -47,6 +47,7 @@ export default function Page() {
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
+  const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
@@ -178,6 +179,20 @@ export default function Page() {
       regime:"",
     })
   }
+
+  function editarVoo(
+  index: number,
+  campo: keyof typeof novoVoo,
+  valor: string
+) {
+  setData(prev => ({
+    ...prev,
+    voos: prev.voos.map((voo, i) =>
+      i === index ? { ...voo, [campo]: valor } : voo
+    )
+  }))
+}
+
 
   if (!mounted) return null
 
@@ -313,7 +328,7 @@ export default function Page() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault()
-                    e.currentTarget.blur() // 🔥 força o blur e mantém padrão único
+                    e.currentTarget.blur() 
                   }
                 }}
               />
@@ -385,13 +400,69 @@ export default function Page() {
           </button>
 
           {data.voos.map((voo, index) => (
-            <div key={index} className="bg-gray-100 p-2 rounded-lg flex justify-between text-sm text-gray-400">
-              <span>{voo.cia} - {voo.voo}</span>
-              <button onClick={() => removerVoo(index)}>
-                <X className="w-5 h-5 text-red-500" />
-              </button>
+            <div key={index} className="bg-gray-100 p-3 rounded-lg space-y-2">
+
+            {editandoVoo === index ? (
+                <>
+                {(Object.keys(voo) as Array<keyof typeof voo>).map((campo) => (
+                  <input
+                    key={campo}
+                    autoFocus={campo === "cia"}
+                    className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
+                    value={voo[campo]}
+                    placeholder={campo}
+                    onChange={(e) =>
+                      editarVoo(index, campo, e.target.value)
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault()
+                        setEditandoVoo(null)
+                      }
+                    }}
+                  />
+                ))}
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setEditandoVoo(null)}
+                    className="flex-1 bg-blue-600 text-white py-1 rounded"
+                  >
+                    Salvar
+                  </button>
+
+                  <button
+                    onClick={() => removerVoo(index)}
+                    className="flex-1 bg-red-500 text-white py-1 rounded"
+                  >
+                    Remover
+                  </button>
+                </div>
+              </>
+            ) : (
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">
+                    {voo.cia} - {voo.voo}
+                  </span>
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoVoo(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+
+                    <button onClick={() => removerVoo(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
+        
+
+
+
+
         </div>
 
 {/* Informações Adicionais */}
