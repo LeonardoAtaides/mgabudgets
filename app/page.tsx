@@ -22,7 +22,7 @@ export default function Page() {
   const [imagemInput, setImagemInput] = useState("")
 
   const [novoVoo, setNovoVoo] = useState({
-    cia: "",
+    cia: "teste",
     classe:"",
     voo: "",
     saida: "",
@@ -190,7 +190,7 @@ export default function Page() {
             />
             <button
               onClick={adicionarImagem}
-              className="bg-indigo-600 text-white px-3 rounded-lg"
+              className="bg-green-600 text-white px-3 rounded-lg"
             >
               +
             </button>
@@ -253,7 +253,7 @@ export default function Page() {
             />
             <button
               onClick={adicionarBeneficio}
-              className="bg-blue-600 text-white px-3 rounded-lg"
+              className="bg-green-600 text-white px-3 rounded-lg"
             >
               +
             </button>
@@ -320,7 +320,7 @@ export default function Page() {
 
           <button
             onClick={adicionarQuarto}
-            className="bg-purple-600 text-white w-full py-2 rounded-lg"
+            className="bg-green-600 text-white w-full py-2 rounded-lg"
           >
             Adicionar Quarto
           </button>
