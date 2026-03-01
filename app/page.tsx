@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef  } from "react"
 import HotelOrcamento from "./components/page"
 import { BudgetsData } from "@/types/budgets"
 import { Plus, X, Trash, FileText} from "lucide-react"
+import { useReactToPrint } from "react-to-print"
 
 export default function Page() {
   const [data, setData] = useState<BudgetsData>({
@@ -21,7 +22,11 @@ export default function Page() {
 
   const [beneficioInput, setBeneficioInput] = useState("")
   const [imagemInput, setImagemInput] = useState("")
-
+  const previewRef = useRef<HTMLDivElement>(null)
+  const handlePrint = useReactToPrint({
+    contentRef: previewRef,
+    documentTitle: "Orcamento-Hotel",
+  })
   const [novoVoo, setNovoVoo] = useState({
     cia: "",
     classe:"",
@@ -145,12 +150,6 @@ export default function Page() {
     })
   }
 
-  function gerarPDF() {
-    setTimeout(() => {
-      window.print()
-    }, 100)
-  }
-
   return (
     <div className="h-screen flex overflow-hidden">
 
@@ -164,7 +163,7 @@ export default function Page() {
 
 
         <button
-          onClick={gerarPDF}
+          onClick={handlePrint}
           className="bg-blue-600 text-white p-2 rounded-full"
         >
           <FileText className="w-5 h-5"/>
@@ -369,7 +368,7 @@ export default function Page() {
 
       {/* PREVIEW */}
       <div className="flex-1 overflow-auto bg-gray-200 p-10">
-        <div className="flex justify-center">
+        <div  ref={previewRef} className="flex justify-center ">
           <HotelOrcamento data={data} />
         </div>
       </div>
