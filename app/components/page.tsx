@@ -203,11 +203,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   <strong>Resumo</strong>
                 </div>
 
-                <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3">
+                <div className="border border-dashed border-[#d4af37] bg-yellow-50 rounded-b-lg p-3 flex gap-2">
                   <div className="text-sm text-gray-700 leading-relaxed">
-                    <strong>Destino:</strong> {data.destino} <br />
-                    <strong>Hotel:</strong> {data.hotel} <br />
-                    <strong>Período:</strong> {data.periodo} <br />
+                    <strong>Destino:</strong> {data.destino}
+                    <strong>Hotel:</strong> {data.hotel}
+                    <strong>Período:</strong> {data.periodo}
                     <strong>Ocupação:</strong> {data.quartos.length}
                   </div>
                 </div>

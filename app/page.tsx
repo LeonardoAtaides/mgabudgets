@@ -49,6 +49,7 @@ export default function Page() {
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
+  const [editandoInfo, setEditandoInfo] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
@@ -203,6 +204,13 @@ function editarQuarto(
     quartos: prev.quartos.map((quarto, i) =>
       i === index ? { ...quarto, [campo]: valor } : quarto
     )
+  }))
+}
+
+function editarInfo(campo: "viajantes" | "regime", valor: string) {
+  setData(prev => ({
+    ...prev,
+    [campo]: valor
   }))
 }
 
@@ -478,54 +486,104 @@ function editarQuarto(
 
         </div>
 
-{/* Informações Adicionais */}
-<label className="flex items-center gap-3 cursor-pointer">
-  <input
-    type="checkbox"
-    checked={data.mostrarInfo}
-    onChange={(e) =>
-      setData(prev => ({
-        ...prev,
-        mostrarInfo: e.target.checked
-      }))
-    }
-    className="w-4 h-4 accent-blue-600"
-  />
-  <span className="text-sm font-medium text-gray-700">
-    Exibir Informações Adicionais
-  </span>
-</label>
+        {/* Informações Adicionais */}
+        <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={data.mostrarInfo}
+            onChange={(e) =>
+              setData(prev => ({
+                ...prev,
+                mostrarInfo: e.target.checked
+              }))
+            }
+            className="w-4 h-4 accent-blue-600"
+          />
+          <span className="text-sm font-medium text-gray-700">
+            Exibir Informações Adicionais
+          </span>
+        </label>
 
-{data.mostrarInfo && (
-  <div className="mt-3 space-y-3 border border-gray-200 p-3 rounded-lg bg-gray-50">
-    
-    <input
-      className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-      placeholder="Viajantes"
-      value={data.viajantes}
-      onChange={(e) =>
-        setData(prev => ({
-          ...prev,
-          viajantes: e.target.value
-        }))
-      }
-    />
+        {data.mostrarInfo && (
+          <div className="bg-gray-100 p-3 rounded-lg space-y-2">
 
-    <input
-      className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400"
-      placeholder="Regime (Ex: Café da manhã incluso)"
-      value={data.regime}
-      onChange={(e) =>
-        setData(prev => ({
-          ...prev,
-          regime: e.target.value
-        }))
-      }
-    />
+            {editandoInfo ? (
+              <>
+                {(["viajantes", "regime"] as const).map((campo) => (
+                  <input
+                    key={campo}
+                    autoFocus={campo === "viajantes"}
+                    className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
+                    value={data[campo]}
+                    placeholder={`Informe ${campo}`}
+                    onChange={(e) => editarInfo(campo, e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault()
+                        setEditandoInfo(false)
+                      }
+                    }}
+                  />
+                ))}
 
-  </div>
-)}
-        
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setEditandoInfo(false)}
+                    className="flex-1 bg-blue-600 text-white py-1 rounded"
+                  >
+                    Salvar
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setData(prev => ({
+                        ...prev,
+                        viajantes: "",
+                        regime: ""
+                      }))
+                      setEditandoInfo(false)
+                    }}
+                    className="flex-1 bg-red-500 text-white py-1 rounded"
+                  >
+                    Remover
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">
+                  {data.viajantes || data.regime ? (
+                    <>
+                      <div>Viajantes: {data.viajantes || "-"}</div>
+                      <div>Regime: {data.regime || "-"}</div>
+                    </>
+                  ) : (
+                    "Sem informações"
+                  )}
+                </span>
+
+                <div className="flex gap-2">
+                  <button onClick={() => setEditandoInfo(true)}>
+                    <Pencil className="w-4 h-4 text-blue-500" />
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      setData(prev => ({
+                        ...prev,
+                        viajantes: "",
+                        regime: ""
+                      }))
+                    }
+                  >
+                    <X className="w-4 h-4 text-red-500" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+          </div>
+        )}
         {/* QUARTOS */}
         <div className="border-t pt-4 space-y-2">
           <h3 className="font-semibold text-gray-700">Quartos</h3>
