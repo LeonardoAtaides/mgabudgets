@@ -3,11 +3,12 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/preview"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble} from "lucide-react"
+import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
 import { InfoModal } from "./components/infomodal"
+
 
 export default function Page() {
   const [mounted, setMounted] = useState(false)
@@ -232,6 +233,26 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
   }))
 }
 
+function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
+  const files = e.target.files
+  if (!files) return
+
+  const novasImagens = Array.from(files).map(file =>
+    URL.createObjectURL(file)
+  )
+
+  const total = data.imagens.length + novasImagens.length
+
+  if (total > 7) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 7 imagens permitidas." })
+    return
+  }
+
+  setData(prev => ({
+    ...prev,
+    imagens: [...prev.imagens, ...novasImagens]
+  }))
+}
 
   if (!mounted) return null
 
@@ -342,6 +363,19 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                 >
                   <Plus className="w-5 h-5 text-white" />
                 </button>
+
+              <div className="flex gap-2">
+                <label className="bg-blue-600 text-white px-3 rounded-lg cursor-pointer hover:bg-blue-700 flex items-center">
+                  <ArrowUpToLine className="w-5 h-5 text-white" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={subirImagemLocal}
+                    className="hidden"
+                  />
+                </label>
+            </div>        
               </div>
               {data.imagens.map((img, index) => (
                 <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
@@ -351,6 +385,8 @@ function editarInfo(campo: "viajantes" | "regime", valor: string) {
                   </button>
                 </div>
               ))}
+
+
             </div>
 
             {/* DESCRIÇÃO */}
