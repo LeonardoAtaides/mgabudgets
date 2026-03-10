@@ -21,6 +21,7 @@ export default function Page() {
     moeda: "BRL",
     descricaoHotel: "",
     descricaoInfo: "",
+    descricaoExtra: "",
     beneficios: [],
     imagens: [],
     voos: [],
@@ -185,6 +186,7 @@ function adicionarImagem() {
       moeda: "BRL",
       descricaoHotel: "",
       descricaoInfo: "",
+      descricaoExtra: "",
       beneficios: [],
       imagens: [],
       voos: [],
@@ -399,6 +401,15 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               }
             />
 
+            {/* DESCRIÇÃO */}
+            <textarea
+              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+              placeholder="Extras"
+              value={data.descricaoExtra}
+              onChange={(e) =>
+                setData({ ...data, descricaoExtra: e.target.value })
+              }
+            />
 
 
             {/* BENEFÍCIOS */}
