@@ -121,21 +121,14 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
 
               {/* Informações Adicionais */}
-              {safeData.mostrarInfo && (
+      
               <div className="border border-gray-300 rounded-lg p-4">
-                <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold">
+                <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
                   Informações Adicionais
                 </div>
 
                 <div className="text-sm font-semibold text-white  px-2 py-1 rounded">
                   <div className="text-sm text-gray-700 leading-relaxed gap-4 flex flex-col">
-                    <div><strong>Período:</strong> {safeData.periodo}</div>
-                    <div>
-                      <strong>
-                        {safeData.viajantes? `Viajante${Number(safeData.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
-                      </strong>{" "}
-                      {safeData.viajantes? `${Number(safeData.viajantes)}`: <span className="placeholder">0</span>}
-                    </div>
                     <div>
                       <strong>
                         {safeData.quartos && safeData.quartos.length > 0 ? `Quarto${safeData.quartos.length > 1 ? "s" : ""}:`: "Quartos:"} 
@@ -143,12 +136,22 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                       {safeData.quartos && safeData.quartos.length > 0
                         ? `${safeData.quartos.length}`
                         : <span className="placeholder">0</span>}
-                    </div>
+                    </div>   
+                    <div>
+                      <strong>
+                        {safeData.viajantes? `Viajante${Number(safeData.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
+                      </strong>{" "}
+                      {safeData.viajantes? `${Number(safeData.viajantes)}`: <span className="placeholder">0</span>}
+                    </div>                    
+
+                    <div><strong>Período:</strong> {safeData.periodo}</div>
+
+
                     <div><strong>Regime:</strong> {safeData.regime}</div>
                   </div>
                 </div>
               </div>
-              )}
+            
             </div>
 
             {/* VOOS */}
