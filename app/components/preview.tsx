@@ -124,7 +124,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
       
               <div className="border border-gray-300 rounded-lg p-4">
                 <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
-                  Informações Adicionais
+                  Informações do Quarto
                 </div>
 
                 <div className="text-sm font-semibold text-white  px-2 py-1 rounded">
