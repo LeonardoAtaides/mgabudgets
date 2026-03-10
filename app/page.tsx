@@ -468,15 +468,14 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
         </div>
 
         
-          <div className="bg-gray-100 p-3 rounded-lg space-y-2">
-
+          <div className="space-y-2">
             {editandoInfo ? (
               <>
                 {(["viajantes", "regime"] as const).map((campo) => (
                   <input
                     key={campo}
                     autoFocus={campo === "viajantes"}
-                    className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600"
+                    className="w-full bg-white border border-gray-300 p-2 rounded-lg text-gray-600"
                     value={data[campo]}
                     placeholder={`Informe ${campo}`}
                     onChange={(e) => editarInfo(campo, e.target.value)}
