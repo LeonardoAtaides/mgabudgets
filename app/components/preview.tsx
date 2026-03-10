@@ -274,18 +274,14 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
           <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold">
               VALOR
           </div>
-
-          <div className="text-sm font-semibold text-white bg-[#0b1b3b] px-2 py-1 rounded">
-              {safeData.moeda}
-          </div>
           </div>
 
           <div className="text-2xl font-extrabold text-[#0b1b3b]">
-                {formatarMoeda(Number(safeData.valorTotal || 0),safeData.moeda)}
+               {safeData.moeda} {formatarMoeda(Number(safeData.valorTotal || 0),safeData.moeda)}
           </div>
 
           <div className="text-sm text-gray-500 mt-1">
-              Valor total do pacote por pessoa.
+              Valor total do pacote.
           </div>
           </div>                  
         </div>            
