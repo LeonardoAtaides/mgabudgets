@@ -19,6 +19,7 @@ export default function Page() {
     hotel: "",
     valorTotal: "",
     moeda: "BRL",
+    valordesc: "pacote",
     descricaoHotel: "",
     descricaoInfo: "",
     descricaoExtra: "",
@@ -184,6 +185,7 @@ function adicionarImagem() {
       hotel: "",
       valorTotal: "",
       moeda: "BRL",
+      valordesc: "pacote",
       descricaoHotel: "",
       descricaoInfo: "",
       descricaoExtra: "",
@@ -582,6 +584,22 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                     setData({ ...data, valorTotal:(e.target.value) })
                   }
                 />
+              </div>          
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
+              <div className="flex gap-2">
+                <select
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
+                  value={data.valordesc}
+                  onChange={(e) =>
+                    setData({ ...data, valordesc: e.target.value as "pacote" | "pacote por pessoa" })
+                  }
+                >
+                  <option value="pacote">Pacote</option>
+                  <option value="pacote por pessoa">Pacote por pessoa</option>
+                </select>
               </div>          
             </div>
           </div>

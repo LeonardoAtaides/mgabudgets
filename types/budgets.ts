@@ -13,6 +13,7 @@ export interface BudgetsData {
   imagens: string[]  
   viajantes: string
   regime: string
+  valordesc: "pacote" | "pacote por pessoa"
 
   voos: {
     cia: string
