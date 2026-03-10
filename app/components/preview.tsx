@@ -258,24 +258,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
                 <div className="border rounded-b-lg p-3">
-                  <div className="text-sm text-gray-700 leading-relaxed gap-4 flex">
-                    <div><strong>Período:</strong> {safeData.periodo}</div>
-                    <div>
-                      <strong>
-                        {safeData.viajantes? `Viajante${Number(safeData.viajantes) > 1 ? "s" : ""}:`: "Viajantes:"}
-                      </strong>{" "}
-                      {safeData.viajantes? `${Number(safeData.viajantes)}`: <span className="placeholder">0</span>}
-                    </div>
-                    <div>
-                      <strong>
-                        {safeData.quartos && safeData.quartos.length > 0 ? `Quarto${safeData.quartos.length > 1 ? "s" : ""}:`: "Quartos:"} 
-                      </strong>{" "}
-                      {safeData.quartos && safeData.quartos.length > 0
-                        ? `${safeData.quartos.length}`
-                        : <span className="placeholder">0</span>}
-                    </div>
-                    <div><strong>Regime:</strong> {safeData.regime}</div>
+                    <div className="text-base text-gray-700 leading-relaxed">
+                    {safeData.descricaoInfo}
+
                   </div>
+    
                 </div>
               </div>
               )}
