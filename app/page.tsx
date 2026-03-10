@@ -100,8 +100,8 @@ export default function Page() {
 function adicionarImagem() {
   if (!imagemInput.trim()) return;
 
-  if (data.imagens.length >= 5) {
-    setInfoModal({ mostrar: true, mensagem: "Máximo de 5 imagens permitidas." });
+  if (data.imagens.length >= 7) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 7 imagens permitidas." });
     return;
   }
 

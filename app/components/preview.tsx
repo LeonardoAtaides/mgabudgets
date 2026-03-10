@@ -71,16 +71,18 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
             {/* GALERIA */}
             <div className="mb-6">
-              <div className="grid grid-cols-4 grid-rows-2 gap-2.5 h-[280px]">
+              <div className="grid grid-cols-4 grid-rows-3 gap-2.5 h-[520px]">
                 {(safeData.imagens && safeData.imagens.length > 0
                   ? safeData.imagens
-                  : Array(5).fill(null)
+                  : Array(7).fill(null)
                 ).map((img, index) => (
                   <div
                     key={index}
-                    className={`w-full h-full rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center text-gray-400 text-sm ${
-                      index === 0 ? "col-span-2 row-span-2" : ""
-                    }`}
+                    className={`w-full h-full rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center text-gray-400 text-sm
+                    ${index === 0 ? "col-span-2 row-span-2" : ""}
+                    ${index === 5 ? "col-span-2 row-start-3 col-start-1" : ""}
+                    ${index === 6 ? "col-span-2 row-start-3 col-start-3" : ""}
+                    `}
                   >
                     {img ? (
                       <img
@@ -95,6 +97,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 ))}
               </div>
             </div>
+            
               {/* INFORMAÇÕES + VALOR */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* HOTEL INFO */}
@@ -224,6 +227,9 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               </div>
               )}
 
+
+
+
             {/* QUARTOS */}
             <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
               <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
@@ -286,8 +292,36 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               </div>
               )}
             </div>
+
+        {/* VALOR */}
+        <div className="">
+          <div className="border border-gray-300 p-4">
+          <div className="flex items-center justify-between mb-3">
+          <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold">
+              VALOR
           </div>
+
+          <div className="text-sm font-semibold text-white bg-[#0b1b3b] px-2 py-1 rounded">
+              {safeData.moeda}
+          </div>
+          </div>
+
+          <div className="text-2xl font-extrabold text-[#0b1b3b]">
+                {formatarMoeda(Number(safeData.valorTotal || 0),safeData.moeda)}
+          </div>
+
+          <div className="text-sm text-gray-500 mt-1">
+              Valor total do pacote por pessoa.
+          </div>
+          </div>                  
+        </div>            
+          </div>
+
+
         </div>
+
+
+
 
         {/* Footer */}
         <div className="bg-[#f6f7fb] p-4 border-t border-gray-200 text-sm text-gray-500 text-center">
