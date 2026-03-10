@@ -120,8 +120,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
 
-              {/* Informações Adicionais */}
-      
+              {/* Informações do Quarto */}
+
               <div className="border border-gray-300 rounded-lg p-4">
                 <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
                   Informações do Quarto
@@ -152,6 +152,46 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
               </div>
             
+            </div>
+
+            {/* QUARTOS */}
+            <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
+              <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
+                <strong>Quartos selecionados</strong>
+              </div>
+
+              <div className="p-4">
+                <div className="grid grid-cols-2 gap-3">
+                  {safeData.quartos.length > 0
+                    ? safeData.quartos.map((quarto, index) => (
+                        <div key={index} className="border border-gray-200 rounded-lg p-3">
+                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
+                            {quarto.nome || <span className="placeholder">Quarto A</span>}
+                          </div>
+
+                          <div className="text-sm text-gray-700 leading-relaxed">
+                            <strong>Vista:</strong> {quarto.vista || <span className="placeholder">Cidade</span>} <br />
+                            <strong>Cama:</strong> {quarto.cama || <span className="placeholder">Casal</span>} <br />
+                            <strong>Tamanho:</strong> {quarto.tamanho || <span className="placeholder">30m²</span>} <br />
+                            <strong>Incluso:</strong> {quarto.incluso || <span className="placeholder">Café da manhã</span>}
+                          </div>
+                        </div>
+                      ))
+                    : (
+                        <div className="border border-gray-200 rounded-lg p-3 col-span-2">
+                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
+                            <span className="placeholder">Quarto A</span>
+                          </div>
+                          <div className="text-sm text-gray-700 leading-relaxed">
+                            <strong>Vista:</strong> <span className="placeholder">Cidade</span> <br />
+                            <strong>Cama:</strong> <span className="placeholder">Casal</span> <br />
+                            <strong>Tamanho:</strong> <span className="placeholder">30m²</span> <br />
+                            <strong>Incluso:</strong> <span className="placeholder">Café da manhã</span>
+                          </div>
+                        </div>
+                      )}
+                </div>
+              </div>
             </div>
 
             {/* VOOS */}
@@ -239,50 +279,6 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
               </div>
               )}
-
-
-
-
-            {/* QUARTOS */}
-            <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
-              <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
-                <strong>Quartos selecionados</strong>
-              </div>
-
-              <div className="p-4">
-                <div className="grid grid-cols-2 gap-3">
-                  {safeData.quartos.length > 0
-                    ? safeData.quartos.map((quarto, index) => (
-                        <div key={index} className="border border-gray-200 rounded-lg p-3">
-                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
-                            {quarto.nome || <span className="placeholder">Quarto A</span>}
-                          </div>
-
-                          <div className="text-sm text-gray-700 leading-relaxed">
-                            <strong>Vista:</strong> {quarto.vista || <span className="placeholder">Cidade</span>} <br />
-                            <strong>Cama:</strong> {quarto.cama || <span className="placeholder">Casal</span>} <br />
-                            <strong>Tamanho:</strong> {quarto.tamanho || <span className="placeholder">30m²</span>} <br />
-                            <strong>Incluso:</strong> {quarto.incluso || <span className="placeholder">Café da manhã</span>}
-                          </div>
-                        </div>
-                      ))
-                    : (
-                        <div className="border border-gray-200 rounded-lg p-3 col-span-2">
-                          <div className="font-bold text-[#0b1b3b] mb-1.5 text-sm">
-                            <span className="placeholder">Quarto A</span>
-                          </div>
-                          <div className="text-sm text-gray-700 leading-relaxed">
-                            <strong>Vista:</strong> <span className="placeholder">Cidade</span> <br />
-                            <strong>Cama:</strong> <span className="placeholder">Casal</span> <br />
-                            <strong>Tamanho:</strong> <span className="placeholder">30m²</span> <br />
-                            <strong>Incluso:</strong> <span className="placeholder">Café da manhã</span>
-                          </div>
-                        </div>
-                      )}
-                </div>
-              </div>
-            </div>
-
               {/* RESUMO */}
               {safeData.mostrarResumo && (
               <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
