@@ -43,7 +43,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         <div className="bg-[#0b1b3b] p-6 text-white flex items-center justify-between gap-4">
           <div className="flex flex-col gap-1.5 min-w-0">
             <div className="text-2xl font-semibold leading-tight">
-               Hospedagem | {safeData.destino || <span className="placeholder">Destino</span>}
+               Pacote de Viagem | {safeData.destino || <span className="placeholder">Destino</span>}
             </div>
           </div>
 
