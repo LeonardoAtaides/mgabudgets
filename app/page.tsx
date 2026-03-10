@@ -68,6 +68,7 @@ export default function Page() {
   })
   const [novoVoo, setNovoVoo] = useState({
     cia: "",
+    data: "",
     classe:"",
     voo: "",
     saida: "",
@@ -133,6 +134,7 @@ function adicionarImagem() {
 
     setNovoVoo({
       cia: "",
+      data: "",
       classe:"",
       voo: "",
       saida: "",

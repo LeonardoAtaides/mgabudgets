@@ -106,7 +106,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                     INFORMAÇÕES DO HOTEL
                   </div>
 
-                  <div className="text-base text-gray-700 leading-relaxed">
+                  <div className="text-base text-gray-700 leading-relaxed text-justify">
                     {safeData.descricaoHotel}
 
                     {safeData.beneficios.length > 0 && (
@@ -126,7 +126,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
                   Extras
                 </div>
-                  <div className="text-base text-gray-700 leading-relaxed">
+                  <div className="text-base text-gray-700 leading-relaxed text-justify">
                     {safeData.descricaoExtra}
                   </div>       
               </div>
@@ -191,6 +191,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   <thead>
                     <tr>
                       <th className="text-left p-2.5 text-[#222]">Cia</th>
+                      <th className="text-left p-2.5 text-[#222]">Data</th>
                       <th className="text-left p-2.5 text-[#222]">Voo</th>
                       <th className="text-left p-2.5 text-[#222]">Saída</th>
                       <th className="text-left p-2.5 text-[#222]">Chegada</th>
@@ -205,6 +206,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                       ? safeData.voos.map((voo, index) => (
                           <tr key={index}>
                             <td className="p-2.5 border-t text-gray-500">{voo.cia || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.data || <span className="placeholder">Teste</span>}</td>
                             <td className="p-2.5 border-t text-gray-500">{voo.voo || <span className="placeholder">Teste</span>}</td>
                             <td className="p-2.5 border-t text-gray-500">{voo.saida || <span className="placeholder">Teste</span>}</td>
                             <td className="p-2.5 border-t text-gray-500">{voo.chegada || <span className="placeholder">Teste</span>}</td>
@@ -216,6 +218,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                       : (
                           <tr>
                             <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Cia Aérea</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">xx/xx/xxxx</span></td>
                             <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Voo 000</span></td>
                             <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
                             <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
@@ -237,7 +240,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                 </div>
 
                 <div className="border rounded-b-lg p-3">
-                    <div className="text-base text-gray-700 leading-relaxed">
+                    <div className="text-base text-gray-700 leading-relaxed text-justify">
                     {safeData.descricaoInfo}
                 </div>
     

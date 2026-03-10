@@ -17,6 +17,7 @@ export interface BudgetsData {
 
   voos: {
     cia: string
+    data: string
     classe: string
     voo: string
     saida: string
