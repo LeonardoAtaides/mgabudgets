@@ -38,7 +38,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
   return (
     <div >
       <div
-        className="max-w-[1100px] mx-auto bg-yellow-100 overflow-hidden"
+        className="max-w-[1100px] mx-auto bg-white overflow-hidden relative"
         style={{ zoom: 0.7 }}
       >
         {/* Header */}
@@ -60,6 +60,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
           </div>
         </div>
+        
 
       {/* Número de Orçamento */}
       <div className="pl-6 py-2 bg-[#b6a36f] w-60 rounded-tr-2xl">
@@ -76,8 +77,6 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               ACOMODAÇÃO EM APARTAMENTO
             </h2>            
           </div>
-
-
 
 
           <div className="flex flex-col items-end mt-[-85px]">
@@ -100,6 +99,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
           <div className="mt-6">
             {/* BLOCO */}
             <div className="flex gap-12 pl-6 ">
+              <img
+              src="/assets/vetor.png"
+              alt=""
+              className="absolute right-[-118px] top-[450px] w-[300px] opacity-30 pointer-events-none z-0"
+              />
 
               {/* IMAGEM */}
               <div className="border border-5 border-gray-800 w-90 h-90 rounded-b-2xl rounded-tr-2xl">
