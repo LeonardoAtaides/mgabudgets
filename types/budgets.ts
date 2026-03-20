@@ -1,7 +1,17 @@
 export interface BudgetsData {
+
+// Dados do orçamento
+  numeroorc: number
+  dataInicio: string
+  dataFim: string
+  hotel: string
+  cidade: string
+  estrelas: string[]
+  imagens: string[] 
+
+  
   destino: string
   periodo: string
-  hotel: string
   valorTotal: string
   moeda: "BRL" | "USD"
   descricaoHotel: string
@@ -10,7 +20,7 @@ export interface BudgetsData {
   beneficios: string[]
   mostrarResumo: boolean
   mostrarInfo: boolean
-  imagens: string[]  
+   
   viajantes: string
   regime: string
   valordesc: "pacote" | "pacote por pessoa"

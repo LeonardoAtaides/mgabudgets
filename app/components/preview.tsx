@@ -40,98 +40,87 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         style={{ zoom: 0.7 }}
       >
         {/* Header */}
-        <div className="bg-[#0b1b3b] p-6 text-white flex items-center justify-between gap-4">
-          <div className="flex flex-col gap-1.5 min-w-0">
-            <div className="text-2xl font-semibold leading-tight">
-               New Model | {safeData.destino || <span className="placeholder">Destino</span>}
-            </div>
-          </div>
-
+        <div className=" text-white flex items-center justify-between gap-4 mb-10">
           <img
-            className="h-16"
+            className="h-18 w-auto ml-6"
             src="/assets/logoMga.png"
             alt="Logo"
           />
+          <div className="flex justify-between gap-4 min-w-0 w-[70%] bg-[#0b1b3b] border rounded-bl-full px-10 pt-3 py-8">
+            <div className="text-xl font-semibold leading-tight pl-8">
+               <h4>Conﬁra o orçamento que preparamos <br /> especialmente para você!</h4>
+            </div>
+
+            <div className="leading-tight">
+               <p className="text-lg font-light">wwww.mgatour.com.br</p>
+               <hr className="my-1"/>
+               <p className="text-end text-xs">Brasília - DF, Brasil</p>
+            </div>
+          </div>
         </div>
 
-        <div className="p-6 bg-white">
-          <h2 className="text-xl font-semibold mb-6 text-[#0b1b3b] border-l-4 border-[#d4af37] pl-2.5 tracking-wider uppercase">
-            Detalhes da hospedagem
-          </h2>
+      {/* Número de Orçamento */}
+      <div className="pl-6 py-2 bg-[#b6a36f] w-60 rounded-tr-2xl">
+        <h2 className="text-xl text-white">Orçamento N° {safeData.numeroorc || "0000"}</h2>
+      </div>
+      
+        <div className=" bg-white">
+          <div className="pl-6">
+            <h2 className="text-xl font-medium text-[#122b4e]  tracking-wider uppercase">
+              DATAS: {safeData.dataInicio || "xx/xx"} a {safeData.dataFim || "xx/xx"}
+            </h2>
 
-          <div className="rounded-lg border border-gray-300 overflow-hidden">
-            <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
-              <strong>
-                {safeData.hotel || <span className="placeholder">Nome do hotel</span>} —{" "}
-                  {safeData.periodo || <span className="placeholder">Período da estadia</span>}
-              </strong>
-            </div>
+            <h2 className="text-xl font-medium text-[#122b4e]  tracking-wider uppercase">
+              ACOMODAÇÃO EM APARTAMENTO
+            </h2>            
+          </div>
 
-            <div className="p-4">
 
-            {/* GALERIA */}
-            <div className="mb-6">
-              <div className="grid grid-cols-4 grid-rows-3 gap-2.5 h-[520px]">
-                {(safeData.imagens && safeData.imagens.length > 0
-                  ? safeData.imagens
-                  : Array(7).fill(null)
-                ).map((img, index) => (
-                  <div
-                    key={index}
-                    className={`w-full h-full rounded-lg border border-gray-100 bg-gray-100 flex items-center justify-center text-gray-400 text-sm
-                    ${index === 0 ? "col-span-2 row-span-2" : ""}
-                    ${index === 5 ? "col-span-2 row-start-3 col-start-1" : ""}
-                    ${index === 6 ? "col-span-2 row-start-3 col-start-3" : ""}
-                    `}
-                  >
-                    {img ? (
-                      <img
-                        src={img}
-                        alt={`Imagem ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      "Imagem"
-                    )}
-                  </div>
-                ))}
+
+          <div className="flex flex-col items-end mt-[-85px]">
+            <div>
+              <h1 className="text-[65px] leading-none  text-[#b6a36f] uppercase font-extrabold">Hotéis</h1>
+              <hr className="my-2 text-[#122b4e] border-2" />
+              <div className="pl-6 py-2 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
+                <h2 className="text-xl text-white uppercase">{safeData.cidade || "Nome da Cidade"}</h2>
               </div>
             </div>
-            
-              {/* INFORMAÇÕES + VALOR */}
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                {/* HOTEL INFO */}
-                <div className="border border-gray-300 rounded-lg p-4">
-                  <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
-                    INFORMAÇÕES DO HOTEL
-                  </div>
+          </div>
+          <div className="flex w-full justify-end">
+              <div className=" flex gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-end">
+                <h2 className="text-base text-white uppercase">{safeData.hotel || "Nome do Hotel"}</h2>
+                <p> {safeData.estrelas?.length ? safeData.estrelas : "⭐⭐⭐⭐⭐"}</p>
+              </div>  
+          </div>
 
-                  <div className="text-base text-gray-700 leading-relaxed text-justify">
-                    {safeData.descricaoHotel}
-
-                    {safeData.beneficios.length > 0 && (
-                      <ul className="mt-3 pl-4 list-disc space-y-1">
-                        {safeData.beneficios.map((beneficio, index) => (
-                          <li key={index}>{beneficio}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-
-
-              {/* Informações do Quarto */}
-
-              <div className="border border-gray-300 rounded-lg p-4">
-                <div className="text-base tracking-wider uppercase text-[#0b1b3b] font-bold mb-3">
-                  Extras
-                </div>
-                  <div className="text-base text-gray-700 leading-relaxed text-justify">
-                    {safeData.descricaoExtra}
-                  </div>       
+          {/* GALERIA */}
+          <div className="mt-6">
+            {/* BLOCO */}
+            <div className="flex gap-12 pl-6">
+              <div className="border border-4 border-gray-800 w-90 h-90 rounded-b-2xl rounded-tr-2xl">
+                        <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
+              alt="" className="w-90 h-90 rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
               </div>
-            
+
+
+              <div className="flex flex-col">
+                <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
+                <ul className="text-[#122b4e] list-disc list-inside">
+                  <li>Apartamento perto de Praia de Copacabana</li>
+                  {safeData.beneficios.map((beneficio, index) => (
+                    <li key={index}>{beneficio}</li>
+                  )) 
+                  && <li className="text-gray-500 italic">Nenhum benefício cadastrado</li>}
+                </ul>                  
+              </div>
             </div>
+          </div>
+
+          <div className="overflow-hidden">
+            <div className="mt-2">
+
+
+
 
             {/* QUARTOS */}
             <div className="rounded-lg border border-gray-300 overflow-hidden mb-4">
