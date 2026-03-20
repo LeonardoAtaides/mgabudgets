@@ -107,7 +107,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               {/* IMAGEM */}
               <div className="border border-5 border-[#122b4e] w-90 h-90 rounded-b-2xl rounded-tr-2xl">
-              <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
+              <img src={safeData.imagens[0] || ""}
               alt="" className="w-90 h-90 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
               </div>
 
@@ -131,17 +131,17 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {/* IMAGEM */}
               <div className="grid grid-cols-1">
                 <div className="border border-5 border-[#b6a36f] w-142 h-80 rounded-b-2xl rounded-tr-2xl">
-                  <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
+                  <img src={safeData.imagens[1] || ""}
                   alt="" className="w-160 h-80 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                 </div>                    
                 <div className="flex gap-12 mt-10">
                   <div className="border border-5 border-[#122b4e] w-65 h-65 rounded-b-2xl rounded-tr-2xl">
-                    <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src={safeData.imagens[2] || ""}
                     alt="" className="w-65 h-65 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
 
                   <div className="border border-5 border-[#122b4e] w-65 h-65 rounded-b-2xl rounded-tr-2xl">
-                    <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src={safeData.imagens[3] || ""}
                     alt="" className="w-65 h-65 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
                 </div>          
