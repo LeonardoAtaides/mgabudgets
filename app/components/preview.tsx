@@ -81,7 +81,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
           <div className="flex flex-col items-end mt-[-85px]">
             <div>
-              <h1 className="text-[65px] leading-none  text-[#b6a36f] uppercase font-extrabold">Hotéis</h1>
+              <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-extrabold">Hotéis</h1>
               <hr className="my-2 text-[#122b4e] border-2" />
               <div className="pl-6 py-2 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
                 <h2 className="text-xl text-white uppercase">{safeData.cidade || "Nome da Cidade"}</h2>
@@ -130,19 +130,19 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               {/* IMAGEM */}
               <div className="grid grid-cols-1">
-                <div className="border border-5 border-gray-800 w-172 h-80 rounded-b-2xl rounded-tr-2xl">
+                <div className="border border-5 border-gray-800 w-142 h-80 rounded-b-2xl rounded-tr-2xl">
                   <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
-                  alt="" className="w-180 h-80 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                  alt="" className="w-160 h-80 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                 </div>                    
                 <div className="flex gap-12 mt-10">
-                  <div className="border border-5 border-gray-800 w-80 h-80 rounded-b-2xl rounded-tr-2xl">
+                  <div className="border border-5 border-gray-800 w-65 h-65 rounded-b-2xl rounded-tr-2xl">
                     <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
-                    alt="" className="w-80 h-80 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                    alt="" className="w-65 h-65 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
 
-                  <div className="border border-5 border-gray-800 w-80 h-80 rounded-b-2xl rounded-tr-2xl">
+                  <div className="border border-5 border-gray-800 w-65 h-65 rounded-b-2xl rounded-tr-2xl">
                     <img src="https://img.freepik.com/fotos-gratis/por-do-sol-no-arroz-fazenda-campo-tailandia_1150-17920.jpg?semt=ais_hybrid&w=740&q=80"
-                    alt="" className="w-80 h-80 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                    alt="" className="w-65 h-65 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
                 </div>          
               </div>
@@ -150,7 +150,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {/* TEXTO */}
               <div className="flex flex-col max-h-170 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Informações Adicionais</h2>
-                <ul className="text-[#122b4e] list-disc list-inside max-w-80 pr-4 text-justify">
+                <ul className="text-[#122b4e] list-disc list-inside max-w-110 pr-4 text-justify">
                   <li>Carregador, áreas para não fumantes e elevador</li>
                   <li>Características do quarto</li>
                   <li>Todos os quartos em Rio Habitat Almirante oferecem extras como ar-condicionado, além de comodidades como Wi-Fi grátis.
