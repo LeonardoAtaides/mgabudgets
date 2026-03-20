@@ -38,11 +38,11 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
   return (
     <div >
       <div
-        className="max-w-[1100px] mx-auto bg-white overflow-hidden relative"
-        style={{ zoom: 0.7 }}
+        className="max-w-[1100px] mx-auto bg-[#000000] overflow-hidden relative"
+        style={{ zoom: 0.7, background: "url('/assets/fundo.png')"}}
       >
         {/* Header */}
-        <div className="  flex items-center justify-between gap-4 mb-10">
+        <div className="flex items-center justify-between gap-4 mb-10">
           <img
             className="h-18 w-auto ml-6"
             src="/assets/logoMga.png"
@@ -100,9 +100,9 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             {/* BLOCO */}
             <div className="flex gap-12 pl-6 ">
               <img
-              src="/assets/vetor.png"
+              src="/assets/Bussola.svg"
               alt=""
-              className="absolute right-[-118px] top-[450px] w-[300px] opacity-30 pointer-events-none z-0"
+              className="absolute right-[-150px] top-[480px] w-[350px] opacity-65 pointer-events-none z-0"
               />
 
               {/* IMAGEM */}
