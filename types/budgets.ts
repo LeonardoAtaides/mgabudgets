@@ -6,10 +6,11 @@ export interface BudgetsData {
   dataFim: string
   hotel: string
   cidade: string
-  estrelas: string[]
+  estrelas: number
   imagens: string[] 
+  beneficios: string[]
+  beneficiosIa: string[]
 
-  
   destino: string
   periodo: string
   valorTotal: string
@@ -17,7 +18,7 @@ export interface BudgetsData {
   descricaoHotel: string
   descricaoInfo: string
   descricaoExtra: string
-  beneficios: string[]
+  
   mostrarResumo: boolean
   mostrarInfo: boolean
    

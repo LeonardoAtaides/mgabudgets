@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "./components/preview"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
+import { Plus,Star, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
@@ -14,7 +14,10 @@ export default function Page() {
   const [mounted, setMounted] = useState(false)
 
   const [data, setData] = useState<BudgetsData>({
-    numeroorc: 0,
+    numeroorc: "",
+    dataInicio: "",
+    dataFim: "",
+    estrelas: 0,
     destino: "",
     periodo: "",
     hotel: "",
@@ -25,6 +28,7 @@ export default function Page() {
     descricaoInfo: "",
     descricaoExtra: "",
     beneficios: [],
+    beneficiosIa: [],
     imagens: [],
     voos: [],
     quartos: [],
@@ -54,9 +58,11 @@ export default function Page() {
   const [modalAberto, setModalAberto] = useState(false);
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
+  const [beneficioIaInput, setBeneficioIaInput] = useState("")
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
+  const [editandoBeneficioIa, setEditandoBeneficioIa] = useState<number | null>(null)
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [quartoModalAberto, setQuartoModalAberto] = useState(false)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
@@ -96,10 +102,26 @@ export default function Page() {
     setBeneficioInput("")
   }
 
+    function adicionarBeneficioIa() {
+    if (!beneficioInput.trim()) return
+    setData(prev => ({
+      ...prev,
+      beneficios: [...prev.beneficios, beneficioInput]
+    }))
+    setBeneficioInput("")
+  }
+
   function removerBeneficio(index: number) {
     setData(prev => ({
       ...prev,
       beneficios: prev.beneficios.filter((_, i) => i !== index)
+    }))
+  }
+
+  function removerBeneficioIa(index: number) {
+    setData(prev => ({
+      ...prev,
+      beneficiosIa: prev.beneficiosIa.filter((_, i) => i !== index)
     }))
   }
 
@@ -183,7 +205,10 @@ function adicionarImagem() {
 
   function confirmarLimpeza() {
     setData({
-      numeroorc: 0,
+      numeroorc: "",
+      dataInicio: "",
+      dataFim: "",
+      estrelas: 0,
       destino: "",
       periodo: "",
       hotel: "",
@@ -194,6 +219,7 @@ function adicionarImagem() {
       descricaoInfo: "",
       descricaoExtra: "",
       beneficios: [],
+      beneficiosIa: [],
       imagens: [],
       voos: [],
       quartos: [],
@@ -371,6 +397,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 }
               />
             </div>
+
             {/* NOME DA CIDADE */}
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
@@ -379,7 +406,151 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               onChange={(e) => setData({ ...data, cidade: e.target.value })}
             />
 
+            {/* NOME DO HOTEL */}
+            <input
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+              placeholder="Hotel"
+              value={data.hotel}
+              onChange={(e) => setData({ ...data, hotel: e.target.value })}
+            />
+            {/* QUANTIDADE DE ESTRELAS */}
+              <input
+                type="number"
+                min={1}
+                max={5}
+                placeholder="Quantidade de Estrelas (1 a 5)"
+                className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                value={data.estrelas || ""}
+                onChange={(e) => {
+                  let valor = Number(e.target.value);
 
+                  if (isNaN(valor)) valor = 1;
+                  if (valor > 5) valor = 5;
+                  if (valor < 1) valor = 1;
+
+                  setData({ ...data, estrelas: valor });
+                }}
+              />
+
+            {/* BENEFÍCIOS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Benefícios</h3>
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={beneficioInput}
+                  onChange={(e) => setBeneficioInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarBeneficio}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.beneficios.map((beneficio, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoBeneficio === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      value={beneficio}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          beneficios: prev.beneficios.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoBeneficio(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{beneficio}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoBeneficio(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerBeneficio(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+
+            {/* BENEFÍCIOS IA */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Benefícios IA</h3>
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={beneficioIaInput}
+                  onChange={(e) => setBeneficioIaInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarBeneficioIa}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.beneficiosIa.map((beneficioia, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoBeneficioIa === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      value={beneficioia}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          beneficiosIa: prev.beneficiosIa.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoBeneficioIa(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{beneficioia}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoBeneficioIa(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerBeneficioIa(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
             {/* IMAGENS */}
             <div className="space-y-2">
               <h3 className="font-semibold text-gray-700">Imagens</h3>
@@ -443,64 +614,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             />
 
 
-            {/* BENEFÍCIOS */}
-            <div className="space-y-2">
-              <h3 className="font-semibold text-gray-700">Benefícios</h3>
-              <div className="flex gap-2">
-                <input
-                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                  value={beneficioInput}
-                  onChange={(e) => setBeneficioInput(e.target.value)}
-                />
-                <button
-                  onClick={adicionarBeneficio}
-                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
-                >
-                  <Plus className="w-5 h-5 text-white" />
-                </button>
-              </div>
 
-              {data.beneficios.map((beneficio, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
-                >
-                  {editandoBeneficio === index ? (
-                    <input
-                      autoFocus
-                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                      value={beneficio}
-                      onChange={(e) =>
-                        setData(prev => ({
-                          ...prev,
-                          beneficios: prev.beneficios.map((b, i) =>
-                            i === index ? e.target.value : b
-                          )
-                        }))
-                      }
-                      onBlur={() => setEditandoBeneficio(null)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault()
-                          e.currentTarget.blur() 
-                        }
-                      }}
-                    />
-                  ) : (
-                    <span className="flex-1 text-gray-600">{beneficio}</span>
-                  )}
-
-                  <div className="flex gap-2">
-                    <button onClick={() => setEditandoBeneficio(index)}>
-                      <Pencil className="w-4 h-4 text-blue-500" />
-                    </button>
-                    <button onClick={() => removerBeneficio(index)}>
-                      <X className="w-4 h-4 text-red-500" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
 
         {/* Informações do Quarto */}
         <div className="">

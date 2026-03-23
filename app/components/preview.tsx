@@ -1,6 +1,7 @@
 import { BudgetsData } from "@/types/budgets";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { Star } from "lucide-react";
 
 function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
   return new Intl.NumberFormat(
@@ -99,9 +100,21 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
           </div>
           <div className="flex w-full justify-end">
-              <div className=" flex gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-end">
+              <div className=" flex gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-center">
                 <h2 className="text-base text-white uppercase">{safeData.hotel || "Nome do Hotel"}</h2>
-                <p> {safeData.estrelas?.length ? safeData.estrelas : "⭐⭐⭐⭐⭐"}</p>
+                <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <Star
+                    key={n}
+                    size={16}
+                    className={
+                      n <= (safeData.estrelas || 5)
+                        ? "fill-white text-white"
+                        : "text-gray-300"
+                    }
+                  />
+                ))}
+              </div>
               </div>  
           </div>
 
@@ -167,7 +180,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
                   <li>Características do quarto</li>
                   <li>Todos os quartos em Rio Habitat Alm,</li>
 
-                  {safeData.beneficios.map((beneficio, index) => (
+                  {safeData.beneficiosIa.map((beneficio, index) => (
                     <li key={index}>{beneficio}</li>
                   ))}
                 </ul>                  
