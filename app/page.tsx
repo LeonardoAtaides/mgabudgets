@@ -346,22 +346,39 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               pattern="\d{4}"
               value={data.numeroorc}
               onChange={(e) => {
-                const valor = e.target.value.replace(/\D/g, ""); // só números
-                setData({ ...data, numeroorc: valor.slice(0, 4) }); // limita a 4
+                const valor = e.target.value.replace(/\D/g, ""); 
+                setData({ ...data, numeroorc: valor.slice(0, 4) });
   }}
             />
+
+            {/* DATAS*/}
+            <div className="flex gap-1 justify-between ">
+            <input
+                type="date"
+                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                value={data.dataInicio || ""}
+                onChange={(e) =>
+                  setData({ ...data, dataInicio: e.target.value })
+                }
+              />
+
+              <input
+                type="date"
+                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                value={data.dataFim || ""}
+                onChange={(e) =>
+                  setData({ ...data, dataFim: e.target.value })
+                }
+              />
+            </div>
+            {/* NOME DA CIDADE */}
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Hotel"
-              value={data.hotel}
-              onChange={(e) => setData({ ...data, hotel: e.target.value })}
+              placeholder="Cidade"
+              value={data.cidade}
+              onChange={(e) => setData({ ...data, cidade: e.target.value })}
             />
-            <input
-              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Período"
-              value={data.periodo}
-              onChange={(e) => setData({ ...data, periodo: e.target.value })}
-            />
+
 
             {/* IMAGENS */}
             <div className="space-y-2">
