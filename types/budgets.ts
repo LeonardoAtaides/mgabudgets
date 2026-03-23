@@ -1,7 +1,7 @@
 export interface BudgetsData {
 
 // Dados do orçamento
-  numeroorc: number
+  numeroorc: string
   dataInicio: string
   dataFim: string
   hotel: string
