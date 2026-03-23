@@ -108,7 +108,7 @@ export default function Page() {
       ...prev,
       beneficios: [...prev.beneficios, beneficioInput]
     }))
-    setBeneficioInput("")
+    setBeneficioIaInput("")
   }
 
   function removerBeneficio(index: number) {
