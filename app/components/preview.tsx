@@ -107,8 +107,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               {/* IMAGEM */}
               <div className="border border-5 border-[#122b4e] w-60 h-50 rounded-b-2xl rounded-tr-2xl">
-              <img src={safeData.imagens[0] || ""}
-              alt="" className="w-60 h-50 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+              <img src={safeData.imagens[0] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
+              alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
               </div>
 
               {/* TEXTO */}
@@ -126,23 +126,23 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
 
             {/* BLOCO 2*/}
-            <div className="flex gap-30 pl-6 mt-8 ">
+            <div className="flex gap-10 pl-6 mt-8 ">
 
               {/* IMAGEM */}
               <div className="grid grid-cols-1 ">
                 <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
-                  <img src={safeData.imagens[1] || ""}
-                  alt="" className="w-102 h-60 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                  <img src={safeData.imagens[1] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
+                  alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                 </div>                    
                 <div className="flex gap-12 mt-10">
-                  <div className="border border-5 border-[#122b4e] w-45 h-45 rounded-b-2xl rounded-tr-2xl">
-                    <img src={safeData.imagens[2] || ""}
-                    alt="" className="w-42 h-45 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                  <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
+                    <img src={safeData.imagens[2] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
+                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
 
-                  <div className="border border-5 border-[#122b4e] w-45 h-45 rounded-b-2xl rounded-tr-2xl">
-                    <img src={safeData.imagens[3] || ""}
-                    alt="" className="w-45 h-45 rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                  <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
+                    <img src={safeData.imagens[3] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
+                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
                   </div>
                 </div>          
               </div>
