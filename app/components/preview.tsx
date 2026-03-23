@@ -63,17 +63,17 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         
 
       {/* Número de Orçamento */}
-      <div className="pl-6 py-2 bg-[#b6a36f] w-60 rounded-tr-2xl">
+      <div className="pl-6 py-1 bg-[#b6a36f] w-60 rounded-tr-2xl">
         <h2 className="text-xl text-white">Orçamento N° {safeData.numeroorc || "0000"}</h2>
       </div>
       
         <div className="">
           <div className="pl-6">
-            <h2 className="text-xl font-medium text-[#122b4e]  tracking-wider uppercase">
+            <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
               DATAS: {safeData.dataInicio || "xx/xx"} a {safeData.dataFim || "xx/xx"}
             </h2>
 
-            <h2 className="text-xl font-medium text-[#122b4e]  tracking-wider uppercase">
+            <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
               ACOMODAÇÃO EM APARTAMENTO
             </h2>            
           </div>
@@ -81,9 +81,9 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
           <div className="flex flex-col items-end mt-[-85px]">
             <div>
-              <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-extrabold">Hotéis</h1>
+              <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-bold">Hotéis</h1>
               <hr className="my-2 text-[#122b4e] border-2" />
-              <div className="pl-6 py-2 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
+              <div className="pl-6 py-1 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
                 <h2 className="text-xl text-white uppercase">{safeData.cidade || "Nome da Cidade"}</h2>
               </div>
             </div>
@@ -99,25 +99,27 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
           <div className="mt-6">
             {/* BLOCO */}
             <div className="flex gap-8 pl-6 ">
+              {/* DETAKLHE BUSSÓLA */}
               <img
               src="/assets/Bussola.svg"
               alt=""
-              className="absolute right-[-150px] top-[480px] w-[350px] opacity-65 pointer-events-none z-0"
+              className="absolute right-[-120px] top-[380px] w-[250px] opacity-55 pointer-events-none z-0"
               />
 
               {/* IMAGEM */}
               <div className="border border-5 border-[#122b4e] w-60 h-50 rounded-b-2xl rounded-tr-2xl">
               <img src={safeData.imagens[0] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-              alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+              alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
               </div>
 
               {/* TEXTO */}
-              <div className="flex flex-col max-h-90 overflow-hidden">
+              <div className="flex flex-col max-h-56 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-160  pr-4 text-justify">
                   <li>Apartamento perto de Praia de Copacabana</li>
-                  <li>Perto de Forte de Copacabana e Avenida Atlântica, Rio Habitakkkkkkkkkkkkt jjjjjjjAlmirante oferece muitas opções de comodidades. Os hóspedes podem ficar on-line com o Wi-Fi grátis nos quartos.
-                  </li>
+                  <li>Características do quarto</li>
+                     
+
                   {safeData.beneficios.map((beneficio, index) => (
                     <li key={index}>{beneficio}</li>
                   ))}
@@ -132,29 +134,29 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               <div className="grid grid-cols-1 ">
                 <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
                   <img src={safeData.imagens[1] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                  alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                  alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
                 </div>                    
                 <div className="flex gap-12 mt-10">
                   <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
                     <img src={safeData.imagens[2] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
                   </div>
 
                   <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
                     <img src={safeData.imagens[3] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-20px] left-[15px]" />      
+                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
                   </div>
                 </div>          
               </div>
 
               {/* TEXTO */}
-              <div className="flex flex-col max-h-170 overflow-hidden">
+              <div className="flex flex-col max-h-114 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Informações Adicionais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-110 pr-4 text-justify">
                   <li>Carregador, áreas para não fumantes e elevador</li>
                   <li>Características do quarto</li>
-                  <li>Todos os quartos em Rio Habitat Almirante oferecem extras como ar-condicionado, além de comodidades como Wi-Fi grátis.
-                  </li>
+                  <li>Todos os quartos em Rio Habitat Alm,</li>
+
                   {safeData.beneficios.map((beneficio, index) => (
                     <li key={index}>{beneficio}</li>
                   ))}
