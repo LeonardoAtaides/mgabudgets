@@ -12,6 +12,16 @@ function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
   ).format(valor)
 }
 
+function formatarData(data: string) {
+  if (!data) return "xx/xx";
+
+  const d = new Date(data);
+
+  const dia = String(d.getDate()).padStart(2, "0");
+  const mes = String(d.getMonth() + 1).padStart(2, "0");
+
+  return `${dia}/${mes}`;
+}
 function pluralize(count: number, singular: string, plural?: string) {
   return count === 1 ? singular : plural || singular + "s";
 }
@@ -70,7 +80,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
         <div className="">
           <div className="pl-6">
             <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
-              DATAS: {safeData.dataInicio || "xx/xx"} a {safeData.dataFim || "xx/xx"}
+              DATAS: {formatarData(safeData.dataInicio)} a {formatarData(safeData.dataFim) || "xx/xx"}  
             </h2>
 
             <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
@@ -80,7 +90,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
 
           <div className="flex flex-col items-end mt-[-85px]">
-            <div>
+            <div className="max-w-110">
               <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-bold">Hotéis</h1>
               <hr className="my-2 text-[#122b4e] border-2" />
               <div className="pl-6 py-1 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
