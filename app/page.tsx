@@ -14,6 +14,7 @@ export default function Page() {
   const [mounted, setMounted] = useState(false)
 
   const [data, setData] = useState<BudgetsData>({
+    numeroorc: 0,
     destino: "",
     periodo: "",
     hotel: "",
@@ -182,6 +183,7 @@ function adicionarImagem() {
 
   function confirmarLimpeza() {
     setData({
+      numeroorc: 0,
       destino: "",
       periodo: "",
       hotel: "",
@@ -333,12 +335,20 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             dadosBasicosAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
+          {/* NÚMERO DO ORÇAMENTO */}
           <div className="mt-2 space-y-3">
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Destino"
-              value={data.destino}
-              onChange={(e) => setData({ ...data, destino: e.target.value })}
+              placeholder="Núm do Orçamento"
+              type="text"
+              inputMode="numeric"
+              maxLength={4}
+              pattern="\d{4}"
+              value={data.numeroorc}
+              onChange={(e) => {
+                const valor = e.target.value.replace(/\D/g, ""); // só números
+                setData({ ...data, numeroorc: valor.slice(0, 4) }); // limita a 4
+  }}
             />
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
