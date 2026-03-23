@@ -273,7 +273,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 />
 
       {/* EDITOR */}
-      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden md:hidden">
+      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden ">
 
       <div className="flex justify-between items-center">
         <div className="flex gap-2 text-gray-800">
@@ -880,7 +880,9 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       </div>
 
       {/* PREVIEW */}
-      <div className="flex-1 overflow-auto bg-gray-200 p-10">
+      <div className="flex-1 overflow-auto bg-gray-200 p-10"
+       style={{zoom: 0.8}}>
+        
         <div  ref={previewRef} className="flex justify-center ">
           <HotelOrcamento data={data} />
         </div>
