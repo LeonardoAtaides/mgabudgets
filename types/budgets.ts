@@ -14,6 +14,19 @@ export interface BudgetsData {
 
 // Dados Aéreo
  descricaodata: string
+  voos: {
+    cia: string
+    numvoo: number
+    saida: string
+    chegada: string
+    origem: string
+    destino: string
+    durcon: string
+    esc: string
+    equipe: string
+    duracao: string
+  }[]
+
 
   destino: string
   periodo: string
@@ -30,17 +43,7 @@ export interface BudgetsData {
   regime: string
   valordesc: "pacote" | "pacote por pessoa"
 
-  voos: {
-    cia: string
-    data: string
-    classe: string
-    voo: string
-    saida: string
-    chegada: string
-    origem: string
-    destino: string
-    duracao: string
-  }[]
+
 
   quartos: {
     nome: string

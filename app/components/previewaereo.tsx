@@ -77,78 +77,10 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
               </div>  
           </div>
 
-          {/* GALERIA */}
+          {/* COMPANHIA AÉREA */}
           <div className="mt-6">
-            {/* BLOCO */}
-            <div className="flex gap-8 pl-6 ">
-              {/* DETALHE BUSSÓLA */}
-              <img
-              src="/assets/Bussola.svg"
-              alt=""
-              className="absolute right-[-120px] top-[380px] w-[250px] opacity-55 pointer-events-none z-0"
-              />
+            {/* QUADRO DE DADOS */}
 
-              {/* IMAGEM */}
-              <div className="border border-5 border-[#122b4e] w-60 h-50 rounded-b-2xl rounded-tr-2xl">
-              {imagens[0] ? (
-                <img src={imagens[0]}
-                  alt=""
-                  className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
-              ) : null}    
-              </div>
-
-              {/* TEXTO */}
-              <div className="flex flex-col w-160 max-h-56 overflow-hidden">
-                <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
-                <ul className="text-[#122b4e] list-disc list-inside max-w-160  pr-4 text-justify">
-                  {safeData.beneficios.map((beneficio, index) => (
-                    <li key={index}>{beneficio}</li>
-                  ))}
-                </ul>                  
-              </div>
-            </div>
-
-            {/* BLOCO 2*/}
-            <div className="flex gap-10 pl-6 mt-8 ">
-
-              {/* IMAGEM */}
-              <div className="grid grid-cols-1 ">
-                <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
-                  {imagens[1] ? (
-                    <img src={imagens[1]}
-                      alt=""
-                      className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
-                  ) : null}
-                </div>                    
-                <div className="flex gap-12 mt-10">
-                  <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
-                    {imagens[2] ? (
-                      <img src={imagens[2]}
-                        alt=""
-                        className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
-                    ) : null}
-                  </div>
-
-                  <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
-                    {imagens[3] ? (
-                      <img src={imagens[3]}
-                        alt=""
-                        className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
-                    ) : null}
-                  </div>
-                </div>          
-              </div>
-
-              {/* TEXTO */}
-              <div className="flex flex-col w-110 max-h-114 overflow-hidden">
-                <h2 className="uppercase text-xl font-medium text-[#122b4e]">Informações Adicionais</h2>
-                <ul className="text-[#122b4e] list-disc list-inside max-w-110 pr-4 text-justify">
-                  {safeData.infoadc.map((infoadc, index) => (
-                    <li key={index}>{infoadc}</li>
-                  ))}
-                </ul>                  
-              </div>
-            </div>
           </div>
         </div>
 
