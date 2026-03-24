@@ -9,7 +9,7 @@ export interface BudgetsData {
   estrelas: number
   imagens: string[] 
   beneficios: string[]
-  beneficiosIa: string[]
+  infoadc: string[]
 
   destino: string
   periodo: string

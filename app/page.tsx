@@ -21,14 +21,14 @@ export default function Page() {
     destino: "",
     periodo: "",
     hotel: "",
+    beneficios: [],    
+    infoadc: [],
     valorTotal: "",
     moeda: "BRL",
     valordesc: "pacote",
     descricaoHotel: "",
     descricaoInfo: "",
     descricaoExtra: "",
-    beneficios: [],
-    beneficiosIa: [],
     imagens: [],
     voos: [],
     quartos: [],
@@ -58,11 +58,11 @@ export default function Page() {
   const [modalAberto, setModalAberto] = useState(false);
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
-  const [beneficioIaInput, setBeneficioIaInput] = useState("")
+  const [infoAdcInput, setInfoAdcInput] = useState("")
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
-  const [editandoBeneficioIa, setEditandoBeneficioIa] = useState<number | null>(null)
+  const [editandoInfoAdc, setEditandoInfoAdc] = useState<number | null>(null)
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [quartoModalAberto, setQuartoModalAberto] = useState(false)
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
@@ -102,13 +102,13 @@ export default function Page() {
     setBeneficioInput("")
   }
 
-    function adicionarBeneficioIa() {
-    if (!beneficioInput.trim()) return
+    function adicionarInfoAdc() {
+    if (!infoAdcInput.trim()) return
     setData(prev => ({
       ...prev,
-      beneficios: [...prev.beneficios, beneficioInput]
+      infoadc: [...prev.infoadc, infoAdcInput]
     }))
-    setBeneficioIaInput("")
+    setInfoAdcInput("")
   }
 
   function removerBeneficio(index: number) {
@@ -118,10 +118,10 @@ export default function Page() {
     }))
   }
 
-  function removerBeneficioIa(index: number) {
+  function removerInfoAdc(index: number) {
     setData(prev => ({
       ...prev,
-      beneficiosIa: prev.beneficiosIa.filter((_, i) => i !== index)
+      infoadc: prev.infoadc.filter((_, i) => i !== index)
     }))
   }
 
@@ -212,14 +212,14 @@ function adicionarImagem() {
       destino: "",
       periodo: "",
       hotel: "",
+      beneficios: [],
+      infoadc: [],
       valorTotal: "",
       moeda: "BRL",
       valordesc: "pacote",
       descricaoHotel: "",
       descricaoInfo: "",
       descricaoExtra: "",
-      beneficios: [],
-      beneficiosIa: [],
       imagens: [],
       voos: [],
       quartos: [],
@@ -498,36 +498,36 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               <div className="flex gap-2">
                 <input
                   className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                  value={beneficioIaInput}
-                  onChange={(e) => setBeneficioIaInput(e.target.value)}
+                  value={infoAdcInput}
+                  onChange={(e) => setInfoAdcInput(e.target.value)}
                 />
                 <button
-                  onClick={adicionarBeneficioIa}
+                  onClick={adicionarInfoAdc}
                   className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
                 >
                   <Plus className="w-5 h-5 text-white" />
                 </button>
               </div>
 
-              {data.beneficiosIa.map((beneficioia, index) => (
+              {data.infoadc.map((infoadc, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
                 >
-                  {editandoBeneficioIa === index ? (
+                  {editandoInfoAdc === index ? (
                     <input
                       autoFocus
                       className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                      value={beneficioia}
+                      value={infoadc}
                       onChange={(e) =>
                         setData(prev => ({
                           ...prev,
-                          beneficiosIa: prev.beneficiosIa.map((b, i) =>
+                          infoadc: prev.infoadc.map((b, i) =>
                             i === index ? e.target.value : b
                           )
                         }))
                       }
-                      onBlur={() => setEditandoBeneficioIa(null)}
+                      onBlur={() => setEditandoInfoAdc(null)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           e.preventDefault()
@@ -536,14 +536,14 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                       }}
                     />
                   ) : (
-                    <span className="flex-1 text-gray-600">{beneficioia}</span>
+                    <span className="flex-1 text-gray-600">{infoadc}</span>
                   )}
 
                   <div className="flex gap-2">
-                    <button onClick={() => setEditandoBeneficioIa(index)}>
+                    <button onClick={() => setEditandoInfoAdc(index)}>
                       <Pencil className="w-4 h-4 text-blue-500" />
                     </button>
-                    <button onClick={() => removerBeneficioIa(index)}>
+                    <button onClick={() => removerInfoAdc(index)}>
                       <X className="w-4 h-4 text-red-500" />
                     </button>
                   </div>
