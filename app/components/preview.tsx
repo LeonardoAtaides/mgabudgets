@@ -173,7 +173,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               </div>
 
               {/* TEXTO */}
-              <div className="flex flex-col max-h-114 overflow-hidden">
+              <div className="flex flex-col w-110 max-h-114 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Informações Adicionais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-110 pr-4 text-justify">
                   {safeData.infoadc.map((infoadc, index) => (
