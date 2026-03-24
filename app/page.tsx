@@ -1026,7 +1026,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       <div className="flex-1 overflow-auto bg-gray-200 p-10"
        style={{zoom: 0.8}}>
         
-        <div  ref={previewRef} className="flex justify-center ">
+        <div  ref={previewRef} className="flex flex-col justify-center ">
           <HotelOrcamento data={data} />
         </div>
       </div>
