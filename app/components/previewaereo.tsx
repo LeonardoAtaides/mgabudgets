@@ -26,7 +26,18 @@ const Aereo = ({ data }: { data: BudgetsData }) => {
       estrelas: 1,
       imagens: [] ,
       beneficios: [],
-      infoadc: []
+      infoadc: [],
+      cia: "",
+      numvoo: 0,
+      saida: "",
+      chegada: "",
+      origem: "",
+      destino: "",
+      durcon: "",
+      esc: "",
+      equipe: "",
+      duracao: "",
+      descricaodata: "",
   };
 const imagens = (safeData.imagens && safeData.imagens.length > 0
   ? safeData.imagens
@@ -79,66 +90,56 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
           {/* COMPANHIA AÉREA */}
           <div className="mt-6">
-            {/* VOOS */}
-            <div className=" overflow-hidden mb-4">
-              <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
-                <strong>
-                  Voos
-                  {safeData.voos.length > 0 ? (
-                    <> {" — "} {safeData.voos[0].cia || <span className="placeholder">Teste</span>} {" — Em classe "} {safeData.voos[0].classe || <span className="placeholder">Econômica</span>}</>
-                  ) : (
-                    <> {" — "} <span className="placeholder">Cia Aérea</span> {" — Em classe "} <span className="placeholder">Econômica</span></>
-                  )}
-                </strong>
-                
+            <div className="w-full min-w-[794px] text-[13px] bg-white px-2 py-2 rounded-2xl">
+
+              {/* HEADER */}
+              <div className="grid grid-cols-[80px_70px_130px_130px_60px_60px_90px_40px_60px_60px] text-[#222]  ">
+                <div className="px-2 py-2 font-semibold">Cia</div>
+                <div className="px-2 py-2 font-semibold">Voo</div>
+                <div className="px-2 py-2 font-semibold">Saída</div>
+                <div className="px-2 py-2 font-semibold">Chegada</div>
+                <div className="px-2 py-2 font-semibold">Origem</div>
+                <div className="px-2 py-2 font-semibold">Destino</div>
+                <div className="px-2 py-2 font-semibold">Dur. Con.</div>
+                <div className="px-2 py-2 font-semibold">Esc.</div>
+                <div className="px-2 py-2 font-semibold">Equip.</div>
+                <div className="px-2 py-2 font-semibold">Dur.</div>
               </div>
 
-              <div className="p-4 overflow-x-auto">
-                <table className="w-full border-collapse text-sm min-w-[780px]">
-                  <thead>
-                    <tr>
-                      <th className="text-left p-2.5 text-[#222]">Cia</th>
-                      <th className="text-left p-2.5 text-[#222]">Data</th>
-                      <th className="text-left p-2.5 text-[#222]">Voo</th>
-                      <th className="text-left p-2.5 text-[#222]">Saída</th>
-                      <th className="text-left p-2.5 text-[#222]">Chegada</th>
-                      <th className="text-left p-2.5 text-[#222]">Origem</th>
-                      <th className="text-left p-2.5 text-[#222]">Destino</th>
-                      <th className="text-left p-2.5 text-[#222]">Duração</th>
-                    </tr>
-                  </thead>
+              {/* BODY */}
+              <div className="space-y-[4px]">
+                {(safeData.voos && safeData.voos.length > 0
+                  ? safeData.voos
+                  : Array(1).fill({})
+                ).map((voo, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-[80px_70px_130px_130px_60px_60px_90px_40px_60px_60px] items-center bg-[#DEDEDE] rounded-md h-[42px] "
+                  >
+                    {/* CIA */}
+                    <div className="px-2">
+                      <div className="bg-[#e9e9e9] h-[26px] rounded-md flex items-center justify-center">
+                        <span className="text-gray-800 font-bold text-[12px]">
+                          {voo.cia || "CIA"}
+                        </span>
+                      </div>
+                    </div>
 
-                  <tbody>
-                    {safeData.voos.length > 0
-                      ? safeData.voos.map((voo, index) => (
-                          <tr key={index}>
-                            <td className="p-2.5 border-t text-gray-500">{voo.cia || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.data || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.voo || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.saida || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.chegada || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.origem || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.destino || <span className="placeholder">Teste</span>}</td>
-                            <td className="p-2.5 border-t text-gray-500">{voo.duracao || <span className="placeholder">Teste</span>}</td>
-                          </tr>
-                        ))
-                      : (
-                          <tr>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Cia Aérea</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">xx/xx/xxxx</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Voo 000</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Origem</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Destino</span></td>
-                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00h00</span></td>
-                          </tr>
-                        )}
-                  </tbody>
-                </table>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.numvoo || "0000"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.saida || "XX Mês 00:00h"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.chegada || "XX Mês 00:30h"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.origem || "UF"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.destino || "DES"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.durcon || "--"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.esc || "0"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.equipe || "--"}</div>
+                    <div className="px-2 text-gray-700 border-l text-center">{voo.duracao || "00:00"}</div>
+                  </div>
+                ))}
               </div>
+
             </div>
-          </div>
+</div>
         </div>
 
 

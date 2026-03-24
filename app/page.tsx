@@ -258,7 +258,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 />
 
       {/* EDITOR */}
-      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden ">
+      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden  ">
 
       <div className="flex justify-between items-center">
         <div className="flex gap-2 text-gray-800">
