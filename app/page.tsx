@@ -4,7 +4,7 @@ import { useState, useRef, useEffect  } from "react"
 import Hoteis from "./components/previewhotel"
 import Aereo from "./components/previewaereo"
 import { BudgetsData } from "@/types/budgets"
-import { Plus,Star, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
+import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
@@ -67,10 +67,7 @@ export default function Page() {
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [editandoInfoAdc, setEditandoInfoAdc] = useState<number | null>(null)
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
-  const [quartoModalAberto, setQuartoModalAberto] = useState(false)
-  const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
-  const [editandoInfo, setEditandoInfo] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
@@ -78,23 +75,17 @@ export default function Page() {
   })
   const [novoVoo, setNovoVoo] = useState({
     cia: "",
-    data: "",
-    classe:"",
-    voo: "",
+    numvoo: 0,
     saida: "",
     chegada: "",
     origem: "",
     destino: "",
+    durcon: "",
+    esc: "",
+    equipe: "",
     duracao: ""
   })
 
-  const [novoQuarto, setNovoQuarto] = useState({
-    nome: "",
-    vista: "",
-    cama: "",
-    tamanho: "",
-    incluso: ""
-  })
 
   function adicionarBeneficio() {
     if (!beneficioInput.trim()) return
@@ -151,7 +142,7 @@ function adicionarImagem() {
   }
 
   function adicionarVoo() {
-    if (!novoVoo.cia || !novoVoo.voo) return
+    if (!novoVoo.cia || !novoVoo.numvoo) return
 
     setData(prev => ({
       ...prev,
@@ -160,13 +151,14 @@ function adicionarImagem() {
 
     setNovoVoo({
       cia: "",
-      data: "",
-      classe:"",
-      voo: "",
+      numvoo: 0,
       saida: "",
       chegada: "",
       origem: "",
       destino: "",
+      durcon: "",
+      esc: "",
+      equipe: "",
       duracao: ""
     })
   }
@@ -178,29 +170,6 @@ function adicionarImagem() {
     }))
   }
 
-  function adicionarQuarto() {
-    if (!novoQuarto.nome) return
-
-    setData(prev => ({
-      ...prev,
-      quartos: [...prev.quartos, novoQuarto]
-    }))
-
-    setNovoQuarto({
-      nome: "",
-      vista: "",
-      cama: "",
-      tamanho: "",
-      incluso: ""
-    })
-  }
-
-  function removerQuarto(index: number) {
-    setData(prev => ({
-      ...prev,
-      quartos: prev.quartos.filter((_, i) => i !== index)
-    }))
-  }
 
  function abrirModal() {
     setModalAberto(true);
@@ -251,25 +220,9 @@ function adicionarImagem() {
     )
   }))
 }
-function editarQuarto(
-  index: number,
-  campo: keyof typeof novoQuarto,
-  valor: string
-) {
-  setData(prev => ({
-    ...prev,
-    quartos: prev.quartos.map((quarto, i) =>
-      i === index ? { ...quarto, [campo]: valor } : quarto
-    )
-  }))
-}
 
-function editarInfo(campo: "viajantes" | "regime", valor: string) {
-  setData(prev => ({
-    ...prev,
-    [campo]: valor
-  }))
-}
+
+
 
 function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
   const files = e.target.files
@@ -676,9 +629,112 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               value={data.descricaodata}
               onChange={(e) => setData({ ...data, descricaodata: e.target.value })}
             />
-
-
           </div>
+                {/* VOOS - SEÇÃO EXPANSÍVEL */}
+      <div className="border-t pt-4 space-y-2">
+        <div 
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setVooModalAberto(prev => !prev)}
+        > 
+          <span className="flex gap-2 justify-center items-center text-gray-700">
+            <PlaneTakeoff className="w-5 h-5" />
+            <h3 className="font-semibold text-gray-700">Voos</h3> 
+          </span>
+          
+          <span
+            className={`text-gray-500 transition-transform duration-300 ${
+              vooModalAberto ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <ChevronDown />
+          </span>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            vooModalAberto ? "max-h-500 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-2 space-y-2">
+            {(Object.keys(novoVoo) as Array<keyof typeof novoVoo>).map((campo) => (
+              <input
+                key={campo}
+                className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                placeholder={campo}
+                value={novoVoo[campo]}
+                onChange={(e) => setNovoVoo({ ...novoVoo, [campo]: e.target.value })}
+              />
+            ))}
+
+            <button
+              onClick={adicionarVoo}
+              className="bg-green-600 text-white w-full py-2 rounded-lg flex gap-2 justify-center items-center hover:bg-green-700 transition-colors duration-200"
+            >
+              <Plus className="w-5 h-5 text-white" /> Adicionar Voo
+            </button>
+
+            {data.voos.map((voo, index) => (
+              <div
+                key={index}
+                className="bg-gray-100 p-3 rounded-lg space-y-2 transition-all duration-200 hover:bg-gray-200"
+              >
+                {editandoVoo === index ? (
+                  <>
+                    {(Object.keys(voo) as Array<keyof typeof voo>).map((campo) => (
+                      <input
+                        key={campo}
+                        autoFocus={campo === "cia"}
+                        className="w-full bg-white border border-gray-300 p-2 rounded text-gray-600 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                        value={voo[campo]}
+                        placeholder={campo}
+                        onChange={(e) => editarVoo(index, campo, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            setEditandoVoo(null);
+                          }
+                        }}
+                      />
+                    ))}
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setEditandoVoo(null)}
+                        className="flex-1 bg-green-500 text-white py-1 rounded hover:bg-green-700 transition-colors duration-200"
+                      >
+                        Salvar
+                      </button>
+
+                      <button
+                        onClick={() => removerVoo(index)}
+                        className="flex-1 bg-red-500 text-white py-1 rounded hover:bg-red-600 transition-colors duration-200"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">
+                      {voo.cia} - {voo.voo}
+                    </span>
+
+                    <div className="flex gap-2">
+                      <button onClick={() => setEditandoVoo(index)}>
+                        <Pencil className="w-4 h-4 text-blue-500" />
+                      </button>
+
+                      <button onClick={() => removerVoo(index)}>
+                        <X className="w-4 h-4 text-red-500" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
