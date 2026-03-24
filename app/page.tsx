@@ -565,13 +565,13 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 />
                 <button
                   onClick={adicionarImagem}
-                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                  className="bg-green-600 text-white px-2.5 rounded-lg hover:bg-green-700 transition-colors duration-200"
                 >
                   <Plus className="w-5 h-5 text-white" />
                 </button>
 
               <div className="flex gap-2">
-                <label className="bg-blue-600 text-white px-3 rounded-lg cursor-pointer hover:bg-blue-700 flex items-center">
+                <label className="bg-blue-600 text-white px-2.5 rounded-lg cursor-pointer hover:bg-blue-700 flex items-center">
                   <ArrowUpToLine className="w-5 h-5 text-white" />
                   <input
                     type="file"
@@ -591,119 +591,8 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                   </button>
                 </div>
               ))}
-
-
             </div>
 
-            {/* DESCRIÇÃO */}
-            <textarea
-              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Descrição do hotel"
-              value={data.descricaoHotel}
-              onChange={(e) =>
-                setData({ ...data, descricaoHotel: e.target.value })
-              }
-            />
-
-            {/* DESCRIÇÃO */}
-            <textarea
-              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Extras"
-              value={data.descricaoExtra}
-              onChange={(e) =>
-                setData({ ...data, descricaoExtra: e.target.value })
-              }
-            />
-
-
-
-
-        {/* Informações do Quarto */}
-        <div className="">
-          <h2 className="font-semibold text-gray-700">
-            Informaçõs do Quarto
-          </h2>
-        </div>
-
-        
-          <div className="space-y-2">
-            {editandoInfo ? (
-              <>
-                {(["viajantes", "regime"] as const).map((campo) => (
-                  <input
-                    key={campo}
-                    autoFocus={campo === "viajantes"}
-                    className="w-full bg-white border border-gray-300 p-2 rounded-lg text-gray-600"
-                    value={data[campo]}
-                    placeholder={`Informe ${campo}`}
-                    onChange={(e) => editarInfo(campo, e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault()
-                        setEditandoInfo(false)
-                      }
-                    }}
-                  />
-                ))}
-
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setEditandoInfo(false)}
-                    className="flex-1 bg-green-500 text-white py-1 rounded"
-                  >
-                    Salvar
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      setData(prev => ({
-                        ...prev,
-                        viajantes: "",
-                        regime: ""
-                      }))
-                      setEditandoInfo(false)
-                    }}
-                    className="flex-1 bg-red-500 text-white py-1 rounded"
-                  >
-                    Remover
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600">
-                  {data.viajantes || data.regime ? (
-                    <>
-                      <div>Viajantes: {data.viajantes || "-"}</div>
-                      <div>Regime: {data.regime || "-"}</div>
-                    </>
-                  ) : (
-                    "Preencher informações"
-                  )}
-                </span>
-
-                <div className="flex gap-2">
-                  <button onClick={() => setEditandoInfo(true)}>
-                    <Pencil className="w-4 h-4 text-blue-500" />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setData(prev => ({
-                        ...prev,
-                        viajantes: "",
-                        regime: ""
-                      }))
-                    }
-                  >
-                    <X className="w-4 h-4 text-red-500" />
-                  </button>
-                </div>
-              </div>
-            )}
-
-          </div>
-        
 
 
             {/* VALOR */}
