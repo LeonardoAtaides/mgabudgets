@@ -46,7 +46,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
   return (
     <div >
       <div
-        className="w-[794px] min-h-[1123px] mx-auto bg-[#000000] overflow-hidden relative"
+        className="w-[794px] h-[1123px]  mx-auto bg-[#000000] overflow-hidden flex flex-col "
         style={{background: "url('/assets/fundo.png')"}}
       >
         {/* Header */}
@@ -144,7 +144,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
 
         {/* Footer */}
-        <div className="mt-5">
+        <div className="mt-auto ">
           <div className="flex justify-center gap-4">
             <span className="flex gap-2 text-[#122b4e] items-center">
               <Mail className="text-[#b6a36f] w-5 h-5" />
