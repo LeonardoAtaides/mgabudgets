@@ -122,7 +122,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
           <div className="mt-6">
             {/* BLOCO */}
             <div className="flex gap-8 pl-6 ">
-              {/* DETAKLHE BUSSÓLA */}
+              {/* DETALHE BUSSÓLA */}
               <img
               src="/assets/Bussola.svg"
               alt=""
@@ -139,10 +139,6 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               <div className="flex flex-col max-h-56 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-160  pr-4 text-justify">
-                  <li>Apartamento perto de Praia de Copacabana</li>
-                  <li>Características do quarto</li>
-                     
-
                   {safeData.beneficios.map((beneficio, index) => (
                     <li key={index}>{beneficio}</li>
                   ))}

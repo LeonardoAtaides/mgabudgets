@@ -432,11 +432,12 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 }}
               />
 
-            {/* BENEFÍCIOS */}
+            {/* CONHEÇA UM POUCO MAIS */}
             <div className="space-y-2">
-              <h3 className="font-semibold text-gray-700">Benefícios</h3>
+              <h3 className="font-semibold text-gray-700">Conheça mais</h3>
               <div className="flex gap-2">
                 <input
+                  placeholder="digite os benefícios"
                   className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   value={beneficioInput}
                   onChange={(e) => setBeneficioInput(e.target.value)}
@@ -492,11 +493,12 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             </div>
 
 
-            {/* BENEFÍCIOS IA */}
+            {/* INFORMAÇÕES ADICIONAIS */}
             <div className="space-y-2">
-              <h3 className="font-semibold text-gray-700">Benefícios IA</h3>
+              <h3 className="font-semibold text-gray-700">Informações Adicionais</h3>
               <div className="flex gap-2">
                 <input
+                placeholder="Digite as informações"
                   className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   value={infoAdcInput}
                   onChange={(e) => setInfoAdcInput(e.target.value)}
