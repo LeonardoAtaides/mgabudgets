@@ -79,8 +79,65 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
           {/* COMPANHIA AÉREA */}
           <div className="mt-6">
-            {/* QUADRO DE DADOS */}
+            {/* VOOS */}
+            <div className=" overflow-hidden mb-4">
+              <div className="bg-[#fafbff] text-[#222] p-3 text-lg border-b border-gray-300">
+                <strong>
+                  Voos
+                  {safeData.voos.length > 0 ? (
+                    <> {" — "} {safeData.voos[0].cia || <span className="placeholder">Teste</span>} {" — Em classe "} {safeData.voos[0].classe || <span className="placeholder">Econômica</span>}</>
+                  ) : (
+                    <> {" — "} <span className="placeholder">Cia Aérea</span> {" — Em classe "} <span className="placeholder">Econômica</span></>
+                  )}
+                </strong>
+                
+              </div>
 
+              <div className="p-4 overflow-x-auto">
+                <table className="w-full border-collapse text-sm min-w-[780px]">
+                  <thead>
+                    <tr>
+                      <th className="text-left p-2.5 text-[#222]">Cia</th>
+                      <th className="text-left p-2.5 text-[#222]">Data</th>
+                      <th className="text-left p-2.5 text-[#222]">Voo</th>
+                      <th className="text-left p-2.5 text-[#222]">Saída</th>
+                      <th className="text-left p-2.5 text-[#222]">Chegada</th>
+                      <th className="text-left p-2.5 text-[#222]">Origem</th>
+                      <th className="text-left p-2.5 text-[#222]">Destino</th>
+                      <th className="text-left p-2.5 text-[#222]">Duração</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {safeData.voos.length > 0
+                      ? safeData.voos.map((voo, index) => (
+                          <tr key={index}>
+                            <td className="p-2.5 border-t text-gray-500">{voo.cia || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.data || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.voo || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.saida || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.chegada || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.origem || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.destino || <span className="placeholder">Teste</span>}</td>
+                            <td className="p-2.5 border-t text-gray-500">{voo.duracao || <span className="placeholder">Teste</span>}</td>
+                          </tr>
+                        ))
+                      : (
+                          <tr>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Cia Aérea</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">xx/xx/xxxx</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Voo 000</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00:00</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Origem</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">Destino</span></td>
+                            <td className="p-2.5 border-t text-gray-500"><span className="placeholder">00h00</span></td>
+                          </tr>
+                        )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
 
