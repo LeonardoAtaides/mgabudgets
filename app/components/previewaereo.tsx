@@ -15,7 +15,7 @@ function formatarData(data: string) {
   return `${dia}/${mes}`;
 }
 
-const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
+const Aereo = ({ data }: { data: BudgetsData }) => {
 
     const safeData: BudgetsData = data || {
       numeroorc: "",
@@ -78,11 +78,9 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
           <div className="flex flex-col items-end mt-[-85px]">
             <div className="max-w-110">
-              <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-bold">Hotéis</h1>
+              <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-bold">Aéreo</h1>
               <hr className="my-2 text-[#122b4e] border-2" />
-              <div className="pl-6 py-1 mb-2 bg-[#b6a36f]  rounded-tr-2xl">
-                <h2 className="text-xl text-white uppercase">{safeData.cidade || "Nome da Cidade"}</h2>
-              </div>
+
             </div>
           </div>
           <div className="flex w-full justify-end">
@@ -121,9 +119,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
                 <img src={imagens[0]}
                   alt=""
                   className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
-              ) : null}
-              <img src={imagens[0]}
-              alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
+              ) : null}    
               </div>
 
               {/* TEXTO */}
@@ -143,7 +139,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
               {/* IMAGEM */}
               <div className="grid grid-cols-1 ">
                 <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
-                  {imagens[0] ? (
+                  {imagens[1] ? (
                     <img src={imagens[1]}
                       alt=""
                       className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
@@ -214,4 +210,4 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
   );
 };
 
-export default HotelOrcamento;
+export default Aereo;
