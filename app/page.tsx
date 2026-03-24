@@ -17,7 +17,7 @@ export default function Page() {
     numeroorc: "",
     dataInicio: "",
     dataFim: "",
-    estrelas: 0,
+    estrelas: 1,
     destino: "",
     periodo: "",
     hotel: "",
@@ -208,7 +208,7 @@ function adicionarImagem() {
       numeroorc: "",
       dataInicio: "",
       dataFim: "",
-      estrelas: 0,
+      estrelas: 1,
       destino: "",
       periodo: "",
       hotel: "",
@@ -438,7 +438,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               <div className="flex gap-2">
                 <input
                   placeholder="digite os benefícios"
-                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   value={beneficioInput}
                   onChange={(e) => setBeneficioInput(e.target.value)}
                 />
@@ -458,7 +458,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                   {editandoBeneficio === index ? (
                     <input
                       autoFocus
-                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                       value={beneficio}
                       onChange={(e) =>
                         setData(prev => ({

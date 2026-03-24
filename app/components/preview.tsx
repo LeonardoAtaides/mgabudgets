@@ -100,8 +100,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
           </div>
           <div className="flex w-full justify-end">
-              <div className=" flex gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-center">
-                <h2 className="text-base text-white uppercase">{safeData.hotel || "Nome do Hotel"}</h2>
+              <div className=" flex  gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-center">
+                <h2 className="text-base text-white uppercase max-w-[380px] truncate">{safeData.hotel || "Nome do Hotel"}</h2>
                 <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((n) => (
                   <Star
@@ -136,7 +136,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               </div>
 
               {/* TEXTO */}
-              <div className="flex flex-col max-h-56 overflow-hidden">
+              <div className="flex flex-col w-160 max-h-56 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-160  pr-4 text-justify">
                   {safeData.beneficios.map((beneficio, index) => (
