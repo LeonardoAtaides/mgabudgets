@@ -499,7 +499,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               <div className="flex gap-2">
                 <input
                 placeholder="Digite as informações"
-                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   value={infoAdcInput}
                   onChange={(e) => setInfoAdcInput(e.target.value)}
                 />
@@ -519,7 +519,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                   {editandoInfoAdc === index ? (
                     <input
                       autoFocus
-                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-blue-500 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                       value={infoadc}
                       onChange={(e) =>
                         setData(prev => ({

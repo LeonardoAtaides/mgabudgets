@@ -3,15 +3,6 @@ import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Star } from "lucide-react";
 
-function formatarMoeda(valor: number, moeda: "BRL" | "USD") {
-  return new Intl.NumberFormat(
-    moeda === "BRL" ? "pt-BR" : "en-US",
-    {
-      style: "currency",
-      currency: moeda
-    }
-  ).format(valor)
-}
 
 function formatarData(data: string) {
   if (!data) return "xx/xx";
@@ -23,29 +14,24 @@ function formatarData(data: string) {
 
   return `${dia}/${mes}`;
 }
-function pluralize(count: number, singular: string, plural?: string) {
-  return count === 1 ? singular : plural || singular + "s";
-}
 
 const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
     const safeData: BudgetsData = data || {
-    destino: "",
-    hotel: "",
-    periodo: "",
-    moeda: "BRL",
-    valorTotal: 0,
-    beneficios: [],
-    voos: [],
-    imagens: [],
-    mostrarInfo: false,
-    mostrarResumo: false,
-    viajantes: 0,
-    quartos: [],
-    descricaoHotel: "",
-    regime: ""
+      numeroorc: "",
+      dataInicio: "",
+      dataFim: "",
+      hotel: "",
+      cidade: "",
+      estrelas: 1,
+      imagens: [] ,
+      beneficios: [],
+      infoadc: []
   };
-
+const imagens = (safeData.imagens && safeData.imagens.length > 0
+  ? safeData.imagens
+  : Array(4).fill(null)
+)
   return (
     <div >
       <div
@@ -131,7 +117,12 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
 
               {/* IMAGEM */}
               <div className="border border-5 border-[#122b4e] w-60 h-50 rounded-b-2xl rounded-tr-2xl">
-              <img src={safeData.imagens[0] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
+              {imagens[0] ? (
+                <img src={imagens[0]}
+                  alt=""
+                  className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
+              ) : null}
+              <img src={imagens[0]}
               alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
               </div>
 
@@ -152,18 +143,27 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               {/* IMAGEM */}
               <div className="grid grid-cols-1 ">
                 <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
-                  <img src={safeData.imagens[1] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                  alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
+                  {imagens[0] ? (
+                    <img src={imagens[1]}
+                      alt=""
+                      className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
+                  ) : null}
                 </div>                    
                 <div className="flex gap-12 mt-10">
                   <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
-                    <img src={safeData.imagens[2] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
+                    {imagens[2] ? (
+                      <img src={imagens[2]}
+                        alt=""
+                        className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
+                    ) : null}
                   </div>
 
                   <div className="border border-5 border-[#122b4e] w-65 h-45 rounded-b-2xl rounded-tr-2xl">
-                    <img src={safeData.imagens[3] || "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_1280.jpg"}
-                    alt="" className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />      
+                    {imagens[3] ? (
+                      <img src={imagens[3]}
+                        alt=""
+                        className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
+                    ) : null}
                   </div>
                 </div>          
               </div>
