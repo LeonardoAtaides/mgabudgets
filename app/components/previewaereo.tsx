@@ -1,19 +1,8 @@
 import { BudgetsData } from "@/types/budgets";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { Star } from "lucide-react";
 
 
-function formatarData(data: string) {
-  if (!data) return "xx/xx";
-
-  const d = new Date(data);
-
-  const dia = String(d.getDate()).padStart(2, "0");
-  const mes = String(d.getMonth() + 1).padStart(2, "0");
-
-  return `${dia}/${mes}`;
-}
 
 const Aereo = ({ data }: { data: BudgetsData }) => {
 
@@ -38,6 +27,8 @@ const Aereo = ({ data }: { data: BudgetsData }) => {
       equipe: "",
       duracao: "",
       descricaodata: "",
+      descricaoaereo: "",
+      valorAereo: 0
   };
 const imagens = (safeData.imagens && safeData.imagens.length > 0
   ? safeData.imagens
@@ -119,7 +110,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
                     {/* CIA */}
                     <div className="px-2">
                       <div className="bg-[#e9e9e9] h-[26px] rounded-md flex items-center justify-center">
-                        <span className="text-gray-800 font-bold text-[12px]">
+                        <span className="text-gray-800 font-bold text-[12px] uppercase">
                           {voo.cia || "CIA"}
                         </span>
                       </div>
@@ -137,11 +128,24 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
                   </div>
                 ))}
               </div>
-
             </div>
-</div>
+          </div>
+        </div>
+        
+        <div className="flex px-6 mt-12">
+          <h2 className="text-[#122b4e] text-lg font-bold">{safeData.descricaoaereo || "Descrição do voo"}</h2>
         </div>
 
+        <div className="mt-4 px-6">
+          <h2 className="text-[#122b4e] text-lg font-bold"> Companhaia Aérea: {safeData.voos[0]?.cia?.toUpperCase()}</h2>
+        </div>
+        
+
+        <div>
+          <ul className="text-xl text-[#122b4e]">
+            <li>Valor total por pessoa <strong>(Hospedagem {safeData.hotel}) {safeData.valorAereo} parcelado em 10x</strong></li>
+          </ul>
+        </div>
 
         {/* Footer */}
         <div className="mt-auto ">

@@ -26,12 +26,14 @@ export interface BudgetsData {
     equipe: string
     duracao: string
   }[]
+  descricaoaereo: string
+  valorAereo: string
 
 
   destino: string
   periodo: string
   valorTotal: string
-  moeda: "BRL" | "USD"
+  moeda: "R$" | "$"
   descricaoHotel: string
   descricaoInfo: string
   descricaoExtra: string

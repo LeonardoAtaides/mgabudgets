@@ -26,8 +26,7 @@ export default function Page() {
     beneficios: [],    
     infoadc: [],
     descricaodata: "",
-    valorTotal: "",
-    moeda: "BRL",
+    valorAereo: "",
     valordesc: "pacote",
     descricaoHotel: "",
     descricaoInfo: "",
@@ -63,6 +62,7 @@ export default function Page() {
   const [beneficioInput, setBeneficioInput] = useState("")
   const [infoAdcInput, setInfoAdcInput] = useState("")
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
+  const [aereoAberto, setAereoAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [editandoInfoAdc, setEditandoInfoAdc] = useState<number | null>(null)
@@ -187,8 +187,8 @@ function adicionarImagem() {
       beneficios: [],
       infoadc: [],
       descricaodata: "",
+      valorAereo: "",
       valorTotal: "",
-      moeda: "BRL",
       valordesc: "pacote",
       descricaoHotel: "",
       descricaoInfo: "",
@@ -551,33 +551,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             </div>
 
 
-
-            {/* VALOR */}
-            <div>
-              <h3 className="font-semibold text-gray-700">Valor</h3>
-              <div className="flex gap-2">
-                <select
-                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
-                  value={data.moeda}
-                  onChange={(e) =>
-                    setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
-                  }
-                >
-                  <option value="BRL">R$</option>
-                  <option value="USD">$</option>
-                </select>
-
-                <input
-                  type="number"
-                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.valorTotal}
-                  onChange={(e) =>
-                    setData({ ...data, valorTotal:(e.target.value) })
-                  }
-                />
-              </div>          
-            </div>
-
             <div>
               <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
               <div className="flex gap-2">
@@ -601,7 +574,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       <div className="space-y-2">
         <div
           className="flex justify-between items-center cursor-pointer"
-          onClick={() => setDadosBasicosAberto(prev => !prev)}
+          onClick={() => setAereoAberto(prev => !prev)}
         >
           <span className="flex gap-2 justify-center items-center text-gray-700">
             <Plane className="w-5 h-5" />
@@ -609,7 +582,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
           
           <span
             className={`text-gray-500 transition-transform duration-300 ${
-              dadosBasicosAberto ? "rotate-180" : "rotate-0"
+              aereoAberto ? "rotate-180" : "rotate-0"
             }`}
           >
             <ChevronDown />
@@ -618,7 +591,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
         <div
           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-            dadosBasicosAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
+            aereoAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="mt-2 space-y-3">
@@ -716,7 +689,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 ) : (
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">
-                      {voo.cia} - {voo.voo}
+                      {voo.cia} 
                     </span>
 
                     <div className="flex gap-2">
@@ -735,8 +708,24 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
           </div>
         </div>
       </div>
+
+      {/* VALOR */}
+            <div>
+              <h3 className="font-semibold text-gray-700">Valor</h3>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
+                  value={data.valorTotal}
+                  onChange={(e) =>
+                    setData({ ...data, valorTotal:(e.target.value) })
+                  }
+                />
+              </div>          
+            </div>
         </div>
       </div>
+
     </div>
 
       {/* PREVIEW */}
