@@ -12,6 +12,9 @@ export interface BudgetsData {
   infoadc: string[]
 // -----------------------//
 
+// Dados Aéreo
+ descricaodata: string
+
   destino: string
   periodo: string
   valorTotal: string

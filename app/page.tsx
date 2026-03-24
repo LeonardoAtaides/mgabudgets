@@ -25,6 +25,7 @@ export default function Page() {
     hotel: "",
     beneficios: [],    
     infoadc: [],
+    descricaodata: "",
     valorTotal: "",
     moeda: "BRL",
     valordesc: "pacote",
@@ -216,6 +217,7 @@ function adicionarImagem() {
       hotel: "",
       beneficios: [],
       infoadc: [],
+      descricaodata: "",
       valorTotal: "",
       moeda: "BRL",
       valordesc: "pacote",
@@ -642,61 +644,249 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
         </div>
       </div>
 
-
-
-
-
-        {/* Informações Adicionais */}
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={data.mostrarInfo}
-            onChange={(e) =>
-              setData(prev => ({
-                ...prev,
-                mostrarInfo: e.target.checked
-              }))
-            }
-            className="w-4 h-4 accent-blue-600"
-          />
-          <span className="text-sm font-medium text-gray-700">
-            Exibir Informações Adicionais
+      {/* AÉREO - SEÇÃO EXPANSÍVEL */}
+      <div className="space-y-2">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setDadosBasicosAberto(prev => !prev)}
+        >
+          <span className="flex gap-2 justify-center items-center text-gray-700">
+            <Plane className="w-5 h-5" />
+            <h3 className="font-semibold text-gray-700">AÉREO</h3></span>
+          
+          <span
+            className={`text-gray-500 transition-transform duration-300 ${
+              dadosBasicosAberto ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <ChevronDown />
           </span>
-        </label>
+        </div>
 
-        {data.mostrarInfo && (
-          <div className="space-y-2">
-            <textarea
-              className="w-full border p-2 border-gray-300 mb-0 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-              placeholder="Informações Adicionais"
-              value={data.descricaoInfo}
-              onChange={(e) =>
-                setData({ ...data, descricaoInfo: e.target.value })
-              }
+        <div
+          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            dadosBasicosAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="mt-2 space-y-3">
+            {/* CIDADE - UF, DIA - MÊS - ANO */}
+            <input
+              className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+              placeholder="Cidade"
+              value={data.descricaodata}
+              onChange={(e) => setData({ ...data, descricaodata: e.target.value })}
             />
 
 
+
+            {/* CONHEÇA UM POUCO MAIS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Conheça mais</h3>
+              <div className="flex gap-2">
+                <input
+                  placeholder="digite os benefícios"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={beneficioInput}
+                  onChange={(e) => setBeneficioInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarBeneficio}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.beneficios.map((beneficio, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoBeneficio === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      value={beneficio}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          beneficios: prev.beneficios.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoBeneficio(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{beneficio}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoBeneficio(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerBeneficio(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+
+            {/* INFORMAÇÕES ADICIONAIS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Informações Adicionais</h3>
+              <div className="flex gap-2">
+                <input
+                placeholder="Digite as informações"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={infoAdcInput}
+                  onChange={(e) => setInfoAdcInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarInfoAdc}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.infoadc.map((infoadc, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoInfoAdc === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      value={infoadc}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          infoadc: prev.infoadc.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoInfoAdc(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{infoadc}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoInfoAdc(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerInfoAdc(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* IMAGENS */}
+            <div className="space-y-2">
+              <h3 className="font-semibold text-gray-700">Imagens</h3>
+              <div className="flex gap-2">
+                <input
+                  className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  placeholder="https://..."
+                  value={imagemInput}
+                  onChange={(e) => setImagemInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarImagem}
+                  className="bg-green-600 text-white px-2.5 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+
+              <div className="flex gap-2">
+                <label className="bg-blue-600 text-white px-2.5 rounded-lg cursor-pointer hover:bg-blue-700 flex items-center">
+                  <ArrowUpToLine className="w-5 h-5 text-white" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={subirImagemLocal}
+                    className="hidden"
+                  />
+                </label>
+            </div>        
+              </div>
+              {data.imagens.map((img, index) => (
+                <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
+                  <span className="truncate w-[80%]">{img}</span>
+                  <button onClick={() => removerImagem(index)}>
+                    <X className="w-5 h-5 text-red-500" />
+                  </button>
+                </div>
+              ))}
+            </div>
+
+
+
+            {/* VALOR */}
+            <div>
+              <h3 className="font-semibold text-gray-700">Valor</h3>
+              <div className="flex gap-2">
+                <select
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
+                  value={data.moeda}
+                  onChange={(e) =>
+                    setData({ ...data, moeda: e.target.value as "BRL" | "USD" })
+                  }
+                >
+                  <option value="BRL">R$</option>
+                  <option value="USD">$</option>
+                </select>
+
+                <input
+                  type="number"
+                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
+                  value={data.valorTotal}
+                  onChange={(e) =>
+                    setData({ ...data, valorTotal:(e.target.value) })
+                  }
+                />
+              </div>          
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
+              <div className="flex gap-2">
+                <select
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
+                  value={data.valordesc}
+                  onChange={(e) =>
+                    setData({ ...data, valordesc: e.target.value as "pacote" | "pacote por pessoa" })
+                  }
+                >
+                  <option value="pacote">Pacote</option>
+                  <option value="pacote por pessoa">Pacote por pessoa</option>
+                </select>
+              </div>          
+            </div>
           </div>
-        )}
- 
-
-
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={data.mostrarResumo}
-            onChange={(e) =>
-              setData({ ...data, mostrarResumo: e.target.checked })
-            }
-            className="w-4 h-4 accent-blue-600"
-          />
-          <span className="text-sm font-medium text-gray-700">
-            Exibir Resumo
-          </span>
-        </label>
-
-
+        </div>
       </div>
+    </div>
 
       {/* PREVIEW */}
       <div className="flex-1 overflow-auto bg-gray-200 p-10"

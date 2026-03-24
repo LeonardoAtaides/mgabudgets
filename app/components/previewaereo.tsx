@@ -65,40 +65,15 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
       </div>
       
         <div className="">
-          <div className="pl-6">
-            <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
-              DATAS: {formatarData(safeData.dataInicio)} a {formatarData(safeData.dataFim) || "xx/xx"}  
-            </h2>
-
-            <h2 className="text-base font-medium text-[#122b4e]  tracking-wider uppercase">
-              ACOMODAÇÃO EM APARTAMENTO
-            </h2>            
-          </div>
-
-
-          <div className="flex flex-col items-end mt-[-85px]">
+          <div className="flex flex-col items-end mt-[-10px]">
             <div className="max-w-110">
               <h1 className="text-[65px] leading-none pr-4 text-[#b6a36f] uppercase font-bold">Aéreo</h1>
               <hr className="my-2 text-[#122b4e] border-2" />
-
             </div>
           </div>
           <div className="flex w-full justify-end">
               <div className=" flex  gap-2 pl-3 px-6 py-1 bg-[#122b4e] rounded-bl-lg items-center">
-                <h2 className="text-base text-white uppercase max-w-[380px] truncate">{safeData.hotel || "Nome do Hotel"}</h2>
-                <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((n) => (
-                  <Star
-                    key={n}
-                    size={16}
-                    className={
-                      n <= (safeData.estrelas || 5)
-                        ? "fill-white text-white"
-                        : "text-gray-300"
-                    }
-                  />
-                ))}
-              </div>
+                <h2 className="text-base text-white uppercase max-w-[450px] truncate">{safeData.descricaodata || "Cidade - UF XX de Mês de XXXX"}</h2>
               </div>  
           </div>
 
