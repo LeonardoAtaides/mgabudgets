@@ -26,9 +26,13 @@ export interface BudgetsData {
     equipe: string
     duracao: string
   }[]
-  descricaoaereo: string
+  cidadeSaida: string
+  cidadeChegada: string
   valorAereo: number
-
+  dataAereoIni: string
+  dataAereoFim: string
+  aeroportoSaida: string
+  aeroportoChegada: string
 
   destino: string
   periodo: string

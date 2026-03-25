@@ -26,7 +26,9 @@ export default function Page() {
     beneficios: [],    
     infoadc: [],
     descricaodata: "",
-    valorAereo: "",
+    valorAereo: 0,
+    dataAereoIni: "",
+    dataAereoFim: "",
     valordesc: "pacote",
     descricaoHotel: "",
     descricaoInfo: "",
@@ -37,7 +39,11 @@ export default function Page() {
     mostrarResumo: true,
     mostrarInfo: true,
     viajantes:"",
-    regime:""
+    regime:"",
+    aeroportoSaida: "",
+    aeroportoChegada: "",
+    cidadeSaida: "",
+    cidadeChegada: ""
   })
 
   useEffect(() => {
@@ -187,12 +193,9 @@ function adicionarImagem() {
       beneficios: [],
       infoadc: [],
       descricaodata: "",
-      valorAereo: "",
-      valorTotal: "",
-      valordesc: "pacote",
-      descricaoHotel: "",
-      descricaoInfo: "",
-      descricaoExtra: "",
+      valorAereo: 0,
+      dataAereoIni: "",
+      dataAereoFim: "",
       imagens: [],
       voos: [],
       quartos: [],
@@ -200,6 +203,10 @@ function adicionarImagem() {
       mostrarInfo: true,
       viajantes: "",
       regime: "",
+      aeroportoSaida: "",
+      aeroportoChegada: "",
+      cidadeSaida: "",
+      cidadeChegada: ""
     });
     setModalAberto(false);
   }
@@ -710,20 +717,72 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       </div>
 
       {/* VALOR */}
-            <div>
-              <h3 className="font-semibold text-gray-700">Valor</h3>
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.valorAereo || ""}
-                  onChange={(e) =>
-                    setData({ ...data, valorAereo: Number(e.target.value) })
-                  }
-                />
-              </div>          
-            </div>
+      <div>
+        <h3 className="font-semibold text-gray-700">Valor</h3>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
+            value={data.valorAereo || ""}
+            onChange={(e) =>
+              setData({ ...data, valorAereo: Number(e.target.value) })
+            }
+          />
+        </div>          
+      </div>
         </div>
+
+        {/* DESCRIÇÃO DO VOO */}
+        <input
+        className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+        placeholder="Cidade"
+        value={data.cidadeSaida}
+        onChange={(e) => setData({ ...data, cidadeSaida: e.target.value })}
+        />
+
+        <input
+        className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+        placeholder="Aeroporto"
+        value={data.aeroportoSaida}
+        onChange={(e) => setData({ ...data, aeroportoSaida: e.target.value })}
+        />
+
+
+                    {/* DATAS*/}
+            <div className="flex gap-1 justify-between ">
+            <input
+                type="date"
+                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                value={data.dataAereoIni || ""}
+                onChange={(e) =>
+                  setData({ ...data, dataAereoIni: e.target.value })
+                }
+              />
+
+              <input
+                type="date"
+                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                value={data.dataAereoFim || ""}
+                onChange={(e) =>
+                  setData({ ...data, dataAereoFim: e.target.value })
+                }
+              />
+            </div>
+
+        <input
+        className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+        placeholder="Aeroporto chegada"
+        value={data.aeroportoChegada}
+        onChange={(e) => setData({ ...data, aeroportoChegada: e.target.value })}
+        />
+
+        <input
+        className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+        placeholder="Cidade"
+        value={data.cidadeChegada}
+        onChange={(e) => setData({ ...data, cidadeChegada: e.target.value })}
+        />
+
       </div>
 
     </div>

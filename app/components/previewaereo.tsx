@@ -2,8 +2,6 @@ import { BudgetsData } from "@/types/budgets";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 
-
-
 const Aereo = ({ data }: { data: BudgetsData }) => {
 
     const safeData: BudgetsData = data || {
@@ -27,8 +25,10 @@ const Aereo = ({ data }: { data: BudgetsData }) => {
       equipe: "",
       duracao: "",
       descricaodata: "",
-      descricaoaereo: "",
-      valorAereo: 0
+      cidadeSaida: "",
+      valorAereo: 0,
+      dataAereoIni: "",
+      dataAereoFim: "",
   };
 
 function formatarMoeda(valor: number) {
@@ -36,6 +36,17 @@ function formatarMoeda(valor: number) {
     style: "currency",
     currency: "BRL",
   }).format(valor);
+}
+
+function formatarData(data: string) {
+  if (!data) return "xx/xx";
+
+  const d = new Date(data);
+
+  const dia = String(d.getDate()).padStart(2, "0");
+  const mes = String(d.getMonth() + 1).padStart(2, "0");
+
+  return `${dia}/${mes}`;
 }
   return (
     <div >
@@ -137,17 +148,19 @@ function formatarMoeda(valor: number) {
         
          {/* DESCRIÇÃO DO DIA  */}
         <div className="flex px-6 mt-12">
-          <h2 className="text-[#122b4e] text-lg font-bold">{safeData.descricaoaereo || "Descrição do voo"}</h2>
+          <h2 className="text-[#122b4e] text-lg font-bold"> Ida dia {formatarData(safeData.dataAereoIni)} saindo de {safeData.cidadeSaida || "Cidade"}
+            para o Aeroporto de {safeData.aeroportoSaida}, Volta dia {formatarData(safeData.dataAereoFim)} saindo do Aeroporto {safeData.aeroportoChegada} para {safeData.cidadeChegada}.
+          </h2>
         </div>
 
-        <div className="mt-4 px-6">
+        <div className="mt-10 px-6">
           <h2 className="text-[#122b4e] text-lg font-bold"> Companhaia Aérea: {safeData.voos[0]?.cia?.toUpperCase()}</h2>
         </div>
         
 
         <div>
-          <ul className="text-xl text-[#122b4e]">
-            <li>Valor total por pessoa <strong>(Hospedagem {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}  parcelado em 10x</strong></li>
+          <ul className="text-xl text-[#122b4e] px-6">
+            <li>Valor total por pessoa <strong>(Hospedagem: Hotel {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}  parcelado em 10x</strong></li>
           </ul>
         </div>
 
