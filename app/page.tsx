@@ -714,11 +714,11 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               <h3 className="font-semibold text-gray-700">Valor</h3>
               <div className="flex gap-2">
                 <input
-                  type="text"
+                  type="number"
                   className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.valorTotal}
+                  value={data.valorAereo || ""}
                   onChange={(e) =>
-                    setData({ ...data, valorTotal:(e.target.value) })
+                    setData({ ...data, valorAereo: Number(e.target.value) })
                   }
                 />
               </div>          

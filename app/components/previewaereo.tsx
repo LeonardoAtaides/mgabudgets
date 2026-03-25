@@ -30,10 +30,13 @@ const Aereo = ({ data }: { data: BudgetsData }) => {
       descricaoaereo: "",
       valorAereo: 0
   };
-const imagens = (safeData.imagens && safeData.imagens.length > 0
-  ? safeData.imagens
-  : Array(4).fill(null)
-)
+
+function formatarMoeda(valor: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(valor);
+}
   return (
     <div >
       <div
@@ -132,6 +135,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
           </div>
         </div>
         
+         {/* DESCRIÇÃO DO DIA  */}
         <div className="flex px-6 mt-12">
           <h2 className="text-[#122b4e] text-lg font-bold">{safeData.descricaoaereo || "Descrição do voo"}</h2>
         </div>
@@ -143,7 +147,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
         <div>
           <ul className="text-xl text-[#122b4e]">
-            <li>Valor total por pessoa <strong>(Hospedagem {safeData.hotel}) {safeData.valorAereo} parcelado em 10x</strong></li>
+            <li>Valor total por pessoa <strong>(Hospedagem {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}  parcelado em 10x</strong></li>
           </ul>
         </div>
 

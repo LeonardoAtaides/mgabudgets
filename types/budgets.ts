@@ -27,7 +27,7 @@ export interface BudgetsData {
     duracao: string
   }[]
   descricaoaereo: string
-  valorAereo: string
+  valorAereo: number
 
 
   destino: string
