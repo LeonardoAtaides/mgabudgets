@@ -216,7 +216,7 @@ function adicionarImagem() {
       imagens: [],
       voos: [],
       quartos: [],
-      pacote: "Valor total por pessoa" | "Valor total do pacote",
+      pacote: "Valor total por pessoa",
       mostrarOu: true,
       mostrarInfo: true,
       aeroportoSaida: "",
