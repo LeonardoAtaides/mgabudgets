@@ -935,7 +935,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       </div>  
     </div>
 
-      {/* PREVIEW */}
+      {/* PREVIEWS */}
       <div className="flex-1 overflow-auto bg-gray-200 p-10"
        style={{zoom: 0.8}}>
         

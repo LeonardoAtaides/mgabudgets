@@ -42,7 +42,6 @@ export interface BudgetsData {
   infoadd: string[]
   validadeorc: string
 
-
 // Modais
   mostrarOu: boolean
   ouIndex: number | null
