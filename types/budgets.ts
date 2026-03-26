@@ -38,8 +38,9 @@ export interface BudgetsData {
   parcelas: number
 // -------------------------------------//
 
-//
-
+// Informações
+  infoadd: string[]
+  validadeorc: string
 
 
 // Modais

@@ -4,13 +4,12 @@ import { useState, useRef, useEffect  } from "react"
 import Hoteis from "./components/previewhotel"
 import Aereo from "./components/previewaereo"
 import { BudgetsData } from "@/types/budgets"
-import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
+import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
 import { InfoModal } from "./components/infomodal"
-
-
+import Info from "./components/previewinfo"
 
 export default function Page() {
   const [mounted, setMounted] = useState(false)
@@ -41,7 +40,9 @@ export default function Page() {
     aeroportoSaida: "",
     aeroportoChegada: "",
     cidadeSaida: "",
-    cidadeChegada: ""
+    cidadeChegada: "",
+    infoadd: [],
+    validadeorc: ""
   })
 
   useEffect(() => {
@@ -65,11 +66,14 @@ export default function Page() {
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
   const [infoAdcInput, setInfoAdcInput] = useState("")
+  const [infoAddInput, setInfoAddInput] = useState("")
   const [dadosBasicosAberto, setDadosBasicosAberto] = useState(true);
   const [aereoAberto, setAereoAberto] = useState(true);
+  const [infoAberto, setInfoAberto] = useState(true);
   const [imagemInput, setImagemInput] = useState("")
   const [editandoBeneficio, setEditandoBeneficio] = useState<number | null>(null)
   const [editandoInfoAdc, setEditandoInfoAdc] = useState<number | null>(null)
+  const [editandoInfoAdd, setEditandoInfoAdd] = useState<number | null>(null)
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const previewRef = useRef<HTMLDivElement>(null)
@@ -109,6 +113,15 @@ export default function Page() {
     setInfoAdcInput("")
   }
 
+      function adicionarInfoAdd() {
+    if (!infoAddInput.trim()) return
+    setData(prev => ({
+      ...prev,
+      infoadd: [...prev.infoadd, infoAddInput]
+    }))
+    setInfoAddInput("")
+  }
+
   function removerBeneficio(index: number) {
     setData(prev => ({
       ...prev,
@@ -123,6 +136,12 @@ export default function Page() {
     }))
   }
 
+    function removerInfoAdd(index: number) {
+    setData(prev => ({
+      ...prev,
+      infoadd: prev.infoadd.filter((_, i) => i !== index)
+    }))
+  }
 function adicionarImagem() {
   if (!imagemInput.trim()) return;
 
@@ -203,7 +222,9 @@ function adicionarImagem() {
       aeroportoSaida: "",
       aeroportoChegada: "",
       cidadeSaida: "",
-      cidadeChegada: ""
+      cidadeChegada: "",
+      infoadd: [],
+      validadeorc: ""
     });
     setModalAberto(false);
   }
@@ -798,14 +819,105 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                     </option>
                   ))}
                 </select>
-
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
+
+      {/* INFORMAÇÕES - SEÇÃO EXPANSÍVEL */}
+      <div className="space-y-2 ">
+        <div
+          className="flex justify-between items-center cursor-pointer"
+          onClick={() => setInfoAberto(prev => !prev)}
+        >
+          <span className="flex gap-2 justify-center items-center text-gray-700">
+            <BadgeInfo className="w-5 h-5" />
+            <h3 className="font-semibold text-gray-700">INFORMAÇÕES</h3></span>
+          
+          <span
+            className={`text-gray-500 transition-transform duration-300 ${
+              infoAberto ? "rotate-180" : "rotate-0"
+            }`}
+          >
+            <ChevronDown />
+          </span>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+            infoAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+            {/* INFORMAÇÕES ADICIONAIS */}
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <input
+                placeholder="Digite as informações"
+                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={infoAddInput}
+                  onChange={(e) => setInfoAddInput(e.target.value)}
+                />
+                <button
+                  onClick={adicionarInfoAdd}
+                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                >
+                  <Plus className="w-5 h-5 text-white" />
+                </button>
+              </div>
+
+              {data.infoadd.map((infoadd, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
+                >
+                  {editandoInfoAdd === index ? (
+                    <input
+                      autoFocus
+                      className="flex-1 bg-white border border-gray-300 p-1 rounded text-gray-600 transition-all duration-200  focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                      value={infoadd}
+                      onChange={(e) =>
+                        setData(prev => ({
+                          ...prev,
+                          infoadd: prev.infoadd.map((b, i) =>
+                            i === index ? e.target.value : b
+                          )
+                        }))
+                      }
+                      onBlur={() => setEditandoInfoAdd(null)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault()
+                          e.currentTarget.blur() 
+                        }
+                      }}
+                    />
+                  ) : (
+                    <span className="flex-1 text-gray-600">{infoadd}</span>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button onClick={() => setEditandoInfoAdd(index)}>
+                      <Pencil className="w-4 h-4 text-blue-500" />
+                    </button>
+                    <button onClick={() => removerInfoAdd(index)}>
+                      <X className="w-4 h-4 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+        </div>
+        <h6 className="font-semibold text-gray-700 text-sm mb-1">Válidade do Orçamento</h6>
+        <input
+          type="date"
+          className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+          value={data.validadeorc || ""}
+          onChange={(e) =>
+            setData({ ...data, validadeorc: e.target.value })
+          }
+        />
+      </div>  
     </div>
 
       {/* PREVIEW */}
@@ -815,6 +927,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
         <div  ref={previewRef} className="flex flex-col justify-center ">
           <Hoteis data={data} />
           <Aereo data={data} />
+          <Info data={data} />
         </div>
       </div>
 
