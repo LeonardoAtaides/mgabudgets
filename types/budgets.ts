@@ -45,6 +45,7 @@ export interface BudgetsData {
 
 // Modais
   mostrarOu: boolean
+  ouIndex: number | null
   mostrarInfo: boolean
    
 

@@ -105,27 +105,25 @@ function formatarData(data: string) {
         <div className="px-10 w-full">
           <div className="flex flex-col max-h-84 overflow-hidden">
             
-            <ul className="text-[#122b4e] list-disc list-inside text-justify text-lg">
+            <ul className="text-[#122b4e] list-disc list-inside text-justify text-lg space-y-1">
               
-              {safeData.infoadd.map((infoadd, index) => (
-                <li key={index}>{infoadd}</li>
-              ))}
+            {safeData.infoadd.map((item, index) => (
+              <li key={index}>
+                {item}
 
-              {safeData.mostrarOu && (
-                <div>
-                  <p>OU</p>
-                  
-                  {safeData.infoadd.map((infoadd, index) => (
-                <li key={index}>{infoadd}</li>
-              ))}        
-                </div>
-
-              )}
+                {safeData.mostrarOu && safeData.ouIndex === index && (
+                  <div className="list-none text-center font-semibold my-2">
+                    OU
+                  </div>
+                )}
+              </li>
+            ))}
 
             </ul>
+
           </div>
         </div>
-        
+                
           <div className="mt-10 px-6">
             <p className="text-[#122b4e] text-lg">
             <strong>Observação importante:</strong>
