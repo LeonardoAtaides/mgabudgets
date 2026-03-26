@@ -33,6 +33,7 @@ export interface BudgetsData {
   dataAereoFim: string
   aeroportoSaida: string
   aeroportoChegada: string
+  valordesc: "pacote" | "pacote por pessoa"
 
   destino: string
   periodo: string
