@@ -126,8 +126,7 @@ function formatarData(data: string) {
                 
           <div className="mt-10 px-6">
             <p className="text-[#122b4e] text-lg">
-            <strong>Observação importante:</strong>
-            Valores, disponibilidade e condições, sujeito a confirmação no momento da reserva.
+            <strong>Observação importante:</strong> Valores, disponibilidade e condições, sujeito a confirmação no momento da reserva.
             </p>
           </div>
 
