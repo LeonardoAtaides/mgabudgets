@@ -26,6 +26,7 @@ export interface BudgetsData {
     equipe: string
     duracao: string
   }[]
+
   cidadeSaida: string
   cidadeChegada: string
   valorAereo: number
@@ -35,28 +36,18 @@ export interface BudgetsData {
   aeroportoChegada: string
   pacote: "Valor total por pessoa" | "Valor total do pacote"
   parcelas: number
+// -------------------------------------//
 
-  destino: string
-  periodo: string
-  valorTotal: string
-  moeda: "R$" | "$"
-  descricaoHotel: string
-  descricaoInfo: string
-  descricaoExtra: string
-  
+//
+
+
+
+// Modais
   mostrarResumo: boolean
   mostrarInfo: boolean
    
-  viajantes: string
-  regime: string
 
 
 
-  quartos: {
-    nome: string
-    vista: string
-    cama: string
-    tamanho: string
-    incluso: string
-  }[]
+
 }
