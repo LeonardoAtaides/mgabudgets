@@ -101,17 +101,14 @@ function formatarData(data: string) {
           <h2 className="text-lg text-[#122b4e] pl-6 font-bold">O pacote incluiu: </h2>
         </div>
 
-        <div className="px-10 w-full max-h-112 ">
-          <div className="flex flex-col max-h-112 overflow-hidden">
+        <div className="px-10 w-full ">
+          <div className="flex flex-col max-h-84 overflow-hidden">
           <ul className="text-[#122b4e] list-disc list-inside  text-justify text-lg">
           {safeData.infoadd.map((infoadd, index) => (
           <li key={index}>{infoadd}</li>
           ))}
           </ul>                  
           </div>
-
-
-
         </div>
           <div className="mt-10 px-6">
             <p className="text-[#122b4e] text-lg">
@@ -120,13 +117,17 @@ function formatarData(data: string) {
             </p>
           </div>
 
-          <div className="mt-10 px-6">
-            <p className="text-[#ee1e3c] text-lg uppercase">
+          <div className=" flex mt-10 px-6 justify-end">
+            <p className="text-[#ee1e3c] text-lg uppercase w-90">
             APENAS COTADO, NADA RESERVADO. ORÇAMENTO VÁLIDO ATÉ {formatarData(safeData.validadeorc)}
             </p>
           </div>
         {/* Footer */}
         <div className="mt-auto ">
+          <div className="text-[#122b4e] mb-10 pl-6 font-bold">
+            <h2>Atenciosamente</h2>
+            <h2>MGA TOUR.</h2>
+          </div>
           <div className="flex justify-center gap-4">
             <span className="flex gap-2 text-[#122b4e] items-center">
               <Mail className="text-[#b6a36f] w-5 h-5" />
