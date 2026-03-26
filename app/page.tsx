@@ -861,6 +861,25 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 >
                   <Plus className="w-5 h-5 text-white" />
                 </button>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={data.mostrarOu}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+
+                      setData(prev => ({
+                        ...prev,
+                        mostrarOu: checked,
+                        ouIndex: checked ? prev.infoadd.length - 1 : null
+                      }));
+                    }}
+                    className="w-4 h-4 accent-blue-600"
+                  />
+                  <span className="text-sm font-medium text-gray-700">
+                    Condição Adversa
+                  </span>
+                </label> 
               </div>
 
               {data.infoadd.map((infoadd, index) => (
@@ -914,25 +933,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             setData({ ...data, validadeorc: e.target.value })
           }
         />
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={data.mostrarOu}
-            onChange={(e) => {
-              const checked = e.target.checked;
-
-              setData(prev => ({
-                ...prev,
-                mostrarOu: checked,
-                ouIndex: checked ? prev.infoadd.length - 1 : null
-              }));
-            }}
-            className="w-4 h-4 accent-blue-600"
-          />
-          <span className="text-sm font-medium text-gray-700">
-            Condição Adversa
-          </span>
-        </label>     
+    
       </div>  
     </div>
 
