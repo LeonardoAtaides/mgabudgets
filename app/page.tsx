@@ -35,7 +35,7 @@ export default function Page() {
     imagens: [],
     voos: [],
     quartos: [],
-    mostrarResumo: true,
+    mostrarOu: true,
     mostrarInfo: true,
     aeroportoSaida: "",
     aeroportoChegada: "",
@@ -217,7 +217,7 @@ function adicionarImagem() {
       voos: [],
       quartos: [],
       pacote: "Valor total por pessoa" | "Valor total do pacote",
-      mostrarResumo: true,
+      mostrarOu: true,
       mostrarInfo: true,
       aeroportoSaida: "",
       aeroportoChegada: "",
@@ -917,6 +917,19 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             setData({ ...data, validadeorc: e.target.value })
           }
         />
+         <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={data.mostrarOu}
+            onChange={(e) =>
+              setData({ ...data, mostrarOu: e.target.checked })
+            }
+            className="w-4 h-4 accent-blue-600"
+          />
+          <span className="text-sm font-medium text-gray-700">
+            Condição Adversa
+          </span>
+        </label>       
       </div>  
     </div>
 

@@ -29,7 +29,8 @@ const Info = ({ data }: { data: BudgetsData }) => {
       valorAereo: 0,
       dataAereoIni: "",
       dataAereoFim: "",
-      valordesc: ""
+      valordesc: "",
+      mostrarOu: false
   };
 
 
@@ -101,15 +102,30 @@ function formatarData(data: string) {
           <h2 className="text-lg text-[#122b4e] pl-6 font-bold">O pacote incluiu: </h2>
         </div>
 
-        <div className="px-10 w-full ">
+        <div className="px-10 w-full">
           <div className="flex flex-col max-h-84 overflow-hidden">
-          <ul className="text-[#122b4e] list-disc list-inside  text-justify text-lg">
-          {safeData.infoadd.map((infoadd, index) => (
-          <li key={index}>{infoadd}</li>
-          ))}
-          </ul>                  
+            
+            <ul className="text-[#122b4e] list-disc list-inside text-justify text-lg">
+              
+              {safeData.infoadd.map((infoadd, index) => (
+                <li key={index}>{infoadd}</li>
+              ))}
+
+              {safeData.mostrarOu && (
+                <div>
+                  <p>OU</p>
+                  
+                  {safeData.infoadd.map((infoadd, index) => (
+                <li key={index}>{infoadd}</li>
+              ))}        
+                </div>
+
+              )}
+
+            </ul>
           </div>
         </div>
+        
           <div className="mt-10 px-6">
             <p className="text-[#122b4e] text-lg">
             <strong>Observação importante:</strong>
