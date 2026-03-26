@@ -29,7 +29,7 @@ export default function Page() {
     valorAereo: 0,
     dataAereoIni: "",
     dataAereoFim: "",
-    valordesc: "pacote",
+    pacote: "",
     descricaoHotel: "",
     descricaoInfo: "",
     descricaoExtra: "",
@@ -556,23 +556,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </div>
               ))}
             </div>
-
-
-            <div>
-              <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
-              <div className="flex gap-2">
-                <select
-                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 accent-[#0B1B3B]"
-                  value={data.valordesc}
-                  onChange={(e) =>
-                    setData({ ...data, valordesc: e.target.value as "pacote" | "pacote por pessoa" })
-                  }
-                >
-                  <option value="pacote">Pacote</option>
-                  <option value="pacote por pessoa">Pacote por pessoa</option>
-                </select>
-              </div>          
-            </div>
           </div>
         </div>
       </div>
@@ -771,7 +754,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
             {/* VALOR */}
             <div>
-              <h3 className="font-semibold text-gray-700">Valor</h3>
+              <h3 className="font-semibold text-gray-700">Valores</h3>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -784,6 +767,43 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               </div>          
             </div>
 
+            <div>
+              <div className="flex gap-2"> 
+                {/* TIPO */}
+                <select
+                  className="border w-full border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={data.pacote}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      pacote: e.target.value as "Valor total por pessoa" | "Valor total do pacote",
+                    })
+                  }
+                >
+                  <option value="Valor total do pacote">Pacote</option>
+                  <option value="Valor total por pessoa">Pacote por pessoa</option>
+                </select>
+
+                {/* PARCELAS */}
+                <select
+                  className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                  value={data.parcelas || 1}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      parcelas: Number(e.target.value),
+                    })
+                  }
+                >
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((num) => (
+                    <option key={num} value={num}>
+                      {num}x
+                    </option>
+                  ))}
+                </select>
+
+              </div>
+            </div>
 
 
           </div>

@@ -33,7 +33,8 @@ export interface BudgetsData {
   dataAereoFim: string
   aeroportoSaida: string
   aeroportoChegada: string
-  valordesc: "pacote" | "pacote por pessoa"
+  pacote: "Valor total por pessoa" | "Valor total do pacote"
+  parcelas: number
 
   destino: string
   periodo: string
@@ -48,7 +49,6 @@ export interface BudgetsData {
    
   viajantes: string
   regime: string
-  valordesc: "pacote" | "pacote por pessoa"
 
 
 

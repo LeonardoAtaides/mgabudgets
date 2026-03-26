@@ -29,6 +29,7 @@ const Aereo = ({ data }: { data: BudgetsData }) => {
       valorAereo: 0,
       dataAereoIni: "",
       dataAereoFim: "",
+      valordesc: ""
   };
 
 function formatarMoeda(valor: number) {
@@ -159,7 +160,7 @@ function formatarData(data: string) {
 
         <div className="mt-14">
           <ul className="text-xl text-[#122b4e] px-6">
-            <li>Valor total por pessoa <strong>(Hospedagem: Hotel {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}</strong>  parcelado em 10x</li>
+            <li>{safeData.pacote} <strong>(Hospedagem: Hotel {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}</strong>  parcelado em {safeData.parcelas}x.</li>
           </ul>
         </div>
 
