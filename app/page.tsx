@@ -28,7 +28,7 @@ export default function Page() {
     valorAereo: 0,
     dataAereoIni: "",
     dataAereoFim: "",
-    pacote: "Valor total por pessoa" | "Valor total do pacote",
+    pacote: "Valor total por pessoa",
     descricaoHotel: "",
     descricaoInfo: "",
     descricaoExtra: "",
