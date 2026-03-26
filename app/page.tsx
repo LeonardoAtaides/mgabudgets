@@ -848,39 +848,42 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
         >
             {/* INFORMAÇÕES ADICIONAIS */}
             <div className="space-y-2">
-              <div className="flex gap-2">
-                <input
-                placeholder="Digite as informações"
-                  className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                  value={infoAddInput}
-                  onChange={(e) => setInfoAddInput(e.target.value)}
-                />
-                <button
-                  onClick={adicionarInfoAdd}
-                  className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
-                >
-                  <Plus className="w-5 h-5 text-white" />
-                </button>
-                <label className="flex items-center gap-3 cursor-pointer">
+              <div className="flex flex-col">
+                <div className="flex gap-2">
                   <input
-                    type="checkbox"
-                    checked={data.mostrarOu}
-                    onChange={(e) => {
-                      const checked = e.target.checked;
-
-                      setData(prev => ({
-                        ...prev,
-                        mostrarOu: checked,
-                        ouIndex: checked ? prev.infoadd.length - 1 : null
-                      }));
-                    }}
-                    className="w-4 h-4 accent-blue-600"
+                  placeholder="Digite as informações"
+                    className="flex-1 border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                    value={infoAddInput}
+                    onChange={(e) => setInfoAddInput(e.target.value)}
                   />
-                  <span className="text-sm font-medium text-gray-700">
-                    Condição Adversa
-                  </span>
-                </label> 
+                  <button
+                    onClick={adicionarInfoAdd}
+                    className="bg-green-600 text-white px-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                  >
+                    <Plus className="w-5 h-5 text-white" />
+                  </button>
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={data.mostrarOu}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+
+                        setData(prev => ({
+                          ...prev,
+                          mostrarOu: checked,
+                          ouIndex: checked ? prev.infoadd.length - 1 : null
+                        }));
+                      }}
+                      className="w-4 h-4 accent-blue-600"
+                    />
+                    <span className="text-sm font-medium text-gray-700">
+                      Condição Adversa
+                    </span>
+                  </label> 
+                </div>                
               </div>
+
 
               {data.infoadd.map((infoadd, index) => (
                 <div
