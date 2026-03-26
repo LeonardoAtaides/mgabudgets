@@ -36,7 +36,10 @@ export default function Page() {
     cidadeSaida: "",
     cidadeChegada: "",
     infoadd: [],
-    validadeorc: ""
+    validadeorc: "",
+    cidade:"",
+    parcelas: 0,
+    ouIndex: 0,
   })
 
   useEffect(() => {
@@ -215,7 +218,10 @@ function adicionarImagem() {
       cidadeSaida: "",
       cidadeChegada: "",
       infoadd: [],
-      validadeorc: ""
+      validadeorc: "",
+      cidade:"",
+      parcelas: 0,
+      ouIndex: 0,
     });
     setModalAberto(false);
   }
