@@ -148,7 +148,7 @@ function formatarData(data: string) {
         
          {/* DESCRIÇÃO DO DIA  */}
         <div className="flex px-6 mt-12">
-          <h2 className="text-[#122b4e] text-lg font-bold"> Ida dia {formatarData(safeData.dataAereoIni)} saindo de {safeData.cidadeSaida || "(Cidade)"} para o Aeroporto de {safeData.aeroportoSaida}, Volta dia {formatarData(safeData.dataAereoFim)} saindo do Aeroporto {safeData.aeroportoChegada} para {safeData.cidadeChegada || "(Cidade)"}.
+          <h2 className="text-[#122b4e] text-lg font-bold"> Ida dia {formatarData(safeData.dataAereoIni)} saindo de {safeData.cidadeSaida || "(Cidade)"} para o Aeroporto de {safeData.aeroportoSaida || "(Aeroporto)"}, Volta dia {formatarData(safeData.dataAereoFim)} saindo do Aeroporto {safeData.aeroportoChegada || "(Aeroporto)"} para {safeData.cidadeChegada || "(Cidade)"}.
           </h2>
         </div>
 
