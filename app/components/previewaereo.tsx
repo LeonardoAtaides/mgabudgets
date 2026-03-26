@@ -158,7 +158,7 @@ function formatarData(data: string) {
         </div>
         
 
-        <div>
+        <div className="mt-14">
           <ul className="text-xl text-[#122b4e] px-6">
             <li>Valor total por pessoa <strong>(Hospedagem: Hotel {safeData.hotel}) {formatarMoeda(safeData.valorAereo)}  parcelado em 10x</strong></li>
           </ul>
