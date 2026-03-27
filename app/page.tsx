@@ -258,8 +258,8 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
   const total = data.imagens.length + novasImagens.length
 
-  if (total > 7) {
-    setInfoModal({ mostrar: true, mensagem: "Máximo de 7 imagens permitidas." })
+  if (total > 4) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 4 imagens permitidas." })
     return
   }
 
@@ -339,7 +339,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
         <div
           className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-            dadosBasicosAberto ? "max-h-350 opacity-100" : "max-h-0 opacity-0"
+            dadosBasicosAberto ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           {/* NÚMERO DO ORÇAMENTO */}
@@ -634,7 +634,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
             <div
               className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-                vooModalAberto ? "max-h-500 opacity-100" : "max-h-0 opacity-0"
+                vooModalAberto ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
               }`}
             >
               <div className="mt-2 space-y-2">
