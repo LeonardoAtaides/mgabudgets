@@ -164,6 +164,13 @@ function formatarData(data: string) {
           </ul>
         </div>
 
+
+        <div className="mt-14">
+          <p className="text-xl text-[#122b4e] px-6">
+           Formas de pagamento: <strong>Pix ou cartão de crédito (sujeito a taxas administrativas)</strong>
+          </p>
+        </div>
+
         {/* Footer */}
         <div className="mt-auto ">
           <div className="flex justify-center gap-4">

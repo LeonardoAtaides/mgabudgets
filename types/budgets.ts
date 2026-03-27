@@ -46,6 +46,7 @@ export interface BudgetsData {
   mostrarOu: boolean
   ouIndex: number | null
   mostrarInfo: boolean
+  mostrarformapag: boolean
    
 
 
