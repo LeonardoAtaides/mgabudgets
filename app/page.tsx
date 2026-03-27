@@ -359,10 +359,10 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             />
 
             {/* DATAS*/}
-            <div className="flex gap-1 justify-between ">
+            <div className="flex justify-between ">
             <input
                 type="date"
-                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                className="w-38 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                 value={data.dataInicio || ""}
                 onChange={(e) =>
                   setData({ ...data, dataInicio: e.target.value })
@@ -371,7 +371,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
               <input
                 type="date"
-                className="w-36 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+                className="w-38 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                 value={data.dataFim || ""}
                 onChange={(e) =>
                   setData({ ...data, dataFim: e.target.value })
