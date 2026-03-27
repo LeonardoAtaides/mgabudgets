@@ -925,17 +925,16 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </div>
               ))}
             </div>
+            <h6 className="font-semibold text-gray-700 text-sm mb-1 mt-2">Válidade do Orçamento</h6>
+            <input
+              type="date"
+              className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
+              value={data.validadeorc || ""}
+              onChange={(e) =>
+                setData({ ...data, validadeorc: e.target.value })
+              }
+            />            
         </div>
-        <h6 className="font-semibold text-gray-700 text-sm mb-1">Válidade do Orçamento</h6>
-        <input
-          type="date"
-          className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-          value={data.validadeorc || ""}
-          onChange={(e) =>
-            setData({ ...data, validadeorc: e.target.value })
-          }
-        />
-    
       </div>  
     </div>
 
