@@ -100,16 +100,16 @@ function formatarData(data: string) {
 
               {/* HEADER */}
               <div className="grid grid-cols-[80px_70px_130px_130px_60px_60px_90px_40px_60px_60px] text-[#222]  ">
-                <div className="px-2 py-2 font-semibold">Cia</div>
-                <div className="px-2 py-2 font-semibold">Voo</div>
-                <div className="px-2 py-2 font-semibold">Saída</div>
-                <div className="px-2 py-2 font-semibold">Chegada</div>
-                <div className="px-2 py-2 font-semibold">Origem</div>
-                <div className="px-2 py-2 font-semibold">Destino</div>
-                <div className="px-2 py-2 font-semibold">Dur. Con.</div>
-                <div className="px-2 py-2 font-semibold">Esc.</div>
-                <div className="px-2 py-2 font-semibold">Equip.</div>
-                <div className="px-2 py-2 font-semibold">Dur.</div>
+                <div className="px-2 py-2 font-semibold text-center">Cia</div>
+                <div className="px-2 py-2 font-semibold text-center">Voo</div>
+                <div className="px-2 py-2 font-semibold text-center">Saída</div>
+                <div className="px-2 py-2 font-semibold text-center">Chegada</div>
+                <div className="px-2 py-2 font-semibold text-center">Origem</div>
+                <div className="px-2 py-2 font-semibold text-center">Destino</div>
+                <div className="px-2 py-2 font-semibold text-center">Dur. Con.</div>
+                <div className="px-2 py-2 font-semibold text-center">Esc.</div>
+                <div className="px-2 py-2 font-semibold text-center">Equip.</div>
+                <div className="px-2 py-2 font-semibold text-center">Dur.</div>
               </div>
 
               {/* BODY */}
