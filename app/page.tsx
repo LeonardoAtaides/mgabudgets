@@ -263,7 +263,6 @@ function removerImagem(index: number) {
     descricaodata: "",
     dataAereoIni: "",
     dataAereoFim: "",
-    pacote: "Valor total por pessoa",
     voos: [],
     mostrarOu: true,
     mostrarInfo: true,
@@ -324,7 +323,7 @@ function removerImagem(index: number) {
 }
 
 function adicionarHotel() {
-  const novoHotel = {
+  const novoHotel: HotelData = {
     dataInicio: "",
     dataFim: "",
     hotel: "",
@@ -335,18 +334,18 @@ function adicionarHotel() {
     infoadc: [],
     valorAereo: 0,
     pacote: "Valor total por pessoa",
-    parcelas: 0,
-  };
+    parcelas: 0
+  }
 
   setData(prev => {
-    const novos = [...prev.hoteis, novoHotel];
-    setHotelIndex(novos.length - 1);
+    const novos = [...prev.hoteis, novoHotel]
+    setHotelIndex(novos.length - 1)
 
     return {
       ...prev,
       hoteis: novos
-    };
-  });
+    }
+  })
 }
 
 

@@ -158,20 +158,20 @@ function formatarData(data: string) {
         </div>
         
 
-      <div className="mt-14">
-        <ul className="text-xl text-[#122b4e] px-6 space-y-2">
-          {safeData.hoteis.map((hotel, index) => (
-            <li key={index}>
-              {safeData.pacote}{" "}
-              <strong>
-                (Hospedagem: Hotel {hotel.hotel}){" "}
-                {formatarMoeda(safeData.valorAereo)}
-              </strong>{" "}
-              parcelado em {safeData.parcelas}x.
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="mt-14">
+          <ul className="text-xl text-[#122b4e] px-6 space-y-2">
+            {safeData.hoteis.map((hotel, index) => (
+              <li key={index}>
+                {hotel.pacote}{" "}
+                <strong>
+                  (Hospedagem: Hotel {hotel.hotel}){" "}
+                  {formatarMoeda(hotel.valorAereo)}
+                </strong>{" "}
+                parcelado em {hotel.parcelas}x.
+              </li>
+            ))}
+          </ul>
+        </div>
 
 
         <div className="mt-14">
