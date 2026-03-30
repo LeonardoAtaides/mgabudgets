@@ -33,15 +33,10 @@ const Info = ({ data }: { data: BudgetsData }) => {
       mostrarOu: false
   };
 
-
 function formatarData(data: string) {
-  if (!data) return "xx/xx/xxxx";
+  if (!data) return "xx/xx";
 
-  const d = new Date(data);
-
-  const dia = String(d.getDate()).padStart(2, "0");
-  const mes = String(d.getMonth() + 1).padStart(2, "0");
-  const ano = d.getFullYear();
+  const [ano, mes, dia] = data.split("-");
 
   return `${dia}/${mes}/${ano}`;
 }
