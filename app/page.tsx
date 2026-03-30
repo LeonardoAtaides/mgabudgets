@@ -25,15 +25,16 @@ export default function Page() {
       estrelas: 1,
       imagens: [],
       beneficios: [],
-      infoadc: []
+      infoadc: [],
+      valorAereo: 0,
+      pacote: "Valor total por pessoa",
+      parcelas: 0
     }
   ],
   numeroorc: "",
   descricaodata: "",
-  valorAereo: 0,
   dataAereoIni: "",
   dataAereoFim: "",
-  pacote: "Valor total por pessoa",
   voos: [],
   mostrarOu: true,
   mostrarInfo: true,
@@ -44,7 +45,6 @@ export default function Page() {
   cidadeChegada: "",
   infoadd: [],
   validadeorc: "",
-  parcelas: 0,
   ouIndex: 0,
   })
 
@@ -253,12 +253,14 @@ function removerImagem(index: number) {
         estrelas: 1,
         imagens: [],
         beneficios: [],
-        infoadc: []
+        infoadc: [],
+        parcelas: 0,
+        pacote: "Valor total por pessoa",
+        valorAereo: 0,
       }
     ],
     numeroorc: "",
     descricaodata: "",
-    valorAereo: 0,
     dataAereoIni: "",
     dataAereoFim: "",
     pacote: "Valor total por pessoa",
@@ -272,7 +274,6 @@ function removerImagem(index: number) {
     cidadeChegada: "",
     infoadd: [],
     validadeorc: "",
-    parcelas: 0,
     ouIndex: 0,
       });
     setHotelIndex(0);
@@ -288,6 +289,9 @@ function removerImagem(index: number) {
   imagens: [],
   beneficios: [],
   infoadc: [],
+  valorAereo: 0,
+  pacote: "Valor total por pessoa",
+  parcelas: 0
 };
 
   function removerHotel(index: number) {
@@ -329,6 +333,9 @@ function adicionarHotel() {
     imagens: [],
     beneficios: [],
     infoadc: [],
+    valorAereo: 0,
+    pacote: "Valor total por pessoa",
+    parcelas: 0,
   };
 
   setData(prev => {
@@ -962,15 +969,37 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
             {/* VALOR */}
             <div>
+                  <div className="flex gap-2 flex-wrap mb-3">
+    {data.hoteis.map((h, index) => (
+      <button
+        key={index}
+        onClick={() => setHotelIndex(index)}
+        className={`px-3 py-1 rounded-lg text-sm transition ${
+          hotelIndex === index
+            ? "bg-blue-600 text-white"
+            : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+        }`}
+      >
+        Hotel {index + 1}
+      </button>
+    ))}
+  </div>  
               <h3 className="font-semibold text-gray-700">Valores</h3>
               <div className="flex gap-2">
                 <input
                   type="number"
                   className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gr ay-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.valorAereo || ""}
-                  onChange={(e) =>
-                    setData({ ...data, valorAereo: Number(e.target.value) })
-                  }
+                  value={hotelAtual.valorAereo || ""}
+                  onChange={(e) => 
+                  setData(prev => ({
+                        ...prev,
+                        hoteis: prev.hoteis.map((h, i) =>
+                          i === hotelIndex
+                            ? { ...h, valorAereo: Number(e.target.value)}
+                            : h
+                        )
+                      }))
+                    }                  
                 />
               </div>          
             </div>
@@ -980,13 +1009,19 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 {/* TIPO */}
                 <select
                   className="border w-full border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.pacote}
-                  onChange={(e) =>
-                    setData({
-                      ...data,
-                      pacote: e.target.value as "Valor total por pessoa" | "Valor total do pacote",
-                    })
-                  }
+                  value={hotelAtual.pacote}
+                  onChange={(e) => {
+                    const valor = e.target.value as HotelData["pacote"]
+
+                    setData(prev => ({
+                      ...prev,
+                      hoteis: prev.hoteis.map((h, i) =>
+                        i === hotelIndex
+                          ? { ...h, pacote: valor }
+                          : h
+                      )
+                    }))
+                  }}
                 >
                   <option value="Valor total do pacote">Pacote</option>
                   <option value="Valor total por pessoa">Pacote por pessoa</option>
@@ -995,13 +1030,17 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 {/* PARCELAS */}
                 <select
                   className="border border-gray-300 p-2 rounded-lg text-gray-500 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                  value={data.parcelas || 1}
-                  onChange={(e) =>
-                    setData({
-                      ...data,
-                      parcelas: Number(e.target.value),
-                    })
-                  }
+                  value={hotelAtual.parcelas || 1}
+                  onChange={(e) => 
+                  setData(prev => ({
+                        ...prev,
+                        hoteis: prev.hoteis.map((h, i) =>
+                          i === hotelIndex
+                            ? { ...h, parcelas: Number(e.target.value)}
+                            : h
+                        )
+                      }))
+                    }  
                 >
                   {Array.from({ length: 12 }, (_, i) => i + 1).map((num) => (
                     <option key={num} value={num}>

@@ -20,13 +20,11 @@ export interface BudgetsData {
 
   cidadeSaida: string
   cidadeChegada: string
-  valorAereo: number
   dataAereoIni: string
   dataAereoFim: string
   aeroportoSaida: string
   aeroportoChegada: string
   pacote: "Valor total por pessoa" | "Valor total do pacote"
-  parcelas: number
 
   // -------------------------------------//
 

@@ -7,4 +7,9 @@ export interface HotelData {
   imagens: string[]
   beneficios: string[]
   infoadc: string[]
+
+  // Valores Hotel
+  valorAereo: number
+  pacote: "Valor total por pessoa" | "Valor total do pacote"
+  parcelas: number
 }
