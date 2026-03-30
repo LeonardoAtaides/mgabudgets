@@ -2,38 +2,49 @@ import { BudgetsData } from "@/types/budgets";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Star } from "lucide-react";
+import { HotelData } from "@/types/hotel";
 
 
 function formatarData(data: string) {
   if (!data) return "xx/xx";
 
-  const d = new Date(data);
-
-  const dia = String(d.getDate()).padStart(2, "0");
-  const mes = String(d.getMonth() + 1).padStart(2, "0");
+  const [ano, mes, dia] = data.split("-");
 
   return `${dia}/${mes}`;
 }
 
 const Hoteis = ({ data }: { data: BudgetsData }) => {
-
-    const safeData: BudgetsData = data || {
+      const safe: BudgetsData = data || {
       numeroorc: "",
-      dataInicio: "",
-      dataFim: "",
-      hotel: "",
-      cidade: "",
-      estrelas: 1,
-      imagens: [] ,
-      beneficios: [],
-      infoadc: []
   };
-const imagens = (safeData.imagens && safeData.imagens.length > 0
-  ? safeData.imagens
-  : Array(4).fill(null)
-)
+
+  const listaHoteis = data?.hoteis?.length
+    ? data.hoteis
+    : [];
+
   return (
-    <div >
+    <>
+      {listaHoteis.map((hotelData: HotelData, i: number) => {
+
+        const safeData = {
+          dataInicio: hotelData.dataInicio || "",
+          dataFim: hotelData.dataFim || "",
+          hotel: hotelData.hotel || "",
+          cidade: hotelData.cidade || "",
+          estrelas: hotelData.estrelas || 1,
+          imagens: hotelData.imagens || [],
+          beneficios: hotelData.beneficios || [],
+          infoadc: hotelData.infoadc || []
+        };
+
+        const imagens = (safeData.imagens && safeData.imagens.length > 0
+          ? safeData.imagens
+          : Array(4).fill(null)
+        );
+
+
+  return (
+    <div key={i} >
       <div
         className="w-[794px] h-[1123px] mx-auto bg-[#000000] overflow-hidden relative"
         style={{background: "url('/assets/fundo.png')"}}
@@ -61,7 +72,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
 
       {/* Número de Orçamento */}
       <div className="pl-6 py-1 bg-[#b6a36f] w-60 rounded-tr-2xl">
-        <h2 className="text-xl text-white">Orçamento N° {safeData.numeroorc || "0000"}</h2>
+        <h2 className="text-xl text-white">Orçamento N° {safe.numeroorc || "0000"}</h2>
       </div>
       
         <div className="">
@@ -119,7 +130,6 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
               <div className="border border-5 border-[#122b4e] w-60 h-50 rounded-b-2xl rounded-tr-2xl">
               {imagens[0] ? (
                 <img src={imagens[0]}
-                  alt=""
                   className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
               ) : null}    
               </div>
@@ -128,8 +138,8 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
               <div className="flex flex-col w-160 max-h-56 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Conheça um pouco mais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-160  pr-4 text-justify">
-                  {safeData.beneficios.map((beneficio, index) => (
-                    <li key={index}>{beneficio}</li>
+                  {safeData.beneficios.map((b: string, i: number) => (
+                    <li key={i}>{b}</li>
                   ))}
                 </ul>                  
               </div>
@@ -143,7 +153,7 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
                 <div className="border border-5 border-[#b6a36f] w-102 h-60 rounded-b-2xl rounded-tr-2xl">
                   {imagens[1] ? (
                     <img src={imagens[1]}
-                      alt=""
+
                       className="w-full h-full object-cover rounded-b-2xl rounded-tr-2xl relative top-[-15px] left-[15px]" />
                   ) : null}
                 </div>                    
@@ -170,8 +180,8 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
               <div className="flex flex-col w-110 max-h-114 overflow-hidden">
                 <h2 className="uppercase text-xl font-medium text-[#122b4e]">Informações Adicionais</h2>
                 <ul className="text-[#122b4e] list-disc list-inside max-w-110 pr-4 text-justify">
-                  {safeData.infoadc.map((infoadc, index) => (
-                    <li key={index}>{infoadc}</li>
+                  {safeData.infoadc.map((info: string, i: number) => (
+                    <li key={i}>{info}</li>
                   ))}
                 </ul>                  
               </div>
@@ -209,6 +219,9 @@ const imagens = (safeData.imagens && safeData.imagens.length > 0
         </div>
       </div>
     </div>
+        );
+      })}
+    </>
   );
 };
 

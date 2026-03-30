@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useRef, useEffect  } from "react"
@@ -10,37 +11,41 @@ import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
 import { InfoModal } from "./components/infomodal"
 import Info from "./components/previewinfo"
-
+import { HotelData } from "@/types/hotel"
 export default function Page() {
   const [mounted, setMounted] = useState(false)
 
   const [data, setData] = useState<BudgetsData>({
-    numeroorc: "",
-    dataInicio: "",
-    dataFim: "",
-    estrelas: 1,
-    hotel: "",
-    beneficios: [],    
-    infoadc: [],
-    descricaodata: "",
-    valorAereo: 0,
-    dataAereoIni: "",
-    dataAereoFim: "",
-    pacote: "Valor total por pessoa",
-    imagens: [],
-    voos: [],
-    mostrarOu: true,
-    mostrarInfo: true,
-    mostrarformapag: true,
-    aeroportoSaida: "",
-    aeroportoChegada: "",
-    cidadeSaida: "",
-    cidadeChegada: "",
-    infoadd: [],
-    validadeorc: "",
-    cidade:"",
-    parcelas: 0,
-    ouIndex: 0,
+  hoteis: [
+    {
+      dataInicio: "",
+      dataFim: "",
+      hotel: "",
+      cidade: "",
+      estrelas: 1,
+      imagens: [],
+      beneficios: [],
+      infoadc: []
+    }
+  ],
+  numeroorc: "",
+  descricaodata: "",
+  valorAereo: 0,
+  dataAereoIni: "",
+  dataAereoFim: "",
+  pacote: "Valor total por pessoa",
+  voos: [],
+  mostrarOu: true,
+  mostrarInfo: true,
+  mostrarformapag: true,
+  aeroportoSaida: "",
+  aeroportoChegada: "",
+  cidadeSaida: "",
+  cidadeChegada: "",
+  infoadd: [],
+  validadeorc: "",
+  parcelas: 0,
+  ouIndex: 0,
   })
 
   useEffect(() => {
@@ -74,7 +79,10 @@ export default function Page() {
   const [editandoInfoAdd, setEditandoInfoAdd] = useState<number | null>(null)
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
+  const [hotelIndex, setHotelIndex] = useState(0)
+  const hotelAtual = data.hoteis[hotelIndex] || data.hoteis[0]
   const previewRef = useRef<HTMLDivElement>(null)
+  
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
     documentTitle: "Orcamento-Hotel",
@@ -93,23 +101,35 @@ export default function Page() {
   })
 
 
-  function adicionarBeneficio() {
-    if (!beneficioInput.trim()) return
-    setData(prev => ({
-      ...prev,
-      beneficios: [...prev.beneficios, beneficioInput]
-    }))
-    setBeneficioInput("")
-  }
+function adicionarBeneficio() {
+  if (!beneficioInput.trim()) return;
 
-    function adicionarInfoAdc() {
-    if (!infoAdcInput.trim()) return
-    setData(prev => ({
-      ...prev,
-      infoadc: [...prev.infoadc, infoAdcInput]
-    }))
-    setInfoAdcInput("")
-  }
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? { ...h, beneficios: [...h.beneficios, beneficioInput] }
+        : h
+    )
+  }));
+
+  setBeneficioInput("");
+}
+
+function adicionarInfoAdc() {
+  if (!infoAdcInput.trim()) return;
+
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? { ...h, infoadc: [...h.infoadc, infoAdcInput] }
+        : h
+    )
+  }));
+
+  setInfoAdcInput("");
+}
 
       function adicionarInfoAdd() {
     if (!infoAddInput.trim()) return
@@ -120,19 +140,33 @@ export default function Page() {
     setInfoAddInput("")
   }
 
-  function removerBeneficio(index: number) {
-    setData(prev => ({
-      ...prev,
-      beneficios: prev.beneficios.filter((_, i) => i !== index)
-    }))
-  }
+function removerBeneficio(index: number) {
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? {
+            ...h,
+            beneficios: h.beneficios.filter((_, idx) => idx !== index)
+          }
+        : h
+    )
+  }));
+}
 
-  function removerInfoAdc(index: number) {
-    setData(prev => ({
-      ...prev,
-      infoadc: prev.infoadc.filter((_, i) => i !== index)
-    }))
-  }
+function removerInfoAdc(index: number) {
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? {
+            ...h,
+            infoadc: h.infoadc.filter((_, idx) => idx !== index)
+          }
+        : h
+    )
+  }));
+}
 
     function removerInfoAdd(index: number) {
     setData(prev => ({
@@ -140,27 +174,38 @@ export default function Page() {
       infoadd: prev.infoadd.filter((_, i) => i !== index)
     }))
   }
+
 function adicionarImagem() {
-  if (!imagemInput.trim()) return;
+if (!imagemInput.trim()) return;
 
-  if (data.imagens.length >= 7) {
-    setInfoModal({ mostrar: true, mensagem: "Máximo de 7 imagens permitidas." });
-    return;
-  }
+setData(prev => ({
+  ...prev,
+  hoteis: prev.hoteis.map((h, i) =>
+    i === hotelIndex
+      ? {
+          ...h,
+          imagens: [...h.imagens, imagemInput]
+        }
+      : h
+  )
+}));
 
-  setData((prev) => ({
-    ...prev,
-    imagens: [...prev.imagens, imagemInput],
-  }));
-  setImagemInput("");
+setImagemInput("");
 }
 
-  function removerImagem(index: number) {
-    setData(prev => ({
-      ...prev,
-      imagens: prev.imagens.filter((_, i) => i !== index)
-    }))
-  }
+function removerImagem(index: number) {
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? {
+            ...h,
+            imagens: h.imagens.filter((_, idx) => idx !== index)
+          }
+        : h
+    )
+  }));
+}
 
   function adicionarVoo() {
     if (!novoVoo.cia || !novoVoo.numvoo) return
@@ -198,36 +243,65 @@ function adicionarImagem() {
 
   function confirmarLimpeza() {
     setData({
-      numeroorc: "",
-      dataInicio: "",
-      dataFim: "",
-      estrelas: 1,
-      hotel: "",
-      beneficios: [],
-      infoadc: [],
-      descricaodata: "",
-      valorAereo: 0,
-      dataAereoIni: "",
-      dataAereoFim: "",
-      imagens: [],
-      voos: [],
-      pacote: "Valor total por pessoa",
-      mostrarOu: true,
-      mostrarInfo: true,
-      mostrarformapag: true,
-      aeroportoSaida: "",
-      aeroportoChegada: "",
-      cidadeSaida: "",
-      cidadeChegada: "",
-      infoadd: [],
-      validadeorc: "",
-      cidade:"",
-      parcelas: 0,
-      ouIndex: 0,
-    });
+    hoteis: [
+      {
+        
+        dataInicio: "",
+        dataFim: "",
+        hotel: "",
+        cidade: "",
+        estrelas: 1,
+        imagens: [],
+        beneficios: [],
+        infoadc: []
+      }
+    ],
+    numeroorc: "",
+    descricaodata: "",
+    valorAereo: 0,
+    dataAereoIni: "",
+    dataAereoFim: "",
+    pacote: "Valor total por pessoa",
+    voos: [],
+    mostrarOu: true,
+    mostrarInfo: true,
+    mostrarformapag: true,
+    aeroportoSaida: "",
+    aeroportoChegada: "",
+    cidadeSaida: "",
+    cidadeChegada: "",
+    infoadd: [],
+    validadeorc: "",
+    parcelas: 0,
+    ouIndex: 0,
+      });
+    setHotelIndex(0);
     setModalAberto(false);
   }
 
+  const hotelVazio: HotelData = {
+  dataInicio: "",
+  dataFim: "",
+  hotel: "",
+  cidade: "",
+  estrelas: 1,
+  imagens: [],
+  beneficios: [],
+  infoadc: [],
+};
+
+  function removerHotel(index: number) {
+  setData(prev => {
+    const novos = prev.hoteis.filter((_, i) => i !== index)
+
+    return {
+      ...prev,
+      hoteis: novos.length ? novos : [hotelVazio] 
+    }
+  })
+
+  setHotelIndex(0)
+}
   function cancelarLimpeza() {
     setModalAberto(false);
   }
@@ -245,28 +319,49 @@ function adicionarImagem() {
   }))
 }
 
+function adicionarHotel() {
+  const novoHotel = {
+    dataInicio: "",
+    dataFim: "",
+    hotel: "",
+    cidade: "",
+    estrelas: 1,
+    imagens: [],
+    beneficios: [],
+    infoadc: [],
+  };
 
+  setData(prev => {
+    const novos = [...prev.hoteis, novoHotel];
+    setHotelIndex(novos.length - 1);
+
+    return {
+      ...prev,
+      hoteis: novos
+    };
+  });
+}
 
 
 function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
-  const files = e.target.files
-  if (!files) return
+  const files = e.target.files;
+  if (!files) return;
 
   const novasImagens = Array.from(files).map(file =>
     URL.createObjectURL(file)
-  )
-
-  const total = data.imagens.length + novasImagens.length
-
-  if (total > 4) {
-    setInfoModal({ mostrar: true, mensagem: "Máximo de 4 imagens permitidas." })
-    return
-  }
+  );
 
   setData(prev => ({
     ...prev,
-    imagens: [...prev.imagens, ...novasImagens]
-  }))
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? {
+            ...h,
+            imagens: [...h.imagens, ...novasImagens]
+          }
+        : h
+    )
+  }));
 }
 
   if (!mounted) return null
@@ -326,8 +421,32 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
         >
           <span className="flex gap-2 justify-center items-center text-gray-700">
             <Hotel className="w-5 h-5" />
-            <h3 className="font-semibold text-gray-700">HOTÉIS</h3></span>
-          
+            <h3 className="font-semibold text-gray-700">HOTÉIS</h3>
+          </span> 
+
+          {/* BOTÃO DE ADIONAR */}
+          <div className="flex items-center gap-2">
+            {/*BOTÃO ADICIONAR HOTEL*/}
+            <button
+              onClick={(e) => {
+              e.stopPropagation(); 
+              adicionarHotel();}}
+              className="bg-green-600 text-white p-1.5 rounded-md hover:bg-green-700 transition"
+              >
+              <Plus className="w-4 h-4"/>
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // 👈 evita fechar o accordion
+                removerHotel(hotelIndex);
+              }}
+              className="bg-red-600 text-white p-1.5 rounded-md hover:bg-red-700 transition disabled:opacity-50"
+              disabled={data.hoteis.length === 1}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
           <span
             className={`text-gray-500 transition-transform duration-300 ${
               dadosBasicosAberto ? "rotate-180" : "rotate-0"
@@ -342,6 +461,21 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             dadosBasicosAberto ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
           }`}
         >
+        <div className="flex gap-2 flex-wrap mb-3">
+        {data.hoteis.map((h, index) => (
+          <button
+            key={index}
+            onClick={() => setHotelIndex(index)}
+            className={`px-3 py-1 rounded-lg text-sm transition ${
+              hotelIndex === index
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+            }`}
+          >
+            Hotel {index + 1}
+          </button>
+        ))}
+      </div>       
           {/* NÚMERO DO ORÇAMENTO */}
           <div className="mt-2 space-y-3">
             <input
@@ -353,9 +487,13 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               pattern="\d{4}"
               value={data.numeroorc}
               onChange={(e) => {
-                const valor = e.target.value.replace(/\D/g, ""); 
-                setData({ ...data, numeroorc: valor.slice(0, 4) });
-  }}
+                  const valor = e.target.value.replace(/\D/g, "").slice(0, 4);
+
+                  setData(prev => ({
+                    ...prev,
+                    numeroorc: valor
+                  }));
+                }}
             />
 
             {/* DATAS*/}
@@ -363,36 +501,68 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             <input
                 type="date"
                 className="w-38 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                value={data.dataInicio || ""}
+                value={hotelAtual.dataInicio || ""}
                 onChange={(e) =>
-                  setData({ ...data, dataInicio: e.target.value })
-                }
+                setData(prev => ({
+                      ...prev,
+                      hoteis: prev.hoteis.map((h, i) =>
+                        i === hotelIndex
+                          ? { ...h, dataInicio: e.target.value }
+                          : h
+                      )
+                    }))
+                  }
               />
 
               <input
                 type="date"
                 className="w-38 border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                value={data.dataFim || ""}
+                value={hotelAtual.dataFim || ""}
                 onChange={(e) =>
-                  setData({ ...data, dataFim: e.target.value })
-                }
-              />
+                setData(prev => ({
+                      ...prev,
+                      hoteis: prev.hoteis.map((h, i) =>
+                        i === hotelIndex
+                          ? { ...h, dataFim: e.target.value }
+                          : h
+                      )
+                    }))
+                  }
+               />
             </div>
 
             {/* NOME DA CIDADE */}
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Cidade"
-              value={data.cidade}
-              onChange={(e) => setData({ ...data, cidade: e.target.value })}
+              value={hotelAtual.cidade}
+              onChange={(e) =>
+              setData(prev => ({
+                  ...prev,
+                  hoteis: prev.hoteis.map((h, i) =>
+                    i === hotelIndex
+                      ? { ...h, cidade: e.target.value }
+                      : h
+                  )
+                }))
+              }
             />
 
             {/* NOME DO HOTEL */}
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
               placeholder="Hotel"
-              value={data.hotel}
-              onChange={(e) => setData({ ...data, hotel: e.target.value })}
+              value={hotelAtual.hotel}
+              onChange={(e) => 
+              setData(prev => ({
+                    ...prev,
+                    hoteis: prev.hoteis.map((h, i) =>
+                      i === hotelIndex
+                        ? { ...h, hotel: e.target.value }
+                        : h
+                    )
+                  }))
+                }
             />
             {/* QUANTIDADE DE ESTRELAS */}
               <input
@@ -401,7 +571,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 max={5}
                 placeholder="Quantidade de Estrelas (1 a 5)"
                 className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
-                value={data.estrelas || ""}
+                value={hotelAtual.estrelas || ""}
                 onChange={(e) => {
                   let valor = Number(e.target.value);
 
@@ -409,7 +579,14 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                   if (valor > 5) valor = 5;
                   if (valor < 1) valor = 1;
 
-                  setData({ ...data, estrelas: valor });
+                  setData(prev => ({
+                    ...prev,
+                    hoteis: prev.hoteis.map((h, i) =>
+                      i === hotelIndex
+                        ? { ...h, estrelas: valor }
+                        : h
+                    )
+                  }));
                 }}
               />
 
@@ -431,7 +608,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </button>
               </div>
 
-              {data.beneficios.map((beneficio, index) => (
+              {hotelAtual.beneficios.map((beneficio, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
@@ -444,8 +621,15 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                       onChange={(e) =>
                         setData(prev => ({
                           ...prev,
-                          beneficios: prev.beneficios.map((b, i) =>
-                            i === index ? e.target.value : b
+                          hoteis: prev.hoteis.map((h, i) =>
+                            i === hotelIndex
+                              ? {
+                                  ...h,
+                                  beneficios: h.beneficios.map((b, idx) =>
+                                    idx === index ? e.target.value : b
+                                  )
+                                }
+                              : h
                           )
                         }))
                       }
@@ -492,7 +676,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </button>
               </div>
 
-              {data.infoadc.map((infoadc, index) => (
+              {hotelAtual.infoadc.map((infoadc, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between bg-gray-100 p-2 rounded-lg gap-2 transition-all duration-200 hover:bg-gray-200"
@@ -505,8 +689,15 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                       onChange={(e) =>
                         setData(prev => ({
                           ...prev,
-                          infoadc: prev.infoadc.map((b, i) =>
-                            i === index ? e.target.value : b
+                          hoteis: prev.hoteis.map((h, i) =>
+                            i === hotelIndex
+                              ? {
+                                  ...h,
+                                  infoadc: h.infoadc.map((b, idx) =>
+                                    idx === index ? e.target.value : b
+                                  )
+                                }
+                              : h
                           )
                         }))
                       }
@@ -564,7 +755,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </label>
             </div>        
               </div>
-              {data.imagens.map((img, index) => (
+              {hotelAtual.imagens.map((img, index) => (
                 <div key={index} className="flex justify-between items-center text-sm bg-gray-100 text-gray-400 p-2 rounded-lg">
                   <span className="truncate w-[80%]">{img}</span>
                   <button onClick={() => removerImagem(index)}>

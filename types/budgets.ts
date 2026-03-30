@@ -1,19 +1,10 @@
+import { HotelData } from "./hotel"
+
 export interface BudgetsData {
-
-// Dados do orçamento Hotel
   numeroorc: string
-  dataInicio: string
-  dataFim: string
-  hotel: string
-  cidade: string
-  estrelas: number
-  imagens: string[] 
-  beneficios: string[]
-  infoadc: string[]
-// -----------------------//
-
-// Dados Aéreo
- descricaodata: string
+  hoteis: HotelData[]
+  // Dados Aéreo
+  descricaodata: string
   voos: {
     cia: string
     numvoo: number
@@ -36,20 +27,16 @@ export interface BudgetsData {
   aeroportoChegada: string
   pacote: "Valor total por pessoa" | "Valor total do pacote"
   parcelas: number
-// -------------------------------------//
 
-// Informações
+  // -------------------------------------//
+
+  // Informações
   infoadd: string[]
   validadeorc: string
 
-// Modais
+  // Modais
   mostrarOu: boolean
   ouIndex: number | null
   mostrarInfo: boolean
   mostrarformapag: boolean
-   
-
-
-
-
 }
