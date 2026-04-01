@@ -5,7 +5,7 @@ import { useState, useRef, useEffect  } from "react"
 import Hoteis from "./components/previewhotel"
 import Aereo from "./components/previewaereo"
 import { BudgetsData } from "@/types/budgets"
-import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo} from "lucide-react"
+import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo, SquareMenu, Calendar} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"
 import { ConfirmModal } from "./components/modal"
@@ -67,6 +67,7 @@ export default function Page() {
 
   const [modalAberto, setModalAberto] = useState(false);
   const [vooModalAberto, setVooModalAberto] = useState(false);
+  const [vooModalDescAberto, setVooModalDesc] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
   const [infoAdcInput, setInfoAdcInput] = useState("")
   const [infoAddInput, setInfoAddInput] = useState("")
@@ -804,7 +805,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
           }`}
         >
           <div className="">
-            <h3 className="font-semibold text-gray-700">Cidade - UF</h3>
+            <h3 className="font-semibold text-gray-700">Resumo do Destino</h3>
             {/* CIDADE - UF, DIA - MÊS - ANO */}
             <input
               className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
@@ -821,7 +822,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               onClick={() => setVooModalAberto(prev => !prev)}
             > 
               <span className="flex gap-2 justify-center items-center text-gray-700">
-                <PlaneTakeoff className="w-5 h-5" />
+                <PlaneTakeoff className="w-4 h-4" />
                 <h3 className="font-semibold text-gray-700">Voos</h3> 
               </span>
               
@@ -920,8 +921,29 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             </div>
 
             {/* DESCRIÇÃO DO VOO */}
-            <h3 className="font-semibold text-gray-700">Descrição do Voo</h3>
-
+            <div 
+              className="flex justify-between items-center cursor-pointer"
+              onClick={() => setVooModalDesc(prev => !prev)}
+            > 
+              <span className="flex gap-2 justify-center items-center text-gray-700">
+                <SquareMenu className="w-4 h-4" />
+                <h3 className="font-semibold text-gray-700">Descrição do Voo</h3> 
+              </span>
+              
+              <span
+                className={`text-gray-500 transition-transform duration-300 ${
+                  vooModalDescAberto ? "rotate-180" : "rotate-0"
+                }`}
+              >
+                <ChevronDown />
+              </span>       
+            </div>
+            <div
+              className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+                vooModalDescAberto ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+            <div className="mt-2 space-y-2">
             <h6 className="font-semibold text-gray-700 text-sm mb-1">Dados de Ida</h6>
             <input
             type="date"
@@ -931,7 +953,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             setData({ ...data, dataAereoIni: e.target.value })
             }
             /> 
-
             <input
             className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
             placeholder="Nome da Cidade"
@@ -944,8 +965,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             placeholder="Aeroporto de Saída"
             value={data.aeroportoSaida}
             onChange={(e) => setData({ ...data, aeroportoSaida: e.target.value })}
-            />
-
+            />    
             <h6 className="font-semibold text-gray-700 text-sm mb-1">Dados de Volta</h6>
             <input
             type="date"
@@ -962,32 +982,31 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             value={data.aeroportoChegada}
             onChange={(e) => setData({ ...data, aeroportoChegada: e.target.value })}
             />
-
-
+            
             <input
             className="w-full border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
             placeholder="Cidade"
             value={data.cidadeChegada}
             onChange={(e) => setData({ ...data, cidadeChegada: e.target.value })}
-            />
+            />  
 
             {/* VALOR */}
             <div>
-                  <div className="flex gap-2 flex-wrap mb-3">
-    {data.hoteis.map((h, index) => (
-      <button
-        key={index}
-        onClick={() => setHotelIndex(index)}
-        className={`px-3 py-1 rounded-lg text-sm transition ${
-          hotelIndex === index
-            ? "bg-blue-600 text-white"
-            : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-        }`}
-      >
-        Hotel {index + 1}
-      </button>
-    ))}
-  </div>  
+              <div className="flex gap-2 flex-wrap mb-3">
+                {data.hoteis.map((h, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setHotelIndex(index)}
+                    className={`px-3 py-1 rounded-lg text-sm transition ${
+                      hotelIndex === index
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                    }`}
+                  >
+                    Hotel {index + 1}
+                  </button>
+                ))}
+              </div>  
               <h3 className="font-semibold text-gray-700">Valores</h3>
               <div className="flex gap-2">
                 <input
@@ -1054,6 +1073,8 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </select>
               </div>
             </div>
+            </div>
+          </div>  
           </div>
         </div>
       </div>
@@ -1099,7 +1120,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </button> 
               </div>
               
-              <label className="flex items-center gap-3 cursor-pointer">
+              <label className="flex items-center gap-3 cursor-pointer my-4">
                 <input
                   type="checkbox"
                   checked={data.mostrarOu}
@@ -1159,7 +1180,12 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 </div>
               ))}
             </div>
-            <h6 className="font-semibold text-gray-700 text-sm mb-1 mt-2">Válidade do Orçamento</h6>
+
+            <div className="flex justify-start gap-2 items-center">
+              <Calendar className="w-4 h-4 text-gray-700" />
+             <h6 className="font-semibold text-gray-700 text-sm mb-1 mt-2">Válidade do Orçamento</h6> 
+            </div>
+            
             <input
               type="date"
               className="w-full border border-gray-300 p-2 rounded-lg text-gray-400 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
