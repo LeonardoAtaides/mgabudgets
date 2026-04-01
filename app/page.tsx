@@ -84,7 +84,7 @@ export default function Page() {
   const hotelAtual = data.hoteis[hotelIndex] || data.hoteis[0]
   const previewRef = useRef<HTMLDivElement>(null)
   
-  const handlePrint = useReactToPrint({
+const handlePrint = useReactToPrint({
     contentRef: previewRef,
     documentTitle: "Orcamento-Hotel",
   })
@@ -100,7 +100,7 @@ export default function Page() {
     equipe: "",
     duracao: ""
   })
-
+const MAX_HOTEIS = 9
 
 function adicionarBeneficio() {
   if (!beneficioInput.trim()) return;
@@ -324,6 +324,13 @@ function removerImagem(index: number) {
 }
 
 function adicionarHotel() {
+    if (data.hoteis.length >= MAX_HOTEIS) {
+    setInfoModal({
+      mostrar: true,
+      mensagem: `Você pode adicionar no máximo ${MAX_HOTEIS} hotéis. Contate o Dev para liberar mais modelos.`
+    })
+    return
+  }
   const novoHotel: HotelData = {
     dataInicio: "",
     dataFim: "",
