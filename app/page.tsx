@@ -441,16 +441,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
               >
               <Plus className="w-4 h-4"/>
             </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // 👈 evita fechar o accordion
-                removerHotel(hotelIndex);
-              }}
-              className="bg-red-600 text-white p-1.5 rounded-md hover:bg-red-700 transition disabled:opacity-50"
-              disabled={data.hoteis.length === 1}
-            >
-              <X className="w-4 h-4" />
-            </button>
           </div>
 
           <span
@@ -467,21 +457,35 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             dadosBasicosAberto ? "max-h-auto opacity-100" : "max-h-0 opacity-0"
           }`}
         >
+
         <div className="flex gap-2 flex-wrap mb-3">
-        {data.hoteis.map((h, index) => (
-          <button
-            key={index}
-            onClick={() => setHotelIndex(index)}
-            className={`px-3 py-1 rounded-lg text-sm transition ${
-              hotelIndex === index
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-            }`}
-          >
-            Hotel {index + 1}
-          </button>
-        ))}
-      </div>       
+          {data.hoteis.map((h, index) => (
+            <div
+              key={index}
+              className={`flex items-center gap-1 px-3 py-1 rounded-lg text-sm transition ${
+                hotelIndex === index
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+              }`}
+            >
+              <button onClick={() => setHotelIndex(index)}>
+                Hotel {index + 1}
+              </button>
+
+              {data.hoteis.length > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    removerHotel(index)
+                  }}
+                  className="ml-1 hover:text-red-500"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          ))}
+        </div>       
           {/* NÚMERO DO ORÇAMENTO */}
           <div className="mt-2 space-y-3">
             <input
