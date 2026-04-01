@@ -304,7 +304,11 @@ function removerImagem(index: number) {
     }
   })
 
-  setHotelIndex(0)
+  setHotelIndex(prev => {
+    if (prev > index) return prev - 1
+    if (prev === index) return Math.max(0, index - 1)
+    return prev
+  })
 }
   function cancelarLimpeza() {
     setModalAberto(false);
