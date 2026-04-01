@@ -430,26 +430,27 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             <h3 className="font-semibold text-gray-700">HOTÉIS</h3>
           </span> 
 
-          {/* BOTÃO DE ADIONAR */}
           <div className="flex items-center gap-2">
-            {/*BOTÃO ADICIONAR HOTEL*/}
-            <button
-              onClick={(e) => {
-              e.stopPropagation(); 
-              adicionarHotel();}}
-              className="bg-green-600 text-white p-1.5 rounded-md hover:bg-green-700 transition"
+            <div className="flex items-center justify-center gap-2">
+              {/*BOTÃO ADICIONAR HOTEL*/}
+              <button
+                onClick={(e) => {
+                e.stopPropagation(); 
+                adicionarHotel();}}
+                className="bg-green-600 text-white p-1.5 rounded-md hover:bg-green-700 transition"
+                >
+                <Plus className="w-4 h-4"/>
+              </button>
+              {/*BOTÃO ABRIR MODAL*/}
+              <span
+                className={`text-gray-500 transition-transform duration-300 ${
+                  dadosBasicosAberto ? "rotate-180" : "rotate-0"
+                }`}
               >
-              <Plus className="w-4 h-4"/>
-            </button>
+                <ChevronDown />
+              </span>              
+            </div>   
           </div>
-
-          <span
-            className={`text-gray-500 transition-transform duration-300 ${
-              dadosBasicosAberto ? "rotate-180" : "rotate-0"
-            }`}
-          >
-            <ChevronDown />
-          </span>
         </div>
 
         <div
