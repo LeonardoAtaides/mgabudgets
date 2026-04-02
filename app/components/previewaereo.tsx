@@ -156,7 +156,7 @@ return (
         </div>
         
 
-        <div className="mt-14">
+        <div className="mt-auto">
           <ul className="text-xl text-[#122b4e] px-6 space-y-2">
             {safeData.hoteis.map((hotel, index) => (
               <li key={index}>
