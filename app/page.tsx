@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 const templates = [
   {
     id: "simple",
-    title: "Orçamento Simples",
+    title: "Modelo 1",
     description: "Modelo básico com itens, quantidades e valores",
     icon: FileText,
     color: "bg-primary/20",
@@ -17,7 +17,7 @@ const templates = [
   },
   {
     id: "detailed",
-    title: "Orçamento Detalhado",
+    title: "Modelo 2",
     description: "Modelo completo com descrições, impostos e condições",
     icon: LayoutTemplate,
     color: "bg-accent/20",
@@ -112,11 +112,12 @@ export default function Page() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border py-6 mt-70">
+      <footer className="border-t border-border py-6 mt-90">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground">
             Desenvolvido por{" "}
-            <span className="text-primary font-medium">Ataídes Dev</span>
+            <a href="https://ataidesdev.com.br" target="_blank" rel="noopener noreferrer" className="text-primary font-medium">
+              Ataídes Dev</a>
           </p>
         </div>
       </footer>
