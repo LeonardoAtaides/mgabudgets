@@ -21,3 +21,20 @@ body {
 .placeholder {
   color: #8b8680;     
 }
+
+
+@keyframes lineGrow {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.animate-line-grow {
+  width: 100%;
+  animation: lineGrow 1.2s ease-out forwards;
+}
