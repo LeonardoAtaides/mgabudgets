@@ -56,7 +56,7 @@ return (
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
-  }}
+  }} 
       >
         {/* Header */}
         <div className="flex items-center justify-between gap-4 mb-10">
