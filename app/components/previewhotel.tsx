@@ -56,8 +56,8 @@ const Hoteis = ({ data }: { data: BudgetsData }) => {
             src="/assets/logoMga.png"
             alt="Logo"
           />
-          <div className="flex justify-between gap-4 min-w-0 w-[90%] bg-[#0b1b3b] rounded-bl-full px-10 pt-3 py-8">
-            <div className="text-base font-semibold leading-tight pl-8">
+          <div className="flex justify-between gap-4 min-w-0 w-[90%] bg-[#0b1b3b] rounded-bl-full px-10 pt-3 py-8 text-white">
+            <div className="text-base font-semibold leading-tight pl-8 ">
                <h4>Confira o orçamento que preparamos <br /> especialmente para você!</h4>
             </div>
 
