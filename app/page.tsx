@@ -4,7 +4,7 @@
 import { useState, useRef, useEffect  } from "react"
 import Hoteis from "./components/previewhotel"
 import Aereo from "./components/previewaereo"
-import { BudgetsData } from "@/types/budgets"
+import { BudgetsData } from "@/types/budgets2.0"
 import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo, SquareMenu, Calendar} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "./components/credits"

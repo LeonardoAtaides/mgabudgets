@@ -1,4 +1,4 @@
-import { BudgetsData } from "@/types/budgets";
+import { BudgetsData } from "@/types/budgets2.0";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 
@@ -51,7 +51,12 @@ return (
     <div >
       <div
         className="w-[794px] h-[1123px]  mx-auto bg-[#000000] overflow-hidden flex flex-col "
-        style={{background: "url('/assets/fundo.png')"}}
+        style={{
+    backgroundImage: "url('/assets/fundo2.png')",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"
+  }}
       >
         {/* Header */}
         <div className="flex items-center justify-between gap-4 mb-10">

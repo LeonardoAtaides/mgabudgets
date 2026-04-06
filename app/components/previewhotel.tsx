@@ -1,4 +1,4 @@
-import { BudgetsData } from "@/types/budgets";
+import { BudgetsData } from "@/types/budgets2.0";
 import {Mail, Phone} from "lucide-react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Star } from "lucide-react";
