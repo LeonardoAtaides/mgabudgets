@@ -2,15 +2,15 @@
 "use client"
 
 import { useState, useRef, useEffect  } from "react"
-import Hoteis from "./components/previewhotel"
-import Aereo from "./components/previewaereo"
+import Hoteis from "../components/previewhotel"
+import Aereo from "../components/previewaereo"
 import { BudgetsData } from "@/types/budgets2.0"
 import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo, SquareMenu, Calendar} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
-import { Credits } from "./components/credits"
-import { ConfirmModal } from "./components/modal"
-import { InfoModal } from "./components/infomodal"
-import Info from "./components/previewinfo"
+import { Credits } from "../components/credits"
+import { ConfirmModal } from "../components/modal"
+import { InfoModal } from "../components/infomodal"
+import Info from "../components/previewinfo"
 import { HotelData } from "@/types/hotel"
 export default function Page() {
   const [mounted, setMounted] = useState(false)
