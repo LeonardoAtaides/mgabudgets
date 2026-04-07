@@ -47,7 +47,7 @@ const Hoteis = ({ data }: { data: BudgetsData }) => {
     <div key={i} >
       <div
         className="w-[794px] h-[1123px] mx-auto bg-[#000000] overflow-hidden relative"
-        style= {{ backgroundImage: "url('/assets/fundo.png')",
+        style= {{ backgroundImage: "url('/assets/fundo.webp')",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover"

@@ -52,7 +52,7 @@ return (
       <div
         className="w-[794px] h-[1123px]  mx-auto bg-[#000000] overflow-hidden flex flex-col "
         style={{
-    backgroundImage: "url('/assets/fundo2.png')",
+    backgroundImage: "url('/assets/fundo2.webp')",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
