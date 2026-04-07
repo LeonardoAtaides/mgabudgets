@@ -52,17 +52,29 @@ export default function Page() {
     setMounted(true)
   }, [])
 
-  useEffect(() => {
-    if (!mounted) return
-    const saved = localStorage.getItem("orcamentoHotel")
-    if (saved) {
-      setData(JSON.parse(saved))
+useEffect(() => {
+  if (!mounted) return
+
+  const saved = localStorage.getItem("orcamentoHotel2")
+
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved)
+
+      // garante estrutura mínima
+      if (parsed?.hoteis) {
+        setData(parsed)
+      }
+    } catch (error) {
+      console.error("Erro ao ler localStorage:", error)
+      localStorage.removeItem("orcamentoHotel")
     }
-  }, [mounted])
+  }
+}, [mounted])
 
   useEffect(() => {
     if (!mounted) return
-    localStorage.setItem("orcamentoHotel", JSON.stringify(data))
+    localStorage.setItem("orcamentoHotel2", JSON.stringify(data))
   }, [data, mounted])
 
   const [modalAberto, setModalAberto] = useState(false);
@@ -81,7 +93,7 @@ export default function Page() {
   const [infoModal, setInfoModal] = useState({ mostrar: false, mensagem: "" });
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const [hotelIndex, setHotelIndex] = useState(0)
-  const hotelAtual = data.hoteis[hotelIndex] || data.hoteis[0]
+  const hotelAtual = data?.hoteis?.[hotelIndex] || data?.hoteis?.[0]
   const previewRef = useRef<HTMLDivElement>(null)
   
 const handlePrint = useReactToPrint({

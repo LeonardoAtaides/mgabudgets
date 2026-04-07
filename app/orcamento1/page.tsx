@@ -39,7 +39,7 @@ export default function Orcamento1() {
 
   useEffect(() => {
     if (!mounted) return
-    const saved = localStorage.getItem("orcamentoHotel")
+    const saved = localStorage.getItem("orcamentoHotel1")
     if (saved) {
       setData(JSON.parse(saved))
     }
@@ -47,7 +47,7 @@ export default function Orcamento1() {
 
   useEffect(() => {
     if (!mounted) return
-    localStorage.setItem("orcamentoHotel", JSON.stringify(data))
+    localStorage.setItem("orcamentoHotel1", JSON.stringify(data))
   }, [data, mounted])
 
   const [modalAberto, setModalAberto] = useState(false);
