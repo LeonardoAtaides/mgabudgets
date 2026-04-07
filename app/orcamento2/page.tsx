@@ -5,13 +5,14 @@ import { useState, useRef, useEffect  } from "react"
 import Hoteis from "../components/previewhotel"
 import Aereo from "../components/previewaereo"
 import { BudgetsData } from "@/types/budgets2.0"
-import { Plus,PlaneTakeoff, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo, SquareMenu, Calendar} from "lucide-react"
+import { Plus,PlaneTakeoff,Home, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Hotel, Plane, BedDouble, ArrowUpToLine, BadgeInfo, SquareMenu, Calendar} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "../components/credits"
 import { ConfirmModal } from "../components/modal"
 import { InfoModal } from "../components/infomodal"
 import Info from "../components/previewinfo"
 import { HotelData } from "@/types/hotel"
+import Link from 'next/link'
 export default function Page() {
   const [mounted, setMounted] = useState(false)
 
@@ -408,7 +409,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
       {/* EDITOR */}
       <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden  ">
-
       <div className="flex justify-between items-center">
         <div className="flex gap-2 text-gray-800">
          <TicketsPlane/>
@@ -419,6 +419,11 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
 
       <div className="flex gap-2">
+        <Link href="/">
+          <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+            <Home/>
+          </button>
+        </Link>        
         <button
           onClick={handlePrint}
           className="bg-orange-500 text-white p-2 rounded-full"

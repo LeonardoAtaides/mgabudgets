@@ -3,11 +3,12 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "../components/preview"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
+import { Plus, X,Home, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "../components/credits"
 import { ConfirmModal } from "../components/modal"
 import { InfoModal } from "../components/infomodal"
+import Link from 'next/link'
 
 
 export default function Orcamento1() {
@@ -285,6 +286,11 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
 
       <div className="flex gap-2">
+        <Link href="/">
+          <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+          <Home/>
+          </button>
+        </Link>   
         <button
           onClick={handlePrint}
           className="bg-orange-500 text-white p-2 rounded-full"
