@@ -364,7 +364,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
             {/* IMAGENS */}
             <div className="space-y-2">
               <h3 className="font-semibold text-gray-700">Imagens</h3>
-              <div className="flex gap-2">
+              <div className="flex gap-1">
                 <input
                   className="flex-1 border border-gray-300 p-2 rounded-lg placeholder:text-gray-400 text-gray-400 transition-all duration-200 focus:border-gray-400 focus:ring-1 focus:ring-gray-400"
                   placeholder="https://..."
@@ -618,8 +618,6 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
           </div>
         )}
             
-            
-
             <div>
               <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
               <div className="flex gap-2">
