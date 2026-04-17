@@ -27,6 +27,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
     imagens: [],
     mostrarInfo: false,
     mostrarResumo: false,
+    mostrarValor: false,
     viajantes: 0,
     quartos: [],
     descricaoHotel: "",
@@ -271,6 +272,7 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
             </div>
 
         {/* VALOR */}
+        {(safeData.mostrarValor) && (
         <div className="">
           <div className="border border-gray-300 p-4">
           <div className="flex items-center justify-between mb-3">
@@ -287,7 +289,8 @@ const HotelOrcamento = ({ data }: { data: BudgetsData }) => {
               Valor total do {safeData.valordesc}.
           </div>
           </div>                  
-        </div>            
+        </div>      
+        )}
           </div>
 
 

@@ -10,6 +10,7 @@ export interface BudgetsData {
   beneficios: string[]
   mostrarResumo: boolean
   mostrarInfo: boolean
+  mostrarValor: boolean
   imagens: string[]  
   viajantes: string
   regime: string

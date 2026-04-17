@@ -30,6 +30,7 @@ export default function Orcamento1() {
     quartos: [],
     mostrarResumo: true,
     mostrarInfo: true,
+    mostrarValor: true,
     viajantes:"",
     regime:""
   })
@@ -198,6 +199,7 @@ function adicionarImagem() {
       quartos: [],
       mostrarResumo: true,
       mostrarInfo: true,
+      mostrarValor: true,
       viajantes: "",
       regime: "",
     });
@@ -567,8 +569,27 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
           </div>
         
+{/* Informações Adicionais */}
+        <label className="flex items-center gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={data.mostrarValor}
+            onChange={(e) =>
+              setData(prev => ({
+                ...prev,
+                mostrarValor: e.target.checked
+              }))
+            }
+            className="w-4 h-4 accent-blue-600"
+          />
+          <span className="text-md font-medium text-gray-700">
+            Exibir Valor
+          </span>
+        </label>
 
-
+        {data.mostrarValor && (
+          <div className="space-y-2">
+           
             {/* VALOR */}
             <div>
               <h3 className="font-semibold text-gray-700">Valor</h3>
@@ -594,6 +615,10 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
                 />
               </div>          
             </div>
+          </div>
+        )}
+            
+            
 
             <div>
               <h3 className="font-semibold text-gray-700">Descrição do pacote</h3>
