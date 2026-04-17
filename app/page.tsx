@@ -10,7 +10,7 @@ const templates = [
   {
     id: "simple",
     title: "Modelo 1",
-    description: "Modelo básico com itens, quantidades e valores",
+    description: "Modelo básico com informações essenciais para o cliente",
     icon: FileText,
     color: "bg-primary/20",
     route: "/orcamento1"
@@ -18,7 +18,7 @@ const templates = [
   {
     id: "detailed",
     title: "Modelo 2",
-    description: "Modelo completo com descrições, impostos e condições",
+    description: "Modelo completo com detalhes adicionais e design aprimorado",
     icon: LayoutTemplate,
     color: "bg-accent/20",
     route: "/orcamento2"
