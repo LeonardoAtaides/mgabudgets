@@ -288,7 +288,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       {!menuAberto && (
         <button
           onClick={() => setMenuAberto(true)}
-          className="fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-full shadow-lg print:hidden"
+          className="fixed top-4 left-4 z-50 bg-[#122B4E] text-white p-2 rounded-full shadow-lg print:hidden"
         >
           <Menu className="w-5 h-5" />
         </button>
