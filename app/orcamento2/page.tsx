@@ -200,21 +200,23 @@ function removerInfoAdc(index: number) {
   }
 
 function adicionarImagem() {
-if (!imagemInput.trim()) return;
+  if (!imagemInput.trim()) return;
 
-setData(prev => ({
-  ...prev,
-  hoteis: prev.hoteis.map((h, i) =>
-    i === hotelIndex
-      ? {
-          ...h,
-          imagens: [...h.imagens, imagemInput]
-        }
-      : h
-  )
-}));
+  if (hotelAtual.imagens.length >= 4) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 4 imagens permitidas por hotel." });
+    return;
+  }
 
-setImagemInput("");
+  setData(prev => ({
+    ...prev,
+    hoteis: prev.hoteis.map((h, i) =>
+      i === hotelIndex
+        ? { ...h, imagens: [...h.imagens, imagemInput] }
+        : h
+    )
+  }));
+
+  setImagemInput("");
 }
 
 function removerImagem(index: number) {
@@ -391,6 +393,11 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
   const novasImagens = Array.from(files).map(file =>
     URL.createObjectURL(file)
   );
+
+  if (hotelAtual.imagens.length + novasImagens.length > 4) {
+    setInfoModal({ mostrar: true, mensagem: "Máximo de 4 imagens permitidas por hotel." });
+    return;
+  }
 
   setData(prev => ({
     ...prev,
