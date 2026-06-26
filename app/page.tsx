@@ -76,9 +76,9 @@ export default function Page() {
       {/* Main */}
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <div className="h-[52px] md:h-[58px] overflow-hidden mb-3">
+          <div className="h-16 sm:h-13 md:h-14.5 overflow-hidden mb-3">
             <h2
-              className={`text-3xl md:text-4xl font-bold text-foreground transition-all duration-400 ${
+              className={`text-xl sm:text-3xl md:text-4xl font-bold text-foreground transition-all duration-400 ${
                 isAnimating
                   ? "-translate-y-full opacity-0"
                   : "translate-y-0 opacity-100"

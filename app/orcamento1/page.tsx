@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect  } from "react"
 import HotelOrcamento from "../components/preview"
 import { BudgetsData } from "@/types/budgets"
-import { Plus, X,Home, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine} from "lucide-react"
+import { Plus, X, Home, Trash, FileText, Pencil, ChevronDown, TicketsPlane, Info, Plane, BedDouble, ArrowUpToLine, Menu } from "lucide-react"
 import { useReactToPrint } from "react-to-print"
 import { Credits } from "../components/credits"
 import { ConfirmModal } from "../components/modal"
@@ -52,6 +52,14 @@ export default function Orcamento1() {
     localStorage.setItem("orcamentoHotel1", JSON.stringify(data))
   }, [data, mounted])
 
+  useEffect(() => {
+    if (!mounted) return
+    const update = () => setPreviewZoom(window.innerWidth < 768 ? 0.45 : 1)
+    update()
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [mounted])
+
   const [modalAberto, setModalAberto] = useState(false);
   const [vooModalAberto, setVooModalAberto] = useState(false);
   const [beneficioInput, setBeneficioInput] = useState("")
@@ -63,6 +71,8 @@ export default function Orcamento1() {
   const [editandoQuarto, setEditandoQuarto] = useState<number | null>(null)
   const [editandoVoo, setEditandoVoo] = useState<number | null>(null)
   const [editandoInfo, setEditandoInfo] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(true)
+  const [previewZoom, setPreviewZoom] = useState(1)
   const previewRef = useRef<HTMLDivElement>(null)
   const handlePrint = useReactToPrint({
     contentRef: previewRef,
@@ -267,7 +277,7 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
 
   return (
     <div className="h-screen flex overflow-hidden">
-      <Credits  />
+      <Credits className={menuAberto ? "hidden md:block" : ""} />
 
       <InfoModal
   mensagem={infoModal.mensagem}
@@ -275,45 +285,57 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
   onClose={() => setInfoModal({ ...infoModal, mostrar: false })}
 />
 
-      {/* EDITOR */}
-      <div className="w-[380px] bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden">
+      {!menuAberto && (
+        <button
+          onClick={() => setMenuAberto(true)}
+          className="fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-full shadow-lg print:hidden"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      )}
 
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 text-gray-800">
-         <TicketsPlane/>
-        <h2 className="text-xl font-semibold text-gray-800">
-          Budgetly Tour
-        </h2>       
+      {/* EDITOR */}
+      <div className={`${menuAberto ? "w-full md:w-[380px]" : "hidden"} bg-[#ffffff] border-r border-gray-200 p-6 overflow-y-auto shadow-sm space-y-6 print:hidden`}>
+
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-2 items-center text-gray-800">
+          <TicketsPlane/>
+          <h2 className="text-[18px] font-semibold text-gray-800">
+            Budgetly Tour
+          </h2>
         </div>
 
-
-      <div className="flex gap-2">
-        <Link href="/">
-          <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
-          <Home/>
+        <div className="flex gap-2 items-center">
+          <Link href="/">
+            <button className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition">
+              <Home/>
+            </button>
+          </Link>
+          <button
+            onClick={handlePrint}
+            className="bg-orange-500 text-white p-2 rounded-full"
+          >
+            <FileText className="w-5 h-5"/>
           </button>
-        </Link>   
-        <button
-          onClick={handlePrint}
-          className="bg-orange-500 text-white p-2 rounded-full"
-        >
-          <FileText className="w-5 h-5"/>
-        </button> 
-        <ConfirmModal
-        mensagem="Tem certeza que deseja limpar o orçamento?"
-        mostrar={modalAberto}
-        onConfirm={confirmarLimpeza}
-        onCancel={cancelarLimpeza}
-      /> 
-
-        <button
-          onClick={abrirModal}
-          className="bg-red-600 text-white p-2 rounded-full"
-        >
-          <Trash className="w-5 h-5"/>
-        </button>          
-      </div>
-
+          <ConfirmModal
+            mensagem="Tem certeza que deseja limpar o orçamento?"
+            mostrar={modalAberto}
+            onConfirm={confirmarLimpeza}
+            onCancel={cancelarLimpeza}
+          />
+          <button
+            onClick={abrirModal}
+            className="bg-red-600 text-white p-2 rounded-full"
+          >
+            <Trash className="w-5 h-5"/>
+          </button>
+          <button
+            onClick={() => setMenuAberto(false)}
+            className="bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
+          >
+            <X className="w-5 h-5"/>
+          </button>
+        </div>
       </div>
  
 
@@ -909,8 +931,8 @@ function subirImagemLocal(e: React.ChangeEvent<HTMLInputElement>) {
       </div>
 
       {/* PREVIEW */}
-      <div className="flex-1 overflow-auto bg-gray-200 p-10">
-        <div  ref={previewRef} className="flex justify-center ">
+      <div className={`${menuAberto ? "hidden md:block md:flex-1" : "flex-1"} overflow-auto bg-gray-200 p-4 md:p-10`} style={{ zoom: previewZoom }}>
+        <div ref={previewRef} className="flex justify-center">
           <HotelOrcamento data={data} />
         </div>
       </div>

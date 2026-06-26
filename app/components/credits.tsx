@@ -12,7 +12,7 @@ export const Credits: React.FC<CreditsProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`fixed bottom-0 right-18 m-4 ${className} group`}>
+    <div className={`fixed bottom-0 right-0 xl:right-18 m-4 ${className} group`}>
       {/* Tooltip */}
       <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:-translate-y-1 transition-all duration-300 bg-black text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
         Desenvolvido por {name}
